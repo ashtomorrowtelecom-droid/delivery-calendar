@@ -7,72 +7,34 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
-
-    /* ── LOGIN ── */
-    #loginScreen {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, #b5179e 0%, #560bad 100%);
-    }
-    .login-box {
-      background: white; border-radius: 18px; padding: 40px 36px; width: 360px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-    }
+    #loginScreen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #b5179e 0%, #560bad 100%); }
+    .login-box { background: white; border-radius: 18px; padding: 40px 36px; width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
     .login-logo { text-align: center; margin-bottom: 28px; }
     .login-logo h1 { font-size: 1.6rem; font-weight: 800; color: #b5179e; }
     .login-logo p { font-size: 0.85rem; color: #888; margin-top: 4px; }
     .login-box label { display: block; font-size: 0.8rem; font-weight: 600; color: #555; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
-    .login-box input {
-      width: 100%; padding: 11px 14px; border: 1.5px solid #e0e0e0; border-radius: 9px;
-      font-size: 0.95rem; margin-bottom: 16px; outline: none; transition: border 0.2s;
-    }
+    .login-box input { width: 100%; padding: 11px 14px; border: 1.5px solid #e0e0e0; border-radius: 9px; font-size: 0.95rem; margin-bottom: 16px; outline: none; transition: border 0.2s; }
     .login-box input:focus { border-color: #b5179e; }
-    .login-btn {
-      width: 100%; padding: 13px; background: #b5179e; color: white; border: none;
-      border-radius: 9px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.2s;
-    }
+    .login-btn { width: 100%; padding: 13px; background: #b5179e; color: white; border: none; border-radius: 9px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
     .login-btn:hover { background: #c1005f; }
     .login-error { color: #c62828; font-size: 0.82rem; text-align: center; margin-top: 12px; display: none; }
-
-    /* ── APP ── */
     #appScreen { display: none; }
-    header {
-      background: linear-gradient(135deg, #b5179e 0%, #7b2ff7 100%);
-      color: white; padding: 16px 24px; display: flex; align-items: center;
-      justify-content: space-between; box-shadow: 0 2px 12px rgba(181,23,158,0.3);
-      position: sticky; top: 0; z-index: 100;
-    }
+    header { background: linear-gradient(135deg, #b5179e 0%, #7b2ff7 100%); color: white; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 12px rgba(181,23,158,0.3); position: sticky; top: 0; z-index: 100; }
     .header-left h1 { font-size: 1.3rem; font-weight: 700; }
     .header-left .subtitle { font-size: 0.8rem; opacity: 0.85; }
     .header-right { display: flex; align-items: center; gap: 14px; }
-    .user-pill {
-      background: rgba(255,255,255,0.2); border-radius: 20px; padding: 5px 14px;
-      font-size: 0.82rem; font-weight: 600;
-    }
-    .logout-btn {
-      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4);
-      color: white; border-radius: 8px; padding: 6px 14px; font-size: 0.82rem;
-      cursor: pointer; transition: background 0.2s;
-    }
+    .user-pill { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 5px 14px; font-size: 0.82rem; font-weight: 600; }
+    .logout-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); color: white; border-radius: 8px; padding: 6px 14px; font-size: 0.82rem; cursor: pointer; transition: background 0.2s; }
     .logout-btn:hover { background: rgba(255,255,255,0.3); }
     .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
-
-    /* ── STATS ── */
     .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
     .stat-card { background: white; border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
     .stat-card .num { font-size: 2rem; font-weight: 700; color: #b5179e; }
     .stat-card .lbl { font-size: 0.75rem; color: #666; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-    /* ── ADMIN: store tabs ── */
     .store-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .store-tab {
-      padding: 7px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 600;
-      cursor: pointer; border: 2px solid transparent; transition: all 0.15s; background: white;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    }
+    .store-tab { padding: 7px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
     .store-tab.active { color: white; }
     .store-tab:not(.active) { color: #444; }
-
-    /* ── CALENDAR ── */
     .day-section { margin-bottom: 28px; }
     .day-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
     .day-label { font-size: 1.05rem; font-weight: 700; }
@@ -88,19 +50,14 @@
     .label-badge { color: white; border-radius: 6px; padding: 3px 9px; font-size: 0.73rem; font-weight: 700; letter-spacing: 0.5px; }
     .delivery-time { font-size: 0.85rem; color: #444; font-weight: 500; margin-bottom: 8px; }
     .status-delivered { display: inline-flex; align-items: center; gap: 5px; background: #e8f5e9; color: #2e7d32; border-radius: 6px; padding: 3px 9px; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
-    .status-out      { display: inline-flex; align-items: center; gap: 5px; background: #e3f2fd; color: #1565c0; border-radius: 6px; padding: 3px 9px; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
-    .status-transit  { display: inline-flex; align-items: center; gap: 5px; background: #fff8e1; color: #f57f17; border-radius: 6px; padding: 3px 9px; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
-    .status-pending  { display: inline-flex; align-items: center; gap: 5px; background: #fce4ec; color: #c62828; border-radius: 6px; padding: 3px 9px; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
+    .status-out { display: inline-flex; align-items: center; gap: 5px; background: #e3f2fd; color: #1565c0; border-radius: 6px; padding: 3px 9px; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
+    .status-transit { display: inline-flex; align-items: center; gap: 5px; background: #fff8e1; color: #f57f17; border-radius: 6px; padding: 3px 9px; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
+    .status-pending { display: inline-flex; align-items: center; gap: 5px; background: #fce4ec; color: #c62828; border-radius: 6px; padding: 3px 9px; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
     .tracking-list { margin-top: 6px; }
     .tracking-link { display: block; color: #1565c0; text-decoration: none; font-size: 0.72rem; font-family: 'Courier New', monospace; margin-bottom: 2px; }
     .tracking-link:hover { text-decoration: underline; }
     .no-tracking { font-size: 0.73rem; color: #aaa; font-style: italic; }
-
-    /* ── CREDENTIALS TABLE (admin only) ── */
-    .creds-panel {
-      background: white; border-radius: 12px; padding: 20px; margin-bottom: 24px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
-    }
+    .creds-panel { background: white; border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
     .creds-panel h3 { font-size: 0.85rem; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; }
     .creds-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     .creds-table th { text-align: left; padding: 8px 12px; background: #f5f5f5; color: #555; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.4px; }
@@ -112,12 +69,10 @@
   </style>
 </head>
 <body>
-
-<!-- LOGIN SCREEN -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo">
-      <h1>📦 Tomorrow Telecom</h1>
+      <h1>Tomorrow Telecom</h1>
       <p>Delivery Tracking Portal</p>
     </div>
     <label>Username</label>
@@ -128,12 +83,10 @@
     <div class="login-error" id="loginError">Incorrect username or password</div>
   </div>
 </div>
-
-<!-- APP SCREEN -->
 <div id="appScreen">
   <header>
     <div class="header-left">
-      <h1>📦 Tomorrow Telecom</h1>
+      <h1>Tomorrow Telecom</h1>
       <div class="subtitle">Delivery Tracking Portal</div>
     </div>
     <div class="header-right">
@@ -145,7 +98,7 @@
     <div class="stats-row" id="statsRow"></div>
     <div id="adminCredsSection" style="display:none">
       <div class="creds-panel">
-        <h3>🔑 Store Login Credentials</h3>
+        <h3>Store Login Credentials</h3>
         <table class="creds-table" id="credsTable"></table>
       </div>
     </div>
@@ -158,67 +111,54 @@
     <div id="calendarContainer"></div>
   </div>
 </div>
-
 <script>
-// ── USERS ───────────────────────────────────────────────────────────────────
 const USERS = [
-  { username: 'admin',     password: 'TTAdmin2026!',    role: 'admin',    label: null,       name: 'Admin' },
-  { username: 'ali',       password: 'ALI2026!',        role: 'store',    label: 'ALI',      name: 'ALI' },
-  { username: 'bader',     password: 'BADER2026!',      role: 'store',    label: 'BADER',    name: 'BADER' },
-  { username: 'sk',        password: 'SK2026!',         role: 'store',    label: 'SK',       name: 'SK' },
-  { username: 'amit',      password: 'AMIT2026!',       role: 'store',    label: 'AMIT',     name: 'AMIT' },
-  { username: 'suleman',   password: 'SUL2026!',        role: 'store',    label: 'SULEMAN',  name: 'SULEMAN' },
-  { username: 'sid',       password: 'SID2026!',        role: 'store',    label: 'SID',      name: 'SID' },
-  { username: 'jacksboro', password: 'JACKS2026!',      role: 'store',    label: 'JACKSBORO',name: 'JACKSBORO' },
-  { username: 'cho',       password: 'CHO2026!',        role: 'store',    label: 'CHO',      name: 'CHO' },
+  { username: 'admin',     password: 'TTAdmin2026!',    role: 'admin',    label: null,        name: 'Admin' },
+  { username: 'ali',       password: 'ALI2026!',        role: 'store',    label: 'ALI',       name: 'ALI' },
+  { username: 'bader',     password: 'BADER2026!',      role: 'store',    label: 'BADER',     name: 'BADER' },
+  { username: 'sk',        password: 'SK2026!',         role: 'store',    label: 'SK',        name: 'SK' },
+  { username: 'amit',      password: 'AMIT2026!',       role: 'store',    label: 'AMIT',      name: 'AMIT' },
+  { username: 'suleman',   password: 'SUL2026!',        role: 'store',    label: 'SULEMAN',   name: 'SULEMAN' },
+  { username: 'sid',       password: 'SID2026!',        role: 'store',    label: 'SID',       name: 'SID' },
+  { username: 'jacksboro', password: 'JACKS2026!',      role: 'store',    label: 'JACKSBORO', name: 'JACKSBORO' },
+  { username: 'cho',       password: 'CHO2026!',        role: 'store',    label: 'CHO',       name: 'CHO' },
 ];
-
-// ── COLORS ───────────────────────────────────────────────────────────────────
 const COLORS = {
   ALI:'#b5179e', BADER:'#7b2d8b', SK:'#1565c0', AMIT:'#2e7d32',
   SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828'
 };
-
-// ── ORDERS ───────────────────────────────────────────────────────────────────
 const ORDERS = [
-  // June 4
-  { ref:'ALI0601',        label:'ALI',       date:'2026-06-04', time:'11:59 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384095204','1Z7900AX0384094965'] },
-  { ref:'SID0601',        label:'SID',       date:'2026-06-04', time:'12:46 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384097391','1Z7900AX0384097113','1Z7900AX0384097453'] },
-  { ref:'BADER0601',      label:'BADER',     date:'2026-06-04', time:'1:03 PM',  status:'Delivered', location:'Front Desk', tracking:[] },
-  { ref:'MRCHO0601',      label:'CHO',       date:'2026-06-04', time:'1:15 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384107389'] },
-  { ref:'SULEMAN0601',    label:'SULEMAN',   date:'2026-06-04', time:'1:50 PM',  status:'Delivered', location:'Front Desk', tracking:[] },
-  // June 5
-  { ref:'SK0601SAMU',     label:'SK',        date:'2026-06-05', time:'11:13 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384122853','1Z7900AX0384122862'] },
-  { ref:'JACKSBORO0601',  label:'JACKSBORO', date:'2026-06-05', time:'11:29 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384093420','1Z7900AX0384093466'] },
-  { ref:'SK0601HAL',      label:'SK',        date:'2026-06-05', time:'11:49 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384120784'] },
-  { ref:'SK0601WESC',     label:'SK',        date:'2026-06-05', time:'12:58 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384126662','1Z7900AX0384128517'] },
-  { ref:'SK0601BEWES',    label:'SK',        date:'2026-06-05', time:'1:04 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384123932'] },
-  { ref:'ALI0601SP01',    label:'ALI',       date:'2026-06-05', time:'1:34 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384122960'] },
-  { ref:'SK0601FM',       label:'SK',        date:'2026-06-05', time:'1:37 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384124271'] },
-  { ref:'SK0601ROSD',     label:'SK',        date:'2026-06-05', time:'1:43 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384122246','1Z7900AX0384121989'] },
-  { ref:'BADER0601SP01',  label:'BADER',     date:'2026-06-05', time:'1:46 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384123058'] },
-  { ref:'SK0601FER',      label:'SK',        date:'2026-06-05', time:'4:11 PM',  status:'Delivered', location:'Front Desk', tracking:[] },
-  // June 16
-  { ref:'AMIT0609SP02',   label:'AMIT',      date:'2026-06-16', time:'11:26 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384241439'] },
-  { ref:'SK0609SP01HAL',  label:'SK',        date:'2026-06-16', time:'12:13 PM', status:'Delivered', location:'Receiver',   tracking:['1Z7900AX0384247004'] },
-  // June 17
-  { ref:'JACKSBORO0615',  label:'JACKSBORO', date:'2026-06-17', time:'11:32 AM', status:'Delivered', location:'Office', tracking:['1Z7900AX0284266790'] },
-  // June 18 — Out for Delivery
+  { ref:'ALI0601',        label:'ALI',       date:'2026-06-04', time:'11:59 AM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384095204','1Z7900AX0384094965'] },
+  { ref:'SID0601',        label:'SID',       date:'2026-06-04', time:'12:46 PM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384097391','1Z7900AX0384097113','1Z7900AX0384097453'] },
+  { ref:'BADER0601',      label:'BADER',     date:'2026-06-04', time:'1:03 PM',  status:'Delivered',       location:'Front Desk', tracking:[] },
+  { ref:'MRCHO0601',      label:'CHO',       date:'2026-06-04', time:'1:15 PM',  status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384107389'] },
+  { ref:'SULEMAN0601',    label:'SULEMAN',   date:'2026-06-04', time:'1:50 PM',  status:'Delivered',       location:'Front Desk', tracking:[] },
+  { ref:'SK0601SAMU',     label:'SK',        date:'2026-06-05', time:'11:13 AM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384122853','1Z7900AX0384122863'] },
+  { ref:'JACKSBORO0601',  label:'JACKSBORO', date:'2026-06-05', time:'11:29 AM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384093420','1Z7900AX0384093466'] },
+  { ref:'SK0601HAL',      label:'SK',        date:'2026-06-05', time:'11:49 AM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384120784'] },
+  { ref:'SK0601WESC',     label:'SK',        date:'2026-06-05', time:'12:58 PM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384126662','1Z7900AX0384128517'] },
+  { ref:'SK0601BEWES',    label:'SK',        date:'2026-06-05', time:'1:04 PM',  status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384123932'] },
+  { ref:'ALI0601SP01',    label:'ALI',       date:'2026-06-05', time:'1:34 PM',  status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384122960'] },
+  { ref:'SK0601FM',       label:'SK',        date:'2026-06-05', time:'1:37 PM',  status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384124271'] },
+  { ref:'SK0601ROSD',     label:'SK',        date:'2026-06-05', time:'1:43 PM',  status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384122246','1Z7900AX0384121989'] },
+  { ref:'BADER0601SP01',  label:'BADER',     date:'2026-06-05', time:'1:46 PM',  status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384123058'] },
+  { ref:'SK0601FER',      label:'SK',        date:'2026-06-05', time:'4:11 PM',  status:'Delivered',       location:'Front Desk', tracking:[] },
+  { ref:'AMIT0609SP02',   label:'AMIT',      date:'2026-06-16', time:'11:26 AM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384241439'] },
+  { ref:'Sk0609SP01HAL',  label:'SK',        date:'2026-06-16', time:'12:13 PM', status:'Delivered',       location:'Receiver',   tracking:['1Z7900AX0384247004'] },
+  { ref:'JACLSBORO0615',  label:'JACKSBORO', date:'2026-06-17', time:'11:32 AM', status:'Delivered',       location:'Office',     tracking:['1Z7900AX0284266790'] },
   { ref:'BADER0615',      label:'BADER',     date:'2026-06-18', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384273762','1Z7900AX0384273851','1Z7900AX0384273780'] },
   { ref:'SK0615HAL',      label:'SK',        date:'2026-06-18', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384273897','1Z7900AX0384273888'] },
   { ref:'SK0615BEWES',    label:'SK',        date:'2026-06-18', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384271531'] },
   { ref:'SK0615FER',      label:'SK',        date:'2026-06-18', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384269633'] },
   { ref:'SK0615ROSD',     label:'SK',        date:'2026-06-18', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384275466','1Z7900AX0384275457'] },
   { ref:'SK0615FM',       label:'SK',        date:'2026-06-18', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384278516'] },
-  { ref:'SK0615SAM',      label:'SK',        date:'2026-06-18', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384269642','1Z7900AX0384285768'] },
+  { ref:'SK0615SAM',      label:'SK',        date:'2026-06-18', time:'Est. by 9:00 PM', status:'InTransit',      tracking:['1Z7900AX0384269642','1Z7900AX0384285768'] },
   { ref:'SID0615',        label:'SID',       date:'2026-06-18', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384280469'] },
   { ref:'ALI0615',        label:'ALI',       date:'2026-06-18', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384277553','1Z7900AX0384277713','1Z7900AX0384279033','1Z7900AX0384278507','1Z7900AX0384278801'] },
   { ref:'AMIT0615',       label:'AMIT',      date:'2026-06-18', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384275500','1Z7900AX0384276063','1Z7900AX0384275546'] },
-  { ref:'SULEMAN0615',    label:'SULEMAN',   date:'2026-06-18', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384283582'] },
-  // June 19 — In Transit
-  { ref:'SK0615WESC',     label:'SK',        date:'2026-06-19', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384303701'] },
-  { ref:'SULEMAN0615SP01',label:'SULEMAN',   date:'2026-06-19', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384305763'] },
-  // Pending
+  { ref:'SULEMAN0615',    label:'SULEMAN',   date:'2026-06-18', time:'Est. by 9:00 PM', status:'InTransit',      tracking:['1Z7900AX0384283582'] },
+  { ref:'SK0615WESC',     label:'SK',        date:'2026-06-19', time:'Est. by 9:00 PM', status:'InTransit',      tracking:['1Z7900AX0384303701'] },
+  { ref:'SULEMAN0615SP01',label:'SULEMAN',   date:'2026-06-19', time:'Est. by 9:00 PM', status:'InTransit',      tracking:['1Z7900AX0384305763'] },
   { ref:'ALI0615SP01',    label:'ALI',       date:'PENDING', time:'', status:'InProcess', tracking:[] },
   { ref:'AMIT0615SP01',   label:'AMIT',      date:'PENDING', time:'', status:'InProcess', tracking:[] },
   { ref:'SID0615SP01',    label:'SID',       date:'PENDING', time:'', status:'InProcess', tracking:[] },
@@ -228,160 +168,129 @@ const ORDERS = [
   { ref:'SK0615FMSP01',   label:'SK',        date:'PENDING', time:'', status:'InProcess', tracking:[] },
   { ref:'CHO0615',        label:'CHO',       date:'PENDING', time:'', status:'InProcess', tracking:[] },
 ];
-
-// ── STATE ────────────────────────────────────────────────────────────────────
 let currentUser = null;
 let activeStoreFilter = 'ALL';
 let activeStatusFilter = 'ALL';
-
-// ── LOGIN ────────────────────────────────────────────────────────────────────
 document.getElementById('passwordInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 document.getElementById('usernameInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-
 function doLogin() {
   const u = document.getElementById('usernameInput').value.trim().toLowerCase();
   const p = document.getElementById('passwordInput').value.trim();
   const user = USERS.find(x => x.username === u && x.password === p);
-  if (!user) {
-    document.getElementById('loginError').style.display = 'block';
-    return;
-  }
+  if (!user) { document.getElementById('loginError').style.display = 'block'; return; }
   currentUser = user;
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('appScreen').style.display = 'block';
-  document.getElementById('userPill').textContent = '👤 ' + user.name;
+  document.getElementById('userPill').textContent = 'User: ' + user.name;
   renderApp();
 }
-
 function doLogout() {
-  currentUser = null;
-  activeStoreFilter = 'ALL';
-  activeStatusFilter = 'ALL';
+  currentUser = null; activeStoreFilter = 'ALL'; activeStatusFilter = 'ALL';
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('appScreen').style.display = 'none';
   document.getElementById('usernameInput').value = '';
   document.getElementById('passwordInput').value = '';
   document.getElementById('loginError').style.display = 'none';
 }
-
-// ── RENDER ───────────────────────────────────────────────────────────────────
 function renderApp() {
   const isAdmin = currentUser.role === 'admin';
-  const storeLabel = currentUser.label;
-
-  // Filter orders for this user
-  let visibleOrders = isAdmin ? ORDERS : ORDERS.filter(o => o.label === storeLabel);
-
-  // Stats
-  const delivered  = visibleOrders.filter(o => o.status === 'Delivered').length;
-  const outFor     = visibleOrders.filter(o => o.status === 'OutForDelivery').length;
-  const inTransit  = visibleOrders.filter(o => o.status === 'InTransit' || o.status === 'OnWayToUPS').length;
-  const inProcess  = visibleOrders.filter(o => o.status === 'InProcess').length;
-
+  let visibleOrders = isAdmin ? ORDERS : ORDERS.filter(o => o.label === currentUser.label);
+  const delivered = visibleOrders.filter(o => o.status === 'Delivered').length;
+  const outFor    = visibleOrders.filter(o => o.status === 'OutForDelivery').length;
+  const inTransit = visibleOrders.filter(o => o.status === 'InTransit').length;
+  const inProcess = visibleOrders.filter(o => o.status === 'InProcess').length;
   document.getElementById('statsRow').innerHTML = `
-    <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('ALL')"><div class="num">${visibleOrders.length}</div><div class="lbl">Total Orders</div></div>
+    <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('ALL')"><div class="num">${visibleOrders.length}</div><div class="lbl">Total</div></div>
     <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('Delivered')"><div class="num" style="color:#2e7d32">${delivered}</div><div class="lbl">Delivered</div></div>
     <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('OutForDelivery')"><div class="num" style="color:#1565c0">${outFor}</div><div class="lbl">Out for Delivery</div></div>
     <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('InTransit')"><div class="num" style="color:#f57f17">${inTransit}</div><div class="lbl">In Transit</div></div>
-    <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('InProcess')"><div class="num" style="color:#c62828">${inProcess}</div><div class="lbl">In Process</div></div>
-  `;
-
-  // Admin extras: credentials table + store filter tabs
+    <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('InProcess')"><div class="num" style="color:#c62828">${inProcess}</div><div class="lbl">In Process</div></div>`;
   if (isAdmin) {
     document.getElementById('adminCredsSection').style.display = 'block';
     document.getElementById('adminTabs').style.display = 'block';
-    renderCredsTable();
-    renderStoreTabs();
+    renderCredsTable(); renderStoreTabs();
   } else {
     document.getElementById('adminCredsSection').style.display = 'none';
     document.getElementById('adminTabs').style.display = 'none';
   }
-
-  renderStatusTabs(visibleOrders);
-  renderCalendar(visibleOrders);
+  renderStatusTabs(visibleOrders); renderCalendar(visibleOrders);
 }
-
 function renderCredsTable() {
-  const rows = USERS.filter(u => u.role === 'store').map(u => `
-    <tr>
-      <td><span class="store-dot" style="background:${COLORS[u.label]||'#999'}"></span><strong>${u.name}</strong></td>
-      <td>${u.username}</td>
-      <td>${u.password} <button class="copy-btn" onclick="copyText('${u.password}')">Copy</button></td>
-    </tr>`).join('');
-  document.getElementById('credsTable').innerHTML = `
-    <thead><tr><th>Store</th><th>Username</th><th>Password</th></tr></thead>
-    <tbody>${rows}</tbody>`;
+  const rows = USERS.filter(u => u.role === 'store').map(u => `<tr><td><span class="store-dot" style="background:${COLORS[u.label]||'#999'}"></span><strong>${u.name}</strong></td><td>${u.username}</td><td>${u.password} <button class="copy-btn" onclick="copyText('${u.password}')">Copy</button></td></tr>`).join('');
+  document.getElementById('credsTable').innerHTML = `<thead><tr><th>Store</th><th>Username</th><th>Password</th></tr></thead><tbody>${rows}</tbody>`;
 }
-
 function renderStoreTabs() {
   const labels = ['ALL', ...Object.keys(COLORS)];
   document.getElementById('storeTabs').innerHTML = labels.map(l => {
     const color = l === 'ALL' ? '#555' : (COLORS[l] || '#555');
     const isActive = activeStoreFilter === l;
-    return `<button class="store-tab ${isActive ? 'active' : ''}"
-      style="${isActive ? `background:${color};border-color:${color}` : `border-color:${color};color:${color}`}"
-      onclick="setStoreFilter('${l}')">${l}</button>`;
+    return `<button class="store-tab ${isActive ? 'active' : ''}" style="${isActive ? `background:${color};border-color:${color}` : `border-color:${color};color:${color}`}" onclick="setStoreFilter('${l}')">${l}</button>`;
   }).join('');
 }
-
 function setStoreFilter(label) {
-  activeStoreFilter = label;
-  activeStatusFilter = 'ALL';
+  activeStoreFilter = label; activeStatusFilter = 'ALL';
   const byStore = label === 'ALL' ? ORDERS : ORDERS.filter(o => o.label === label);
-  renderStoreTabs();
-  renderStatusTabs(byStore);
-  renderCalendar(byStore);
+  renderStoreTabs(); renderStatusTabs(byStore); renderCalendar(byStore);
 }
-
 const STATUS_META = {
-  ALL:             { label: 'All',             color: '#555' },
-  OutForDelivery:  { label: '🚚 Out for Delivery', color: '#1565c0' },
-  InTransit:       { label: '📦 In Transit',    color: '#f57f17' },
-  Delivered:       { label: '✅ Delivered',      color: '#2e7d32' },
-  InProcess:       { label: '🔄 In Process',    color: '#c62828' },
-  OnWayToUPS:      { label: '⏳ On Way to UPS', color: '#f57f17' },
+  ALL:{label:'All',color:'#555'}, OutForDelivery:{label:'Out for Delivery',color:'#1565c0'},
+  InTransit:{label:'In Transit',color:'#f57f17'}, Delivered:{label:'Delivered',color:'#2e7d32'},
+  InProcess:{label:'In Process',color:'#c62828'}
 };
-
 function renderStatusTabs(baseOrders) {
   const counts = {};
-  baseOrders.forEach(o => { counts[o.status] = (counts[o.status]||0) + 1; });
-  const presentStatuses = ['ALL', ...Object.keys(STATUS_META).filter(s => s !== 'ALL' && counts[s])];
-  document.getElementById('statusTabs').innerHTML = presentStatuses.map(s => {
-    const meta = STATUS_META[s] || { label: s, color: '#555' };
-    const count = s === 'ALL' ? baseOrders.length : (counts[s] || 0);
+  baseOrders.forEach(o => { counts[o.status] = (counts[o.status]||0)+1; });
+  const statuses = ['ALL', ...Object.keys(STATUS_META).filter(s => s !== 'ALL' && counts[s])];
+  document.getElementById('statusTabs').innerHTML = statuses.map(s => {
+    const meta = STATUS_META[s] || {label:s,color:'#555'};
+    const count = s === 'ALL' ? baseOrders.length : (counts[s]||0);
     const isActive = activeStatusFilter === s;
-    return `<button class="store-tab ${isActive ? 'active' : ''}"
-      style="${isActive ? `background:${meta.color};border-color:${meta.color}` : `border-color:${meta.color};color:${meta.color}`}"
-      onclick="setStatusFilter('${s}')">${meta.label} (${count})</button>`;
+    return `<button class="store-tab ${isActive ? 'active' : ''}" style="${isActive ? `background:${meta.color};border-color:${meta.color}` : `border-color:${meta.color};color:${meta.color}`}" onclick="setStatusFilter('${s}')">${meta.label} (${count})</button>`;
   }).join('');
 }
-
 function setStatusFilter(status) {
   activeStatusFilter = status;
-  const isAdmin = currentUser.role === 'admin';
-  let base = isAdmin ? ORDERS : ORDERS.filter(o => o.label === currentUser.label);
+  let base = currentUser.role === 'admin' ? ORDERS : ORDERS.filter(o => o.label === currentUser.label);
   if (activeStoreFilter !== 'ALL') base = base.filter(o => o.label === activeStoreFilter);
   const filtered = status === 'ALL' ? base : base.filter(o => o.status === status);
-  renderStatusTabs(base);
-  renderCalendar(filtered);
+  renderStatusTabs(base); renderCalendar(filtered);
 }
-
 function renderCalendar(orders) {
   const today = new Date().toISOString().slice(0,10);
-  const dated   = orders.filter(o => o.date !== 'PENDING');
+  const dated = orders.filter(o => o.date !== 'PENDING');
   const pending = orders.filter(o => o.date === 'PENDING');
-
   const groups = {};
-  dated.forEach(o => { if (!groups[o.date]) groups[o.date] = []; groups[o.date].push(o); });
-
+  dated.forEach(o => { if (!groups[o.date]) groups[o.date]=[]; groups[o.date].push(o); });
   let html = Object.keys(groups).sort().reverse().map(date => {
-    const isToday  = date === today;
+    const isToday = date === today;
     const isFuture = date > today;
-    const dayLabel = formatDate(date) + (isToday ? ' 🔴 TODAY' : isFuture ? ' ⏳' : '');
+    const dayLabel = formatDate(date) + (isToday ? ' [TODAY]' : isFuture ? ' [upcoming]' : '');
     const items = groups[date];
-    return `
-      <div class="day-section">
-        <div class="day-header">
-          <div class="day-label">${dayLabel}</div>
-          <div class="day-count">${items.length} order${items.length === 1 ? '' : 's'}</div>
-          <di
+    return `<div class="day-section"><div class="day-header"><div class="day-label">${dayLabel}</div><div class="day-count">${items.length} order${items.length===1?'':'s'}</div><div class="day-line"></div></div><div class="orders-grid">${items.map(renderOrderCard).join('')}</div></div>`;
+  }).join('');
+  if (pending.length > 0) {
+    html += `<div class="day-section"><div class="day-header"><div class="day-label">Pending - Awaiting Shipment</div><div class="day-count">${pending.length} order${pending.length===1?'':'s'}</div><div class="day-line"></div></div><div class="orders-grid">${pending.map(renderOrderCard).join('')}</div></div>`;
+  }
+  document.getElementById('calendarContainer').innerHTML = html || '<div style="text-align:center;color:#999;padding:40px">No orders found.</div>';
+}
+function renderOrderCard(o) {
+  const color = COLORS[o.label] || '#999';
+  let badge = '';
+  if (o.status === 'Delivered')        badge = `<span class="status-delivered">Delivered</span>`;
+  else if (o.status === 'OutForDelivery') badge = `<span class="status-out">Out for Delivery</span>`;
+  else if (o.status === 'InTransit')   badge = `<span class="status-transit">In Transit</span>`;
+  else                                 badge = `<span class="status-pending">In Process</span>`;
+  const timeStr = o.time ? `<div class="delivery-time">${o.time}${o.location ? ' - ' + o.location : ''}</div>` : '';
+  const trackHtml = o.tracking && o.tracking.length > 0
+    ? `<div class="tracking-list">${o.tracking.map(t => `<a class="tracking-link" href="https://www.ups.com/track?tracknum=${t}" target="_blank">${t}</a>`).join('')}</div>`
+    : `<div class="no-tracking">No tracking number yet</div>`;
+  return `<div class="order-card"><div class="card-stripe" style="background:${color}"></div><div class="card-body"><div class="card-top"><div class="order-ref">${o.ref}</div><span class="label-badge" style="background:${color}">${o.label}</span></div>${badge}${timeStr}${trackHtml}</div></div>`;
+}
+function formatDate(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric', year: 'numeric' });
+}
+function copyText(text) { navigator.clipboard.writeText(text).catch(()=>{}); }
+</script>
+</body>
+</html>

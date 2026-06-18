@@ -7,7 +7,7 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
-    #loginScreen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(150deg, #4ade80 0%, #7c3aed 45%, #064e3b 100%); }
+    #loginScreen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(to top right, #4ade80 0%, #7c3aed 50%, #064e3b 100%); }
     .login-box { background: white; border-radius: 16px; padding: 36px 32px 32px; width: 340px; box-shadow: 0 24px 64px rgba(0,0,0,0.35); }
     .login-logo { text-align: center; margin-bottom: 24px; }
     .login-logo svg { margin-bottom: 10px; }
@@ -139,7 +139,7 @@ const COLORS = {
   SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828'
 };
 const ORDERS = [
-  { ref:'ALI0601',        label:'ALI',       date:'2026-06-04', time:'11:59 AM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384095204','1Z7900AX0384094965'] },
+  { ref:'ALI0601',        label:'ALI',       date:'2026-06-04', time:'11:59 AM', status:'Delivered',       location:'Gront Desk', tracking:['1Z7900AX0384095204','1Z7900AX0384094965'] },
   { ref:'SID0601',        label:'SID',       date:'2026-06-04', time:'12:46 PM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384097391','1Z7900AX0384097113','1Z7900AX0384097453'] },
   { ref:'BADER0601',      label:'BADER',     date:'2026-06-04', time:'1:03 PM',  status:'Delivered',       location:'Front Desk', tracking:[] },
   { ref:'MRCHO0601',      label:'CHO',       date:'2026-06-04', time:'1:15 PM',  status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384107389'] },
@@ -296,4 +296,4 @@ function renderOrderCard(o) {
     ? `<div class="tracking-list">${o.tracking.map(t => `<a class="tracking-link" href="https://www.ups.com/track?tracknum=${t}" target="_blank">${t}</a>`).join('')}</div>`
     : `<div class="no-tracking">No tracking number yet</div>`;
   const orderNoHtml = o.orderNo ? `<div class="order-no">#${o.orderNo}</div>` : '';
-  return `<div class="order-card"><div class="card-stripe" style="background:${color}"></div><div class="card-body"><div class="card-top"><div>
+  return `<div class="order-card"><div class="card-stripe" style="background:${color}"></div><div class="card-body"><div class="card-top"

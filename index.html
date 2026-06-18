@@ -327,7 +327,6 @@ function renderStoreTabs() {
 function setStoreFilter(label) {
   activeStoreFilter = label;
   activeStatusFilter = 'ALL';
-  const isAdmin = currentUser.role === 'admin';
   const byStore = label === 'ALL' ? ORDERS : ORDERS.filter(o => o.label === label);
   renderStoreTabs();
   renderStatusTabs(byStore);
@@ -384,4 +383,5 @@ function renderCalendar(orders) {
       <div class="day-section">
         <div class="day-header">
           <div class="day-label">${dayLabel}</div>
-          <div class="day-count">${items.length} order${it
+          <div class="day-count">${items.length} order${items.length === 1 ? '' : 's'}</div>
+          <di

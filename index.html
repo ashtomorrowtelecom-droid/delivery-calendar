@@ -48,6 +48,7 @@
     .card-body { padding: 14px 16px; }
     .card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
     .order-ref { font-size: 0.9rem; font-weight: 700; }
+    .order-no { font-size: 0.72rem; color: #888; margin-top: 2px; font-family: 'Courier New', monospace; }
     .label-badge { color: white; border-radius: 6px; padding: 3px 9px; font-size: 0.73rem; font-weight: 700; letter-spacing: 0.5px; }
     .delivery-time { font-size: 0.85rem; color: #444; font-weight: 500; margin-bottom: 8px; }
     .status-delivered { display: inline-flex; align-items: center; gap: 5px; background: #e8f5e9; color: #2e7d32; border-radius: 6px; padding: 3px 9px; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
@@ -171,11 +172,11 @@ const ORDERS = [
   { ref:'SULEMAN0615SP01',label:'SULEMAN',   date:'2026-06-19', time:'Est. by 9:00 PM', status:'InTransit',      tracking:['1Z7900AX0384305763'] },
   { ref:'ALI0615SP01',    label:'ALI',       date:'PENDING', time:'', status:'InProcess', tracking:[] },
   { ref:'AMIT0615SP01',   label:'AMIT',      date:'PENDING', time:'', status:'InProcess', tracking:[] },
-  { ref:'SID0615SP01',    label:'SID',       date:'PENDING', time:'', status:'InProcess', tracking:[] },
-  { ref:'BADER0615SP01',  label:'BADER',     date:'PENDING', time:'', status:'InProcess', tracking:[] },
-  { ref:'SK0615BEWESSP01',label:'SK',        date:'PENDING', time:'', status:'InProcess', tracking:[] },
-  { ref:'SK0615FERSP01',  label:'SK',        date:'PENDING', time:'', status:'InProcess', tracking:[] },
-  { ref:'SK0615FMSP01',   label:'SK',        date:'PENDING', time:'', status:'InProcess', tracking:[] },
+  { ref:'SID0615SP01',    label:'SID',   orderNo:'171974271', date:'2026-06-15', time:'Completed', status:'Delivered', location:'Front Desk', tracking:[] },
+  { ref:'BADER0615SP01',  label:'BADER', orderNo:'171974272', date:'2026-06-15', time:'Completed', status:'Delivered', location:'Front Desk', tracking:[] },
+  { ref:'SK0615FMSP01',   label:'SK',    orderNo:'171974273', date:'2026-06-15', time:'Completed', status:'Delivered', location:'Front Desk', tracking:[] },
+  { ref:'SK0615FERSP01',  label:'SK',    orderNo:'171974274', date:'2026-06-15', time:'Completed', status:'Delivered', location:'Front Desk', tracking:[] },
+  { ref:'SK0615BEWESSP01',label:'SK',    orderNo:'171974275', date:'2026-06-15', time:'Completed', status:'Delivered', location:'Front Desk', tracking:[] },
   { ref:'CHO0615',        label:'CHO',       date:'PENDING', time:'', status:'InProcess', tracking:[] },
 ];
 let currentUser = null;
@@ -294,13 +295,5 @@ function renderOrderCard(o) {
   const trackHtml = o.tracking && o.tracking.length > 0
     ? `<div class="tracking-list">${o.tracking.map(t => `<a class="tracking-link" href="https://www.ups.com/track?tracknum=${t}" target="_blank">${t}</a>`).join('')}</div>`
     : `<div class="no-tracking">No tracking number yet</div>`;
-  return `<div class="order-card"><div class="card-stripe" style="background:${color}"></div><div class="card-body"><div class="card-top"><div class="order-ref">${o.ref}</div><span class="label-badge" style="background:${color}">${o.label}</span></div>${badge}${timeStr}${trackHtml}</div></div>`;
-}
-function formatDate(dateStr) {
-  const d = new Date(dateStr + 'T12:00:00');
-  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric', year: 'numeric' });
-}
-function copyText(text) { navigator.clipboard.writeText(text).catch(()=>{}); }
-</script>
-</body>
-</html>
+  const orderNoHtml = o.orderNo ? `<div class="order-no">#${o.orderNo}</div>` : '';
+  return `<div class="order-card"><div class="card-stripe" style="background:${color}"></div><div class="card-body"><div class="card-top"><di

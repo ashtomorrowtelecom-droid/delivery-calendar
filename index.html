@@ -191,7 +191,7 @@ var O=[
   {ref:'MRCHO0601',l:'CHO',d:'2026-06-04',t:'1:15 PM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384107389']},
   {ref:'SULEMAN0601',l:'SULEMAN',d:'2026-06-04',t:'1:50 PM',s:'Delivered',loc:'Front Desk',tr:[]},
   {ref:'SK0601SAMU',l:'SK',d:'2026-06-05',t:'11:13 AM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384122853','1Z7900AX0384122862']},
-  {ref:'JACKSBORO0601',l:'JACKSBORO',d:'2026-06-05',t:'11:29 AM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384093420','1Z7900AX0384093466"]},
+  {ref:'JACKSBORO0601',l:'JACKSBORO',d:'2026-06-05',t:'11:29 AM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384093420','1Z7900AX0384093466']},
   {ref:'SK0601HAL',l:'SK',d:'2026-06-05',t:'11:49 AM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384120784']},
   {ref:'SK0601WESC',l:'SK',d:'2026-06-05',t:'12:58 PM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384126662','1Z7900AX0384128517']},
   {ref:'SK0601BEWES',l:'SK',d:'2026-06-05',t:'1:04 PM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384123932']},
@@ -209,7 +209,7 @@ var O=[
   {ref:'SK0615FER',on:'171973961',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384269633']},
   {ref:'SK0615ROSD',on:'171973962',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384275466','1Z7900AX0384275457']},
   {ref:'SK0615FM',on:'171973963',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384278516']},
-  {ref:'SK0615SAM',on:'171973964',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'InTransit',tr:['1Z7900AX0384279642','1Z7900AX0384285768']},
+  {ref:'SK0615SAM',on:'171973964',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'InTransit',tr:['1Z7900AX0384269642','1Z7900AX0384285768']},
   {ref:'SID0615',on:'171973576',l:'SID',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384280469']},
   {ref:'ALI0615',on:'171973574',l:'ALI',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384277553','1Z7900AX0384277713','1Z7900AX0384279033','1Z7900AX0384278507','1Z7900AX0384278801']},
   {ref:'AMIT0615',on:'171973572',l:'AMIT',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384275500','1Z7900AX0384277063','1Z7900AX0384275546']},
@@ -317,7 +317,7 @@ function renderCalendar(){
   var bd={};
   ords.forEach(function(o){var k=o.d==='PENDING'?'PENDING':o.d;if(!bd[k])bd[k]=[];bd[k].push(o);});
   var dk=Object.keys(bd).sort(function(a,b){if(a==='PENDING')return-1;if(b==='PENDING')return 1;return b.localeCompare(a);});
-  if(!dk.length){document.getElementById('calendarContainer').innerHTML="<div style='text-align:center;color:#aaa;padding:48px 0'>No orders match filters.</div>";return;}
+  if(!dk.length){document.getElementById('calendarContainer').innerHTML='<div style="text-align:center;color:#aaa;padding:48px 0">No orders match filters.</div>';return;}
   var h='';
   dk.forEach(function(k){
     var day=bd[k];var dl=k==='PENDING'?'Pending / In Process':fmtDate(k);

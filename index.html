@@ -85,7 +85,7 @@
     .track-dots{position:absolute;top:0;left:0;right:0}
     .track-dot{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;border:2px solid white;background:#ddd;transition:background .5s,box-shadow .5s}
     .track-labels{position:absolute;top:18px;left:0;right:0}
-    .track-lbl{position:absolute;transform:translateX(-50%);font-size:.65rem;font-weight:600;color:#aaa;text-align:center;white-space:nowraw;transition:color .5s}
+    .track-lbl{position:absolute;transform:translateX(-50%);font-size:.65rem;font-weight:600;color:#aaa;text-align:center;white-space:nowrap;transition:color .5s}
     .track-lbl.active{color:#333}
     .track-lbl span{display:block;font-size:.58rem;color:inherit;margin-top:1px}
     .modal-body{padding:0 24px 24px}
@@ -203,22 +203,23 @@ var O=[
   {ref:'AMIT0609SP02',l:'AMIT',d:'2026-06-16',t:'11:26 AM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384241439']},
   {ref:'SK0609SP01HAL',l:'SK',d:'2026-06-16',t:'12:13 PM',s:'Delivered',loc:'Receiver',tr:['1Z7900AX0384247004']},
   {ref:'JACKSBORO0615',on:'171973408',l:'JACKSBORO',d:'2026-06-17',t:'11:32 AM',s:'Delivered',loc:'Office',tr:['1Z7900AX0284266790']},
-  {ref:'BADER0615',on:'171973616',l:'BADER',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384273762','1Z7900AX0384273851','1Z7900AX0384273780']},
-  {ref:'SK0615HAL',on:'171973647',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384273897','1Z7900AX0384273888']},
-  {ref:'SK0615BEWES',on:'171973642',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384271531']},
-  {ref:'SK0615FER',on:'171973961',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384269633']},
-  {ref:'SK0615ROSD',on:'171973962',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384275466','1Z7900AX0384275457']},
-  {ref:'SK0615FM',on:'171973963',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384278516']},
-  {ref:'SK0615SAM',on:'171973964',l:'SK',d:'2026-06-18',t:'Est. by 9:00 PM',s:'InTransit',tr:['1Z7900AX0384269642','1Z7900AX0384285768']},
-  {ref:'SID0615',on:'171973576',l:'SID',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384280469']},
-  {ref:'ALI0615',on:'171973574',l:'ALI',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384277553','1Z7900AX0384277713','1Z7900AX0384279033','1Z7900AX0384278507','1Z7900AX0384278801']},
-  {ref:'AMIT0615',on:'171973572',l:'AMIT',d:'2026-06-18',t:'Est. by 9:00 PM',s:'OutForDelivery',tr:['1Z7900AX0384275500','1Z7900AX0384277063','1Z7900AX0384275546']},
-  {ref:'SULEMAN0615',on:'171973544',l:'SULEMAN',d:'2026-06-18',t:'Est. by 9:00 PM',s:'InTransit',tr:['1Z7900AX0384283582']},
-  {ref:'SK0615WESC',on:'171973965',l:'SK',d:'2026-06-19',t:'Est. by 9:00 PM',s:'InTransit',tr:['1Z7900AX0384303701']},
+  {ref:'BADER0615',on:'171973616',l:'BADER',d:'2026-06-18',t:'1:35 PM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384273762','1Z7900AX0384273851','1Z7900AX0384273780']},
+  {ref:'SK0615HAL',on:'171973647',l:'SK',d:'2026-06-18',t:'',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384273897','1Z7900AX0384273888']},
+  {ref:'SK0615BEWES',on:'171973642',l:'SK',d:'2026-06-18',t:'',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384271531']},
+  {ref:'SK0615FER',on:'171973961',l:'SK',d:'2026-06-18',t:'',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384269633']},
+  {ref:'SK0615ROSD',on:'171973962',l:'SK',d:'2026-06-18',t:'',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384275466','1Z7900AX0384275457']},
+  {ref:'SK0615FM',on:'171973963',l:'SK',d:'2026-06-18',t:'',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384278516']},
+  {ref:'SK0615SAM',on:'171973964',l:'SK',d:'2026-06-18',t:'11:11 AM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384269642','1Z7900AX0384285768']},
+  {ref:'SID0615',on:'171973576',l:'SID',d:'2026-06-18',t:'',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384280469']},
+  {ref:'ALI0615',on:'171973574',l:'ALI',d:'2026-06-18',t:'',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384277553','1Z7900AX0384277713','1Z7900AX0384279033','1Z7900AX0384278507','1Z7900AX0384278801']},
+  {ref:'AMIT0615',on:'171973572',l:'AMIT',d:'2026-06-18',t:'',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384275500','1Z7900AX0384277063','1Z7900AX0384275546']},
+  {ref:'SULEMAN0615',on:'171973544',l:'SULEMAN',d:'2026-06-18',t:'4:12 PM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384283582']},
+  {ref:'SK0615WESC',on:'171973965',l:'SK',d:'2026-06-19',t:'1:09 PM',s:'Delivered',loc:'Front Desk',tr:['1Z7900AX0384303701']},
   {ref:'SULEMAN0615SP01',on:'171974228',l:'SULEMAN',d:'2026-06-19',t:'Est. by 9:00 PM',s:'InTransit',tr:['1Z7900AX0384305763']},
   {ref:'ALI0615SP01',on:'171974230',l:'ALI',d:'PENDING',t:'',s:'InProcess',tr:[]},
   {ref:'AMIT0615SP01',on:'171974229',l:'AMIT',d:'PENDING',t:'',s:'InProcess',tr:[]},
   {ref:'CHO0615',on:'171973966',l:'CHO',d:'PENDING',t:'',s:'InProcess',tr:[]},
+  {ref:'CHO0619',on:'171978587',l:'CHO',d:'PENDING',t:'',s:'InProcess',tr:[]},
   {ref:'SID0615SP01',l:'SID',on:'171974271',d:'2026-06-15',t:'Completed',s:'Delivered',loc:'Front Desk',tr:[]},
   {ref:'BADER0615SP01',l:'BADER',on:'171974272',d:'2026-06-15',t:'Completed',s:'Delivered',loc:'Front Desk',tr:[]},
   {ref:'SK0615FMSP01',l:'SK',on:'171974273',d:'2026-06-15',t:'Completed',s:'Delivered',loc:'Front Desk',tr:[]},
@@ -335,7 +336,7 @@ function sbadge(s){
 function cardHtml(o){
   var col=C[o.l]||'#999';
   var tr=(o.tr&&o.tr.length)?o.tr.map(function(t){return'<a class="tracking-link" href="https://www.ups.com/track?tracknum='+t+'" target="_blank" onclick="event.stopPropagation()">'+t+'</a>';}).join(''):'<div class="no-tracking">No tracking number</div>';
-  return'<div class="order-card" onclick="openModal(\''+o.ref+'\')">'+'<div class="card-stripe" style="background:'+col+'"></div>'+'<div class="card-body"><div class="card-top"><div><div class="order-ref">'+o.ref+'</div>'+(o.on?'<div class="order-no">Order #'+o.on+'</div>':'')+'</div><span class="label-badge" style="background:'+col+'">'+o.l+'</span></div>'+(o.t?'<div class="delivery-time">'+o.t+'</div>':'')+sbadge(o.s)+tr+'</div></div>';
+  return'<div class="order-card" onclick="openModal(\''+o.ref+'\')">'+'<div class="card-stripe" style="background:'+col+'"></div>'+'<div class="card-body"><div class="card-top"><div><div class="order-ref">'+o.ref+'</div>'+(o.on?'<div class="order-no">Order #'+o.on+'</div>':'')+'</div><span class="label-badge" style="background:'+col+'">'+o.l+'</spam></div>'+(o.t?'<div class="delivery-time">'+o.t+'</div>':'')+sbadge(o.s)+tr+'</div></div>';
 }
 function openModal(ref){
   var o=null;for(var i=0;i<O.length;i++){if(O[i].ref===ref){o=O[i];break;}}
@@ -346,7 +347,13 @@ function openModal(ref){
   document.getElementById('modalSub').textContent=o.l+(o.d!=='PENDING'?' - '+fmtDate(o.d):' - Pending');
   document.getElementById('modalEta').innerHTML=o.t?'<div class="modal-eta">'+(o.s==='Delivered'?'Delivered: ':'Estimated: ')+o.t+(o.loc?' - '+o.loc:'')+'</div>':'';
   document.getElementById('modalStatusRow').innerHTML=sbadge(o.s)+(o.on?'<span style="font-size:.82rem;color:#888;font-family:monospace">Order #'+o.on+'</span>':'');
-  document.getElementById('modalTracking').innerHTML=(o.tr&&o.tr.length)?'<h4>UPS Tracking</h4>'+o.tr.map(function(t){return'<a class="modal-tlink" href="https://www.ups.com/track?tracknum='+t+'" target="_blank">'+t+'</a>';}).join(''):'<span class="modal-notrack">No tracking numbers available</span>';
+  if(o.tr&&o.tr.length){
+    var tlinks=o.tr.map(function(t){return'<a class="modal-tlink" href="https://www.ups.com/track?tracknum='+t+'&loc=en_US" target="_blank">&#128666; '+t+'</a>';}).join('');
+    var allNums=o.tr.join('%2C');
+    document.getElementById('modalTracking').innerHTML='<h4>UPS Tracking <a href="https://www.ups.com/track?tracknum='+allNums+'&loc=en_US" target="_blank" style="font-size:.72rem;font-weight:600;color:#1565c0;text-decoration:none;background:#e3f2fd;padding:2px 8px;border-radius:4px;margin-left:8px;">&#128260; Check Live Status</a></h4>'+tlinks;
+  } else {
+    document.getElementById('modalTracking').innerHTML='<span class="modal-notrack">No tracking numbers available</span>';
+  }
   var de=document.getElementById('trackDots');var le=document.getElementById('trackLabels');
   de.innerHTML='';le.innerHTML='';
   ST.forEach(function(s,i){
@@ -361,15 +368,4 @@ function openModal(ref){
   document.getElementById('modalOverlay').classList.add('open');
   requestAnimationFrame(function(){requestAnimationFrame(function(){
     bar.style.transition='width 0.9s cubic-bezier(.4,0,.2,1)';
-    trk.style.transition='left 0.9s cubic-bezier(.4,0,.2,1)';
-    bar.style.width=pct+'%';trk.style.left=pct+'%';
-  });});
-}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
-function closeModalOnBg(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
-function setFS(l){asf=l;renderStoreTabs();renderCalendar();}
-function setSS(s){asst=s;renderStatusTabs();renderCalendar();}
-function cp(t){if(navigator.clipboard)navigator.clipboard.writeText(t).catch(function(){});}
-</script>
-</body>
-</html>
+    trk.style.transition='left 0.9s cubic-bezier(.4,0,.2,1

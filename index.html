@@ -16,6 +16,10 @@
     .login-box label { display: block; font-size: 0.72rem; font-weight: 700; color: #888; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.6px; }
     .login-box input { width: 100%; padding: 10px 12px; border: 1.5px solid #e8e8e8; border-radius: 8px; font-size: 0.92rem; margin-bottom: 16px; outline: none; transition: border 0.2s; background: #fafafa; }
     .login-box input:focus { border-color: #b5179e; background: white; }
+    .pw-wrap { position: relative; margin-bottom: 16px; }
+    .pw-wrap input { margin-bottom: 0; padding-right: 40px; }
+    .pw-toggle { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #aaa; font-size: 0.8rem; padding: 2px 4px; }
+    .pw-toggle:hover { color: #666; }
     .login-btn { width: 100%; padding: 12px; background: #b5179e; color: white; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s; letter-spacing: 0.3px; }
     .login-btn:hover { background: #9a1286; }
     .login-error { color: #c62828; font-size: 0.82rem; text-align: center; margin-top: 12px; display: none; }
@@ -42,8 +46,8 @@
     .day-count { background: #b5179e; color: white; border-radius: 20px; padding: 2px 10px; font-size: 0.75rem; font-weight: 600; }
     .day-line { flex: 1; height: 1px; background: #e0e0e0; }
     .orders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-    .order-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.08); transition: transform 0.15s, box-shadow 0.15s; }
-    .order-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .order-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.08); transition: transform 0.15s, box-shadow 0.15s; cursor: pointer; }
+    .order-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.14); }
     .card-stripe { height: 5px; }
     .card-body { padding: 14px 16px; }
     .card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
@@ -68,6 +72,41 @@
     .store-dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 7px; vertical-align: middle; }
     .copy-btn { background: #f0f0f0; border: none; border-radius: 5px; padding: 3px 8px; font-size: 0.72rem; cursor: pointer; color: #555; }
     .copy-btn:hover { background: #e0e0e0; }
+
+    /* ── MODAL ── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box { background: white; border-radius: 20px; width: 100%; max-width: 520px; overflow: hidden; box-shadow: 0 32px 80px rgba(0,0,0,0.35); transform: translateY(24px) scale(0.97); transition: transform 0.25s, opacity 0.25s; opacity: 0; }
+    .modal-overlay.open .modal-box { transform: translateY(0) scale(1); opacity: 1; }
+    .modal-header { padding: 20px 24px 16px; display: flex; align-items: flex-start; justify-content: space-between; }
+    .modal-title { font-size: 1.15rem; font-weight: 700; }
+    .modal-sub { font-size: 0.82rem; color: #777; margin-top: 3px; }
+    .modal-close { background: #f0f0f0; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .modal-close:hover { background: #e0e0e0; }
+
+    /* ── TRUCK TRACK ── */
+    .track-section { padding: 0 24px 20px; }
+    .track-road { position: relative; margin: 36px 0 48px; height: 8px; background: #e8e8e8; border-radius: 4px; }
+    .track-progress-bar { position: absolute; left: 0; top: 0; height: 100%; border-radius: 4px; transition: width 0.9s cubic-bezier(.4,0,.2,1); }
+    .track-truck { position: absolute; top: -22px; transition: left 0.9s cubic-bezier(.4,0,.2,1); transform: translateX(-50%); font-size: 28px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18)); }
+    .track-dots { position: absolute; top: 0; left: 0; right: 0; }
+    .track-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 50%; border: 2.5px solid white; box-shadow: 0 0 0 2px #ddd; background: #ddd; transition: background 0.5s, box-shadow 0.5s; }
+    .track-dot.active { box-shadow: 0 0 0 2px currentColor; }
+    .track-labels { position: absolute; top: 20px; left: 0; right: 0; }
+    .track-lbl { position: absolute; transform: translateX(-50%); font-size: 0.68rem; font-weight: 600; color: #aaa; text-align: center; white-space: nowrap; transition: color 0.5s; }
+    .track-lbl.active { color: #333; }
+    .track-lbl span { display: block; font-size: 0.6rem; font-weight: 400; color: inherit; margin-top: 1px; }
+
+    /* ── MODAL BODY ── */
+    .modal-body { padding: 0 24px 24px; }
+    .modal-status-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .modal-tracking { background: #f8f8f8; border-radius: 10px; padding: 14px 16px; }
+    .modal-tracking h4 { font-size: 0.75rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .modal-tracking-link { display: block; color: #1565c0; text-decoration: none; font-size: 0.78rem; font-family: 'Courier New', monospace; padding: 5px 0; border-bottom: 1px solid #eee; }
+    .modal-tracking-link:last-child { border-bottom: none; padding-bottom: 0; }
+    .modal-tracking-link:hover { text-decoration: underline; }
+    .modal-no-tracking { font-size: 0.8rem; color: #aaa; font-style: italic; }
+    .modal-eta { display: flex; align-items: center; gap: 8px; background: #f0f9ff; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.85rem; color: #0369a1; font-weight: 500; }
   </style>
 </head>
 <body>
@@ -87,13 +126,43 @@
       <p>Delivery Tracking Portal</p>
     </div>
     <label>Username</label>
-    <input type="text" id="usernameInput" placeholder="Enter username" autocomplete="off">
+    <input type="text" id="usernameInput" placeholder="Enter username" autocomplete="username">
     <label>Password</label>
-    <input type="password" id="passwordInput" placeholder="Enter password">
+    <div class="pw-wrap">
+      <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="current-password">
+      <button class="pw-toggle" type="button" onclick="togglePw()" id="pwToggle">👁</button>
+    </div>
     <button class="login-btn" onclick="doLogin()">Sign In</button>
-    <div class="login-error" id="loginError">Incorrect username or password</div>
+    <div class="login-error" id="loginError">Incorrect username or password. Try again.</div>
   </div>
 </div>
+
+<!-- ORDER DETAIL MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-sub" id="modalSub"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="track-section">
+      <div class="track-road">
+        <div class="track-progress-bar" id="trackBar"></div>
+        <div class="track-truck" id="trackTruck">🚚</div>
+        <div class="track-dots" id="trackDots"></div>
+        <div class="track-labels" id="trackLabels"></div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div id="modalEta"></div>
+      <div class="modal-status-row" id="modalStatusRow"></div>
+      <div class="modal-tracking" id="modalTracking"></div>
+    </div>
+  </div>
+</div>
+
 <div id="appScreen">
   <header>
     <div class="header-left">
@@ -139,7 +208,7 @@ const COLORS = {
   SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828'
 };
 const ORDERS = [
-  { ref:'ALI0601',        label:'ALI',       date:'2026-06-04', time:'11:59 AM', status:'Delivered',       location:'Gront Desk', tracking:['1Z7900AX0384095204','1Z7900AX0384094965'] },
+  { ref:'ALI0601',        label:'ALI',       date:'2026-06-04', time:'11:59 AM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384095204','1Z7900AX0384094965'] },
   { ref:'SID0601',        label:'SID',       date:'2026-06-04', time:'12:46 PM', status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384097391','1Z7900AX0384097113','1Z7900AX0384097453'] },
   { ref:'BADER0601',      label:'BADER',     date:'2026-06-04', time:'1:03 PM',  status:'Delivered',       location:'Front Desk', tracking:[] },
   { ref:'MRCHO0601',      label:'CHO',       date:'2026-06-04', time:'1:15 PM',  status:'Delivered',       location:'Front Desk', tracking:['1Z7900AX0384107389'] },
@@ -182,6 +251,13 @@ const ORDERS = [
 let currentUser = null;
 let activeStoreFilter = 'ALL';
 let activeStatusFilter = 'ALL';
+
+function togglePw() {
+  const inp = document.getElementById('passwordInput');
+  const btn = document.getElementById('pwToggle');
+  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+  else { inp.type = 'password'; btn.textContent = '👁'; }
+}
 document.getElementById('passwordInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 document.getElementById('usernameInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 function doLogin() {
@@ -222,78 +298,4 @@ function renderApp() {
     renderCredsTable(); renderStoreTabs();
   } else {
     document.getElementById('adminCredsSection').style.display = 'none';
-    document.getElementById('adminTabs').style.display = 'none';
-  }
-  renderStatusTabs(visibleOrders); renderCalendar(visibleOrders);
-}
-function renderCredsTable() {
-  const rows = USERS.filter(u => u.role === 'store').map(u => `<tr><td><span class="store-dot" style="background:${COLORS[u.label]||'#999'}"></span><strong>${u.name}</strong></td><td>${u.username}</td><td>${u.password} <button class="copy-btn" onclick="copyText('${u.password}')">Copy</button></td></tr>`).join('');
-  document.getElementById('credsTable').innerHTML = `<thead><tr><th>Store</th><th>Username</th><th>Password</th></tr></thead><tbody>${rows}</tbody>`;
-}
-function renderStoreTabs() {
-  const labels = ['ALL', ...Object.keys(COLORS)];
-  document.getElementById('storeTabs').innerHTML = labels.map(l => {
-    const color = l === 'ALL' ? '#555' : (COLORS[l] || '#555');
-    const isActive = activeStoreFilter === l;
-    return `<button class="store-tab ${isActive ? 'active' : ''}" style="${isActive ? `background:${color};border-color:${color}` : `border-color:${color};color:${color}`}" onclick="setStoreFilter('${l}')">${l}</button>`;
-  }).join('');
-}
-function setStoreFilter(label) {
-  activeStoreFilter = label; activeStatusFilter = 'ALL';
-  const byStore = label === 'ALL' ? ORDERS : ORDERS.filter(o => o.label === label);
-  renderStoreTabs(); renderStatusTabs(byStore); renderCalendar(byStore);
-}
-const STATUS_META = {
-  ALL:{label:'All',color:'#555'}, OutForDelivery:{label:'Out for Delivery',color:'#1565c0'},
-  InTransit:{label:'In Transit',color:'#f57f17'}, Delivered:{label:'Delivered',color:'#2e7d32'},
-  InProcess:{label:'In Process',color:'#c62828'}
-};
-function renderStatusTabs(baseOrders) {
-  const counts = {};
-  baseOrders.forEach(o => { counts[o.status] = (counts[o.status]||0)+1; });
-  const statuses = ['ALL', ...Object.keys(STATUS_META).filter(s => s !== 'ALL' && counts[s])];
-  document.getElementById('statusTabs').innerHTML = statuses.map(s => {
-    const meta = STATUS_META[s] || {label:s,color:'#555'};
-    const count = s === 'ALL' ? baseOrders.length : (counts[s]||0);
-    const isActive = activeStatusFilter === s;
-    return `<button class="store-tab ${isActive ? 'active' : ''}" style="${isActive ? `background:${meta.color};border-color:${meta.color}` : `border-color:${meta.color};color:${meta.color}`}" onclick="setStatusFilter('${s}')">${meta.label} (${count})</button>`;
-  }).join('');
-}
-function setStatusFilter(status) {
-  activeStatusFilter = status;
-  let base = currentUser.role === 'admin' ? ORDERS : ORDERS.filter(o => o.label === currentUser.label);
-  if (activeStoreFilter !== 'ALL') base = base.filter(o => o.label === activeStoreFilter);
-  const filtered = status === 'ALL' ? base : base.filter(o => o.status === status);
-  renderStatusTabs(base); renderCalendar(filtered);
-}
-function renderCalendar(orders) {
-  const today = new Date().toISOString().slice(0,10);
-  const dated = orders.filter(o => o.date !== 'PENDING');
-  const pending = orders.filter(o => o.date === 'PENDING');
-  const groups = {};
-  dated.forEach(o => { if (!groups[o.date]) groups[o.date]=[]; groups[o.date].push(o); });
-  let html = Object.keys(groups).sort().reverse().map(date => {
-    const isToday = date === today;
-    const isFuture = date > today;
-    const dayLabel = formatDate(date) + (isToday ? ' [TODAY]' : isFuture ? ' [upcoming]' : '');
-    const items = groups[date];
-    return `<div class="day-section"><div class="day-header"><div class="day-label">${dayLabel}</div><div class="day-count">${items.length} order${items.length===1?'':'s'}</div><div class="day-line"></div></div><div class="orders-grid">${items.map(renderOrderCard).join('')}</div></div>`;
-  }).join('');
-  if (pending.length > 0) {
-    html += `<div class="day-section"><div class="day-header"><div class="day-label">Pending - Awaiting Shipment</div><div class="day-count">${pending.length} order${pending.length===1?'':'s'}</div><div class="day-line"></div></div><div class="orders-grid">${pending.map(renderOrderCard).join('')}</div></div>`;
-  }
-  document.getElementById('calendarContainer').innerHTML = html || '<div style="text-align:center;color:#999;padding:40px">No orders found.</div>';
-}
-function renderOrderCard(o) {
-  const color = COLORS[o.label] || '#999';
-  let badge = '';
-  if (o.status === 'Delivered')        badge = `<span class="status-delivered">Delivered</span>`;
-  else if (o.status === 'OutForDelivery') badge = `<span class="status-out">Out for Delivery</span>`;
-  else if (o.status === 'InTransit')   badge = `<span class="status-transit">In Transit</span>`;
-  else                                 badge = `<span class="status-pending">In Process</span>`;
-  const timeStr = o.time ? `<div class="delivery-time">${o.time}${o.location ? ' - ' + o.location : ''}</div>` : '';
-  const trackHtml = o.tracking && o.tracking.length > 0
-    ? `<div class="tracking-list">${o.tracking.map(t => `<a class="tracking-link" href="https://www.ups.com/track?tracknum=${t}" target="_blank">${t}</a>`).join('')}</div>`
-    : `<div class="no-tracking">No tracking number yet</div>`;
-  const orderNoHtml = o.orderNo ? `<div class="order-no">#${o.orderNo}</div>` : '';
-  return `<div class="order-card"><div class="card-stripe" style="background:${color}"></div><div class="card-body"><div class="card-top"
+    document.getElementById('adminTabs').sty

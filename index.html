@@ -316,14 +316,14 @@ const ORDERS = [
   { ref:'SK0615WESC',     label:'SK',        date:'2026-06-19', time:'1:09 PM',  status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384303701'] },
   // June 22
   { ref:'SULEMAN0615SP01',label:'SULEMAN',   date:'2026-06-22', time:'12:35 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384305763'] },
-  { ref:'SK0622SAM',   label:'SK',    num:'171980497', date:'2026-06-22', time:'11:59 AM', status:'InProcess', tracking:[], items:[
+  { ref:'SK0622SAM',   label:'SK',    num:'171980497', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384386382'], items:[
       {qty:'1',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'3',unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
       {qty:'1',unit:'PAC',sku:'MOT XT26151 GPLAY 64G BLU KIT'},
       {qty:'2',unit:'EA', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
   ]},
-  { ref:'SK0622FM',    label:'SK',    date:'2026-06-22', time:'11:55 AM', status:'InProcess', tracking:[], items:[
+  { ref:'SK0622FM',    label:'SK',    num:'171980494', date:'2026-06-22', time:'11:55 AM', status:'InProcess', tracking:[], items:[
       {qty:'3',unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'2',unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
@@ -331,7 +331,7 @@ const ORDERS = [
       {qty:'3',unit:'EA', sku:'SAM A176U A17 128G BLK KIT'},
       {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
   ]},
-  { ref:'SK0622BEWES', label:'SK',    date:'2026-06-22', time:'11:51 AM', status:'InProcess', tracking:[], items:[
+  { ref:'SK0622BEWES', label:'SK',    num:'171980491', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384383607'], items:[
       {qty:'1',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL 8 5G 128G SLV KIT'},
@@ -340,7 +340,7 @@ const ORDERS = [
       {qty:'2',unit:'EA', sku:'SAM A176U A17 128G BLK KIT'},
       {qty:'2',unit:'PAC',sku:'TRIPLESIM PLUG 64K METRO UICC'},
   ]},
-  { ref:'SK0622ROSD',  label:'SK',    date:'2026-06-22', time:'11:47 AM', status:'InProcess', tracking:[], items:[
+  { ref:'SK0622ROSD',  label:'SK',    num:'171980489', date:'2026-06-22', time:'11:47 AM', status:'InProcess', tracking:[], items:[
       {qty:'1',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'3',unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
@@ -350,7 +350,7 @@ const ORDERS = [
       {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
       {qty:'2',unit:'PAC',sku:'TRIPLESIM PLUG 64K METRO UICC'},
   ]},
-  { ref:'SK0622HAL',   label:'SK',    date:'2026-06-22', time:'11:42 AM', status:'InProcess', tracking:[], items:[
+  { ref:'SK0622HAL',   label:'SK',    num:'171980482', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384364495'], items:[
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL 8 5G 128G SLV KIT'},
       {qty:'1',unit:'PAC',sku:'MOT XT26131 G 128G BLU KIT'},
@@ -358,9 +358,344 @@ const ORDERS = [
       {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
       {qty:'1',unit:'PAC',sku:'TRIPLESIM PLUG 64K METRO UICC'},
   ]},
-  { ref:'SK0622WESC',  label:'SK',    date:'2026-06-22', time:'11:40 AM', status:'InProcess', tracking:[], items:[
+  { ref:'SK0622WESC',  label:'SK',    num:'171980472', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384363969'], items:[
       {qty:'4',unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'1',unit:'EA', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'2',unit:'EA', sku:'SAM A176U A17 128G BLK KIT'},
-      
+      {qty:'1',unit:'PAC',sku:'TRIPLESIM PLUG 64K METRO UICC'},
+  ]},
+  { ref:'SK0622FER',   label:'SK',    num:'171980425', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384365654'], items:[
+      {qty:'2',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'3',unit:'EA', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'3',unit:'EA', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'2',unit:'EA', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'BADER0622',   label:'BADER', num:'171980053', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384367063','1Z7900AX0384367107','1Z7900AX0384367090','1Z7900AX0384367072'], items:[
+      {qty:'3',unit:'EA', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
+      {qty:'2',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'2',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'4',unit:'EA', sku:'TCL T513W K32 5G 64G BLU KIT'},
+      {qty:'3',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'4',unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'1',unit:'PAC',sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'3',unit:'PAC',sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'1',unit:'PAC',sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'4',unit:'EA', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'1',unit:'PAC',sku:'TCL T807W 70PRO 128G BLU KIT'},
+      {qty:'1',unit:'EA', sku:'TCL T807W 70PRO 128G BLU KIT'},
+      {qty:'6',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'ALI0622',     label:'ALI',   num:'171980033', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384367018','1Z7900AX0384367036','1Z7900AX0384366966','1Z7900AX0384366975','1Z7900AX0384366984','1Z7900AX0384366993'], items:[
+      {qty:'5',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'4',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'6',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'1',unit:'PAC',sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'6',unit:'PAC',sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'1',unit:'PAC',sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'12',unit:'EA',sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+      {qty:'2',unit:'PAC',sku:'TRIPLESIM PLUG 64K METRO UICC'},
+  ]},
+  { ref:'SULEMAN0622', label:'SULEMAN', num:'171979925', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384364717'] },
+  { ref:'CHO0622',     label:'CHO',   num:'171979929', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384375401'], items:[
+      {qty:'1',unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'1',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+  ]},
+  { ref:'SID0622',       label:'SID',     num:'171980058', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384365485'] },
+  { ref:'AMIT0622',      label:'AMIT',    num:'171979927', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384367081','1Z7900AX0384368268'] },
+  { ref:'JACKSBORO0622', label:'JACKSBORO', num:'171979784', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0284358208'] },
+  { ref:'JACKSBORO0622SP01', label:'JACKSBORO', num:'171979791', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0284360437'] },
+  // June 23
+  { ref:'ALI0623SP01',    label:'ALI',     num:'171981761', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384382153'] },
+  { ref:'SK0623SP01FM',   label:'SK',      num:'171981808', date:'2026-06-23', time:'10:20 AM', status:'InProcess', tracking:[] },
+  { ref:'SK0623SP01ROSD', label:'SK',      num:'171981802', date:'2026-06-23', time:'10:18 AM', status:'InProcess', tracking:[] },
+  { ref:'CHO0623SP01',    label:'CHO',     num:'171982293', date:'2026-06-23', time:'11:49 AM', status:'InProcess', tracking:[] },
+  { ref:'SULEMAN0623SP01',label:'SULEMAN', num:'171982333', date:'2026-06-23', time:'11:56 AM', status:'InProcess', tracking:[] },
+  { ref:'BADER0623SP01',  label:'BADER',   num:'171982340', date:'2026-06-23', time:'11:59 AM', status:'InProcess', tracking:[] },
+  { ref:'SID0623SP01',    label:'SID',     num:'171981513', date:'2026-06-23', time:'10:07 AM', status:'InProcess', tracking:[] },
+  { ref:'AMIT0623SP01',   label:'AMIT',    num:'171981436', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384381958'] },
+  // June 24
+  { ref:'AMIT0624SP02',   label:'AMIT',    num:'171983192', date:'2026-06-24', time:'', status:'InProcess', tracking:[] },
+  { ref:'SK0624SP01SAM',  label:'SK',      num:'171983191', date:'2026-06-24', time:'', status:'InProcess', tracking:[] },
+  // Pending
+  { ref:'ALI0615SP01',    label:'ALI',       date:'PENDING', time:'', status:'InProcess', tracking:[] },
+  { ref:'AMIT0615SP01',   label:'AMIT',      date:'PENDING', time:'', status:'InProcess', tracking:[] },
+  { ref:'SID0615SP01',    label:'SID',       date:'PENDING', time:'', status:'InProcess', tracking:[] },
+  { ref:'BADER0615SP01',  label:'BADER',     date:'PENDING', time:'', status:'InProcess', tracking:[] },
+  { ref:'SK0615BEWESSP01',label:'SK',        date:'PENDING', time:'', status:'InProcess', tracking:[] },
+  { ref:'SK0615FERSP01',  label:'SK',        date:'PENDING', time:'', status:'InProcess', tracking:[] },
+  { ref:'SK0615FMSP01',   label:'SK',        date:'PENDING', time:'', status:'InProcess', tracking:[] },
+  { ref:'CHO0615',        label:'CHO',       date:'PENDING', time:'', status:'InProcess', tracking:[] },
+];
+
+// ── STATE ────
+let currentUser = null;
+let activeStoreFilter = 'ALL';
+let activeStatusFilter = 'ALL';
+
+// ── LOGIN ────
+document.getElementById('passwordInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.getElementById('usernameInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+function doLogin() {
+  const u = document.getElementById('usernameInput').value.trim().toLowerCase();
+  const p = document.getElementById('passwordInput').value.trim();
+  const user = USERS.find(x => x.username === u && x.password === p);
+  if (!user) {
+    document.getElementById('loginError').style.display = 'block';
+    return;
+  }
+  currentUser = user;
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('appScreen').style.display = 'block';
+  document.getElementById('userPill').textContent = '👤 ' + user.name;
+  renderApp();
+}
+
+function doLogout() {
+  currentUser = null;
+  activeStoreFilter = 'ALL';
+  activeStatusFilter = 'ALL';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('appScreen').style.display = 'none';
+  document.getElementById('usernameInput').value = '';
+  document.getElementById('passwordInput').value = '';
+  document.getElementById('loginError').style.display = 'none';
+}
+
+// ── RENDER ────
+function renderApp() {
+  const isAdmin = currentUser.role === 'admin';
+  const storeLabel = currentUser.label;
+  let visibleOrders = isAdmin ? ORDERS : ORDERS.filter(o => o.label === storeLabel);
+  const delivered  = visibleOrders.filter(o => o.status === 'Delivered').length;
+  const outFor     = visibleOrders.filter(o => o.status === 'OutForDelivery').length;
+  const inTransit  = visibleOrders.filter(o => o.status === 'InTransit' || o.status === 'OnWayToUPS').length;
+  const inProcess  = visibleOrders.filter(o => o.status === 'InProcess').length;
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('ALL')"><div class="num">${visibleOrders.length}</div><div class="lbl">Total Orders</div></div>
+    <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('Delivered')"><div class="num" style="color:#2e7d32">${delivered}</div><div class="lbl">Delivered</div></div>
+    <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('OutForDelivery')"><div class="num" style="color:#1565c0">${outFor}</div><div class="lbl">Out for Delivery</div></div>
+    <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('InTransit')"><div class="num" style="color:#f57f17">${inTransit}</div><div class="lbl">In Transit</div></div>
+    <div class="stat-card" style="cursor:pointer" onclick="setStatusFilter('InProcess')"><div class="num" style="color:#c62828">${inProcess}</div><div class="lbl">In Process</div></div>
+  `;
+  if (isAdmin) {
+    document.getElementById('adminCredsSection').style.display = 'block';
+    document.getElementById('adminTabs').style.display = 'block';
+    renderCredsTable();
+    renderStoreTabs();
+  } else {
+    document.getElementById('adminCredsSection').style.display = 'none';
+    document.getElementById('adminTabs').style.display = 'none';
+  }
+  renderStatusTabs(visibleOrders);
+  renderCalendar(visibleOrders);
+}
+
+function renderCredsTable() {
+  const rows = USERS.filter(u => u.role === 'store').map(u => `
+    <tr>
+      <td><span class="store-dot" style="background:${COLORS[u.label]||'#999'}"></span><strong>${u.name}</strong></td>
+      <td>${u.username}</td>
+      <td>${u.password} <button class="copy-btn" onclick="copyText('${u.password}')">Copy</button></td>
+    </tr>`).join('');
+  document.getElementById('credsTable').innerHTML = `
+    <thead><tr><th>Store</th><th>Username</th><th>Password</th></tr></thead>
+    <tbody>${rows}</tbody>`;
+}
+
+function renderStoreTabs() {
+  const labels = ['ALL', ...Object.keys(COLORS)];
+  document.getElementById('storeTabs').innerHTML = labels.map(l => {
+    const color = l === 'ALL' ? '#555' : (COLORS[l] || '#555');
+    const isActive = activeStoreFilter === l;
+    return `<button class="store-tab ${isActive ? 'active' : ''}"
+      style="${isActive ? `background:${color};border-color:${color}` : `border-color:${color};color:${color}`}"
+      onclick="setStoreFilter('${l}')">${l}</button>`;
+  }).join('');
+}
+
+function setStoreFilter(label) {
+  activeStoreFilter = label;
+  activeStatusFilter = 'ALL';
+  const byStore = label === 'ALL' ? ORDERS : ORDERS.filter(o => o.label === label);
+  renderStoreTabs();
+  renderStatusTabs(byStore);
+  renderCalendar(byStore);
+}
+
+const STATUS_META = {
+  ALL:             { label: 'All',             color: '#555' },
+  OutForDelivery:  { label: '🚚 Out for Delivery', color: '#1565c0' },
+  InTransit:       { label: '📦 In Transit',    color: '#f57f17' },
+  Delivered:       { label: '✅ Delivered',      color: '#2e7d32' },
+  InProcess:       { label: '🔄 In Process',    color: '#c62828' },
+  OnWayToUPS:      { label: '⏳ On Way to UPS', color: '#f57f17' },
+};
+
+function renderStatusTabs(baseOrders) {
+  const counts = {};
+  baseOrders.forEach(o => { counts[o.status] = (counts[o.status]||0) + 1; });
+  const presentStatuses = ['ALL', ...Object.keys(STATUS_META).filter(s => s !== 'ALL' && counts[s])];
+  document.getElementById('statusTabs').innerHTML = presentStatuses.map(s => {
+    const meta = STATUS_META[s] || { label: s, color: '#555' };
+    const count = s === 'ALL' ? baseOrders.length : (counts[s] || 0);
+    const isActive = activeStatusFilter === s;
+    return `<button class="store-tab ${isActive ? 'active' : ''}"
+      style="${isActive ? `background:${meta.color};border-color:${meta.color}` : `border-color:${meta.color};color:${meta.color}`}"
+      onclick="setStatusFilter('${s}')">${meta.label} (${count})</button>`;
+  }).join('');
+}
+
+function setStatusFilter(status) {
+  activeStatusFilter = status;
+  const isAdmin = currentUser.role === 'admin';
+  let base = isAdmin ? ORDERS : ORDERS.filter(o => o.label === currentUser.label);
+  if (activeStoreFilter !== 'ALL') base = base.filter(o => o.label === activeStoreFilter);
+  const filtered = status === 'ALL' ? base : base.filter(o => o.status === status);
+  renderStatusTabs(base);
+  renderCalendar(filtered);
+}
+
+function renderCalendar(orders) {
+  const today = new Date().toISOString().slice(0,10);
+  const dated   = orders.filter(o => o.date !== 'PENDING');
+  const pending = orders.filter(o => o.date === 'PENDING');
+  const groups = {};
+  dated.forEach(o => { if (!groups[o.date]) groups[o.date] = []; groups[o.date].push(o); });
+  let html = Object.keys(groups).sort().reverse().map(date => {
+    const isToday  = date === today;
+    const isFuture = date > today;
+    const dayLabel = formatDate(date) + (isToday ? ' 🔴 TODAY' : isFuture ? ' ⏳' : '');
+    const items = groups[date];
+    return `
+      <div class="day-section">
+        <div class="day-header">
+          <div class="day-label">${dayLabel}</div>
+          <div class="day-count">${items.length} order${items.length === 1 ? '' : 's'}</div>
+          <div class="day-line"></div>
+        </div>
+        <div class="orders-grid">
+          ${items.map(o => renderOrderCard(o)).join('')}
+        </div>
+      </div>`;
+  }).join('');
+  if (pending.length > 0) {
+    html += `
+      <div class="day-section">
+        <div class="day-header">
+          <div class="day-label">⏳ Pending — Awaiting Shipment</div>
+          <div class="day-count">${pending.length} order${pending.length === 1 ? '' : 's'}</div>
+          <div class="day-line"></div>
+        </div>
+        <div class="orders-grid">
+          ${pending.map(o => renderOrderCard(o)).join('')}
+        </div>
+      </div>`;
+  }
+  document.getElementById('calendarContainer').innerHTML = html || '<div style="text-align:center;color:#999;padding:40px">No orders found.</div>';
+}
+
+function renderOrderCard(o) {
+  const color = COLORS[o.label] || '#999';
+  let statusBadge = '';
+  if (o.status === 'Delivered') {
+    statusBadge = `<span class="status-delivered">✅ Delivered</span>`;
+  } else if (o.status === 'OutForDelivery') {
+    statusBadge = `<span class="status-out">🚚 Out for Delivery</span>`;
+  } else if (o.status === 'InTransit' || o.status === 'OnWayToUPS') {
+    statusBadge = `<span class="status-transit">📦 In Transit</span>`;
+  } else {
+    statusBadge = `<span class="status-pending">🔄 In Process</span>`;
+  }
+  const timeStr = o.time ? `<div class="delivery-time">${o.status === 'Delivered' ? '✅ ' : ''}${o.time}${o.location ? ' · ' + o.location : ''}</div>` : '';
+  const trackingHtml = o.tracking && o.tracking.length > 0
+    ? `<div class="tracking-list">${o.tracking.map(t => `<a class="tracking-link" href="https://www.ups.com/track?tracknum=${t}" target="_blank">${t}</a>`).join('')}</div>`
+    : `<div class="no-tracking">No tracking number yet</div>`;
+  const hasItems = o.items && o.items.length > 0;
+  const itemsHint = hasItems
+    ? `<div style="font-size:0.7rem;color:#aaa;margin-top:6px">🛍 ${o.items.length} item${o.items.length===1?'':'s'} — tap to view</div>`
+    : `<div style="font-size:0.7rem;color:#ddd;margin-top:6px">Tap for details</div>`;
+  return `
+    <div class="order-card" onclick="showOrderModal('${o.ref}')">
+      <div class="card-stripe" style="background:${color}"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="order-ref">${o.ref}</div>
+          <span class="label-badge" style="background:${color}">${o.label}</span>
+        </div>
+        ${o.num ? `<div style="font-size:0.72rem;color:#999;margin-bottom:6px;font-family:'Courier New',monospace">Order #${o.num}</div>` : ''}
+        ${statusBadge}
+        ${timeStr}
+        ${trackingHtml}
+        ${itemsHint}
+      </div>
+    </div>`;
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+function copyText(text) {
+  navigator.clipboard.writeText(text).catch(() => {});
+}
+
+// ── ORDER MODAL ────
+function showOrderModal(ref) {
+  const order = ORDERS.find(o => o.ref === ref);
+  if (!order) return;
+  const color = COLORS[order.label] || '#999';
+  document.getElementById('modalTitle').innerHTML = `<span style="color:${color}">${order.ref}</span>`;
+  let metaParts = [];
+  if (order.status === 'Delivered') metaParts.push(`✅ Delivered ${order.date}${order.time ? ' · ' + order.time : ''}${order.location ? ' · ' + order.location : ''}`);
+  else if (order.status === 'OutForDelivery') metaParts.push(`🚚 Out for Delivery — ${order.date}`);
+  else if (order.status === 'InTransit') metaParts.push(`📦 In Transit — Est. ${order.date}`);
+  else metaParts.push('🔄 In Process');
+  document.getElementById('modalMeta').textContent = metaParts.join('  ');
+  let body = '';
+  if (order.items && order.items.length > 0) {
+    body = order.items.map(item => {
+      const prod = lookupProduct(item.sku);
+      return `
+        <div class="product-row">
+          <div class="product-img-wrap">
+            ${prod.img
+              ? `<img src="${prod.img}" alt="${prod.name}" onerror="this.parentNode.innerHTML='<span class=\\'product-img-fallback\\'>📱</span>'">`
+              : `<span class="product-img-fallback">📱</span>`}
+          </div>
+          <div class="product-info">
+            <div class="product-qty-badge">${item.qty} ${item.unit || 'EA'}</div>
+            <div class="product-name">${prod.name}</div>
+            <div class="product-sku">${item.sku}</div>
+          </div>
+        </div>`;
+    }).join('');
+  } else {
+    body = '<div class="modal-no-items">📋 Item details not yet loaded for this order.</div>';
+  }
+  if (order.tracking && order.tracking.length > 0) {
+    body += `<div style="margin-top:14px;padding-top:14px;border-top:1px solid #f0f0f0">
+      <div style="font-size:0.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Tracking Numbers</div>
+      ${order.tracking.map(t => `<a href="https://www.ups.com/track?tracknum=${t}" target="_blank" class="tracking-link" style="display:inline-block;margin:2px 4px 2px 0">${t}</a>`).join('')}
+    </div>`;
+  }
+  document.getElementById('modalBody').innerHTML = body;
+  document.getElementById('orderModal').style.display = 'flex';
+}
+
+function closeModalOverlay(e) {
+  if (e.target === document.getElementById('orderModal')) {
+    document.getElementById('orderModal').style.display = 'none';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('orderModal').style.display = 'none';
+});
+</script>
+</body>
+</html>

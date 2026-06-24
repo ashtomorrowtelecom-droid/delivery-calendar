@@ -98,7 +98,7 @@
     .transit-progress { margin: 6px 0 8px; }
     .transit-track { position: relative; height: 6px; background: #e0e0e0; border-radius: 10px; overflow: visible; margin-bottom: 4px; }
     .transit-track::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 65%; background: linear-gradient(90deg, #1565c0, #42a5f5); border-radius: 10px; }
-    .transit-truck { position: absolute; top: -10px; left: 62%; font-size: 1.1rem; animation: truckMove 2s ease-in-out infinite alternate; }
+    .transit-truck { position: absolute; top: -10px; left: 62%; font-size: 1.1rem; animation: truckMove 2s ease-in-out infinite alternate; display: inline-block; transform: scaleX(-1); }
     @keyframes truckMove { from { left: 58%; } to { left: 66%; } }
     .transit-labels { display: flex; justify-content: space-between; font-size: 0.62rem; color: #aaa; margin-top: 2px; }
 

@@ -95,6 +95,12 @@
     .tracking-link { display: block; color: #1565c0; text-decoration: none; font-size: 0.72rem; font-family: 'Courier New', monospace; margin-bottom: 2px; }
     .tracking-link:hover { text-decoration: underline; }
     .no-tracking { font-size: 0.73rem; color: #aaa; font-style: italic; }
+    .transit-progress { margin: 6px 0 8px; }
+    .transit-track { position: relative; height: 6px; background: #e0e0e0; border-radius: 10px; overflow: visible; margin-bottom: 4px; }
+    .transit-track::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 65%; background: linear-gradient(90deg, #1565c0, #42a5f5); border-radius: 10px; }
+    .transit-truck { position: absolute; top: -10px; left: 62%; font-size: 1.1rem; animation: truckMove 2s ease-in-out infinite alternate; }
+    @keyframes truckMove { from { left: 58%; } to { left: 66%; } }
+    .transit-labels { display: flex; justify-content: space-between; font-size: 0.62rem; color: #aaa; margin-top: 2px; }
 
     /* ── ORDER MODAL ── */
     .modal-overlay {
@@ -561,8 +567,8 @@ function setStatusFilter(status) {
 
 function renderCalendar(orders) {
   const today = new Date().toISOString().slice(0,10);
-  const dated   = orders.filter(o => o.date !== 'PENDING');
-  const pending = orders.filter(o => o.date === 'PENDING');
+  const dated   = orders.filter(o => o.date !== 'PENDING' && o.status !== 'InProcess');
+  const pending = orders.filter(o => o.date === 'PENDING' || o.status === 'InProcess');
   const groups = {};
   dated.forEach(o => { if (!groups[o.date]) groups[o.date] = []; groups[o.date].push(o); });
   let html = Object.keys(groups).sort().reverse().map(date => {
@@ -586,7 +592,7 @@ function renderCalendar(orders) {
     html += `
       <div class="day-section">
         <div class="day-header">
-          <div class="day-label">⏳ Pending — Awaiting Shipment</div>
+          <div class="day-label">🔄 Awaiting Shipment</div>
           <div class="day-count">${pending.length} order${pending.length === 1 ? '' : 's'}</div>
           <div class="day-line"></div>
         </div>
@@ -610,7 +616,7 @@ function renderOrderCard(o) {
   } else {
     statusBadge = `<span class="status-pending">🔄 In Process</span>`;
   }
-  const timeStr = o.time ? `<div class="delivery-time">${o.status === 'Delivered' ? '✅ ' : ''}${o.time}${o.location ? ' · ' + o.location : ''}</div>` : '';
+  const timeStr = (o.time && o.status !== 'InProcess') ? `<div class="delivery-time">${o.status === 'Delivered' ? '✅ ' : ''}${o.time}${o.location ? ' · ' + o.location : ''}</div>` : '';
   const trackingHtml = o.tracking && o.tracking.length > 0
     ? `<div class="tracking-list">${o.tracking.map(t => `<a class="tracking-link" href="https://www.ups.com/track?tracknum=${t}" target="_blank">${t}</a>`).join('')}</div>`
     : `<div class="no-tracking">No tracking number yet</div>`;
@@ -628,6 +634,7 @@ function renderOrderCard(o) {
         </div>
         ${o.num ? `<div style="font-size:0.72rem;color:#999;margin-bottom:6px;font-family:'Courier New',monospace">Order #${o.num}</div>` : ''}
         ${statusBadge}
+        ${(o.status === 'InTransit' || o.status === 'OnWayToUPS') ? `<div class="transit-progress"><div class="transit-track"><div class="transit-truck">🚚</div></div><div class="transit-labels"><span>Shipped</span><span>On the way</span><span>Arriving</span></div></div>` : ''}
         ${timeStr}
         ${trackingHtml}
         ${itemsHint}

@@ -265,8 +265,20 @@ const PRODUCTS = {
   'TCL T513W':       { name: 'TCL K32 5G',                    img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/tcl/tcl-k32-5g/Blue/TCL-K32-5G-Blue-front.png' },
   'TCL T807W':       { name: 'TCL 70 Pro',                    img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/tcl/tcl-70-pro/Blue/TCL-70-Pro-Blue-front.png' },
   'SAG FAST5688W':   { name: 'Sagemcom 5G Gateway',           img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/home-internet/gateway/sagemcom-fast5688w/T-Mobile-Sagemcom-Fast-5688W-front.png' },
+  'SAM X218U':       { name: 'Samsung Galaxy Tab A9+ 5G',    img: 'https://images.samsung.com/is/image/samsung/p6pim/us/sm-x218uzsaxaa/gallery/us-galaxy-tab-a9-plus-5g-sm-x218-sm-x218uzsaxaa-thumb' },
+  'TMO REVVL TAB':   { name: 'T-Mobile REVVL Tab 5G',        img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/t-mobile/t-mobile-revvl-tab-2-5g/Black/T-Mobile-REVVL-Tab-2-5G-Black-front.png' },
   'TRIPLESIM':       { name: 'Metro SIM Card',                img: null },
 };
+
+
+const MARGIN_RATES = { PHONE: 19.50, TABLET: 8.00 };
+const TABLET_SKUS = ['SAM X218U', 'TMO REVVL TAB'];
+function getItemMargin(sku) {
+  const upper = sku.toUpperCase();
+  if (TABLET_SKUS.some(t => upper.startsWith(t.toUpperCase()))) return MARGIN_RATES.TABLET;
+  if (upper.includes('SIM') || upper.includes('TRIPLESIM')) return 0;
+  return MARGIN_RATES.PHONE;
+}
 
 function lookupProduct(sku) {
   const skuUp = (sku || '').toUpperCase();
@@ -356,7 +368,7 @@ const ORDERS = [
       {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
       {qty:'2',unit:'PAC',sku:'TRIPLESIM PLUG 64K METRO UICC'},
   ]},
-  { ref:'SK0622HAL',   label:'SK',    num:'171980482', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384364495'], items:[
+  { ref:'SK0622HAL',   label:'SK',    num:'171980482', date:'2026-06-25', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384364495'], items:[
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL 8 5G 128G SLV KIT'},
       {qty:'1',unit:'PAC',sku:'MOT XT26131 G 128G BLU KIT'},
@@ -364,7 +376,7 @@ const ORDERS = [
       {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
       {qty:'1',unit:'PAC',sku:'TRIPLESIM PLUG 64K METRO UICC'},
   ]},
-  { ref:'SK0622WESC',  label:'SK',    num:'171980472', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384363969'], items:[
+  { ref:'SK0622WESC',  label:'SK',    num:'171980472', date:'2026-06-25', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384363969'], items:[
       {qty:'4',unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'1',unit:'EA', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -379,7 +391,7 @@ const ORDERS = [
       {qty:'2',unit:'EA', sku:'MOT XT26131 G 128G BLU KIT'},
       {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
   ]},
-  { ref:'BADER0622',   label:'BADER', num:'171980053', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384367063','1Z7900AX0384367107','1Z7900AX0384367090','1Z7900AX0384367072'], items:[
+  { ref:'BADER0622',   label:'BADER', num:'171980053', date:'2026-06-25', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384367063','1Z7900AX0384367107','1Z7900AX0384367090','1Z7900AX0384367072'], items:[
       {qty:'3',unit:'EA', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
       {qty:'2',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
@@ -394,7 +406,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'TCL T807W 70PRO 128G BLU KIT'},
       {qty:'6',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
   ]},
-  { ref:'ALI0622',     label:'ALI',   num:'171980033', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384367018','1Z7900AX0384367036','1Z7900AX0384366966','1Z7900AX0384366975','1Z7900AX0384366984','1Z7900AX0384366993'], items:[
+  { ref:'ALI0622',     label:'ALI',   num:'171980033', date:'2026-06-25', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384367018','1Z7900AX0384367036','1Z7900AX0384366966','1Z7900AX0384366975','1Z7900AX0384366984','1Z7900AX0384366993'], items:[
       {qty:'5',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'4',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'6',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -404,24 +416,24 @@ const ORDERS = [
       {qty:'12',unit:'EA',sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
       {qty:'2',unit:'PAC',sku:'TRIPLESIM PLUG 64K METRO UICC'},
   ]},
-  { ref:'SULEMAN0622', label:'SULEMAN', num:'171979925', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384364717'] },
-  { ref:'CHO0622',     label:'CHO',   num:'171979929', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384375401'], items:[
+  { ref:'SULEMAN0622', label:'SULEMAN', num:'171979925', date:'2026-06-25', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384364717'] },
+  { ref:'CHO0622',     label:'CHO',   num:'171979929', date:'2026-06-25', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384375401'], items:[
       {qty:'1',unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'1',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
   ]},
-  { ref:'SID0622',       label:'SID',     num:'171980058', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384365485'] },
-  { ref:'AMIT0622',      label:'AMIT',    num:'171979927', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384367081','1Z7900AX0384368268'] },
-  { ref:'JACKSBORO0622', label:'JACKSBORO', num:'171979784', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0284358208'] },
-  { ref:'JACKSBORO0622SP01', label:'JACKSBORO', num:'171979791', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0284360437'] },
+  { ref:'SID0622',       label:'SID',     num:'171980058', date:'2026-06-25', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384365485'] },
+  { ref:'AMIT0622',      label:'AMIT',    num:'171979927', date:'2026-06-25', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384367081','1Z7900AX0384368268'] },
+  { ref:'JACKSBORO0622', label:'JACKSBORO', num:'171979784', date:'2026-06-24', time:'12:34 PM', status:'Delivered', location:'Office', tracking:['1Z7900AX0284358208'] },
+  { ref:'JACKSBORO0622SP01', label:'JACKSBORO', num:'171979791', date:'2026-06-24', time:'12:34 PM', status:'Delivered', location:'Office', tracking:['1Z7900AX0284360437'] },
   // June 23
-  { ref:'ALI0623SP01',    label:'ALI',     num:'171981761', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384382153'] },
+  { ref:'ALI0623SP01',    label:'ALI',     num:'171981761', date:'2026-06-26', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384382153'] },
   { ref:'SK0623SP01FM',   label:'SK',      num:'171981808', date:'2026-06-23', time:'10:20 AM', status:'InProcess', tracking:[] },
   { ref:'SK0623SP01ROSD', label:'SK',      num:'171981802', date:'2026-06-23', time:'10:18 AM', status:'InProcess', tracking:[] },
   { ref:'CHO0623SP01',    label:'CHO',     num:'171982293', date:'2026-06-23', time:'11:49 AM', status:'InProcess', tracking:[] },
   { ref:'SULEMAN0623SP01',label:'SULEMAN', num:'171982333', date:'2026-06-23', time:'11:56 AM', status:'InProcess', tracking:[] },
   { ref:'BADER0623SP01',  label:'BADER',   num:'171982340', date:'2026-06-23', time:'11:59 AM', status:'InProcess', tracking:[] },
   { ref:'SID0623SP01',    label:'SID',     num:'171981513', date:'2026-06-23', time:'10:07 AM', status:'InProcess', tracking:[] },
-  { ref:'AMIT0623SP01',   label:'AMIT',    num:'171981436', date:'2026-06-25', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384381958'] },
+  { ref:'AMIT0623SP01',   label:'AMIT',    num:'171981436', date:'2026-06-26', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384381958'] },
   // June 24
   { ref:'AMIT0624SP02',   label:'AMIT',    num:'171983192', date:'2026-06-24', time:'', status:'InProcess', tracking:[] },
   { ref:'SK0624SP01SAM',  label:'SK',      num:'171983191', date:'2026-06-24', time:'', status:'InProcess', tracking:[] },
@@ -685,11 +697,28 @@ function showOrderModal(ref) {
     body = '<div class="modal-no-items">📋 Item details not yet loaded for this order.</div>';
   }
   if (order.tracking && order.tracking.length > 0) {
-    body += `<div style="margin-top:14px;padding-top:14px;border-top:1px solid #f0f0f0">
-      <div style="font-size:0.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Tracking Numbers</div>
-      ${order.tracking.map(t => `<a href="https://www.ups.com/track?tracknum=${t}" target="_blank" class="tracking-link" style="display:inline-block;margin:2px 4px 2px 0">${t}</a>`).join('')}
-    </div>`;
+    body += `<div style="margin-top:16px;padding:14px 16px;background:#f0f7ff;border-radius:12px;border-left:4px solid #1565c0"><div style="font-size:0.75rem;font-weight:700;color:#1565c0;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">📦 UPS Tracking</div>` + order.tracking.map(t => `<a href="https://www.ups.com/track?tracknum=${t}" target="_blank" style="display:flex;align-items:center;gap:8px;padding:7px 10px;margin-bottom:6px;background:white;border-radius:8px;text-decoration:none;color:#1565c0;font-family:'Courier New',monospace;font-size:0.8rem;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,0.08)">🚚 ${t}</a>`).join('') + `</div>`;
+  } else {
+    body += `<div style="margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:12px;border-left:4px solid #e0e0e0"><div style="font-size:0.75rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">📦 UPS Tracking</div><div style="font-size:0.82rem;color:#bbb;font-style:italic">No tracking number yet</div></div>`;
   }
+
+  // Margin section
+  if (order.items && order.items.length > 0) {
+    let tot = 0;
+    const rows = order.items.map(item => {
+      const rate = getItemMargin(item.sku);
+      const qty = parseInt(item.qty) || 1;
+      const sub = rate * qty;
+      tot += sub;
+      if (rate === 0) return '';
+      const tab = TABLET_SKUS.some(t => item.sku.toUpperCase().startsWith(t.toUpperCase()));
+      return `<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0f0f0;font-size:0.8rem"><span style="color:#555">${tab?'🗂️':'📱'} ${item.sku} <span style="color:#bbb">×${qty}</span></span><span style="font-weight:700;color:#2e7d32">+$${sub.toFixed(2)}</span></div>`;
+    }).filter(r=>r).join('');
+    if (tot > 0) {
+      body += `<div style="margin-top:16px;padding:14px 16px;background:#f1f8e9;border-radius:12px;border-left:4px solid #2e7d32"><div style="font-size:0.75rem;font-weight:700;color:#2e7d32;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">💰 Margin Summary</div>${rows}<div style="display:flex;justify-content:space-between;padding-top:10px;font-size:1rem;font-weight:800"><span style="color:#555">Total Margin</span><span style="color:#2e7d32;font-size:1.15rem">$${tot.toFixed(2)}</span></div></div>`;
+    }
+  }
+
   document.getElementById('modalBody').innerHTML = body;
   document.getElementById('orderModal').style.display = 'flex';
 }

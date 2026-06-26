@@ -205,6 +205,19 @@
     .store-dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 7px; vertical-align: middle; }
     .copy-btn { background: #f0f0f0; border: none; border-radius: 5px; padding: 3px 8px; font-size: 0.72rem; cursor: pointer; color: #555; }
     .copy-btn:hover { background: #e0e0e0; }
+
+    /* ── RICH ACCORDION DETAIL ── */
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-bottom: 14px; padding: 12px; background: #f8f8fc; border-radius: 10px; }
+    .detail-cell { display: flex; flex-direction: column; gap: 2px; }
+    .detail-lbl { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #aaa; }
+    .detail-val { font-size: 0.84rem; font-weight: 600; color: #1a1a2e; }
+    .detail-val.mono { font-family: 'Courier New', monospace; font-size: 0.78rem; }
+    .margin-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding: 10px 14px; background: linear-gradient(135deg,#f3e5f5,#e8eaf6); border-radius: 10px; }
+    .margin-bar-label { font-size: 0.72rem; font-weight: 700; color: #7b1fa2; text-transform: uppercase; letter-spacing: 0.5px; }
+    .margin-bar-value { font-size: 1.1rem; font-weight: 800; color: #4a148c; }
+    .acc-item-sku { font-size: 0.68rem; color: #bbb; font-family: 'Courier New', monospace; margin-top: 2px; }
+    .acc-item-margin { font-size: 0.7rem; color: #2e7d32; font-weight: 700; margin-top: 2px; }
+    .section-divider { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #ccc; margin: 14px 0 6px; border-top: 1px solid #f0f0f0; padding-top: 10px; }
   </style>
 </head>
 <body>
@@ -337,12 +350,19 @@ const PRODUCT_IMGS = {
   'SAM A166U':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A16-5G/Blue-Black/Samsung-Galaxy-A16-5G-Blue-Black-frontimage.png',
   'SAM A176U':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A17-5G/Black/Samsung-Galaxy-A17-5G-Black-frontimage.png',
   'SAM A376U':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A37-5G/Awesome-Charcoal/Samsung-Galaxy-A37-5G-Awesome-Charcoal-frontimage.png',
-  'APL IPHONE 17':    'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17-Pro-Max/Silver/Apple-iPhone-17-Pro-Max-Silver-frontimage.png',
+  'APL IPHONE 17 PRO':'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17-Pro-Max/Silver/Apple-iPhone-17-Pro-Max-Silver-frontimage.png',
+  'APL IPHONE 17':    'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17/Black/Apple-iPhone-17-Black-frontimage.png',
   'APL IPHONE 16E':   'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-16e/Black/Apple-iPhone-16e-Black-frontimage.png',
   'TMO REVVL TAB 2':  'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
   'TMO REVVL TAB':    'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
   'TMO REVVL 8':      'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/T-Mobile/T-Mobile-Revvl-8/Icy-Silver/T-Mobile-Revvl-8-Icy-Silver-frontimage.png',
   'TCL FLIP':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/TCL/TCL-FLIP-4-5G/Stone-Gray/TCL-FLIP-4-5G-Stone-Gray-frontimage.png',
+  'MOT XT25171':      'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/motorola/Motorola-Moto-G-Stylus-5G-2024/Cadet-Blue/Motorola-Moto-G-Stylus-5G-2024-Cadet-Blue-frontimage.png',
+  'MOT XT26151':      'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/motorola/Motorola-Moto-G-Play-2024/Sapphire-Blue/Motorola-Moto-G-Play-2024-Sapphire-Blue-frontimage.png',
+  'MOT XT26131':      'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/motorola/Motorola-Moto-G-2024/Seafoam-Green/Motorola-Moto-G-2024-Seafoam-Green-frontimage.png',
+  'SAG FAST5688W':    'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/sagemcom/Sagemcom-Fast-5688W/Midnight-Black/Sagemcom-Fast-5688W-Midnight-Black-frontimage.png',
+  'TCL T513W':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/TCL/TCL-K32-5G/Blue/TCL-K32-5G-Blue-frontimage.png',
+  'TCL T432W':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/TCL/TCL-K11/Black/TCL-K11-Black-frontimage.png',
 };
 
 function lookupProduct(sku) {
@@ -627,29 +647,51 @@ function renderAccordion(o) {
   const dateStr = fmtDate(o.date);
   const id      = 'ord_' + o.ref.replace(/[^a-z0-9]/gi, '_');
 
+  // ── Tracking section ──
   const trackingHtml = o.tracking && o.tracking.length
-    ? `<div class="acc-tracking-label">UPS Tracking</div>` +
+    ? `<div class="section-divider">📦 UPS Tracking</div>` +
       o.tracking.map(t =>
         `<a class="tracking-link" href="https://www.ups.com/track?tracknum=${t}" target="_blank">📦 ${t}</a>`
       ).join('')
-    : `<span class="no-tracking">No tracking number yet</span>`;
+    : `<div class="section-divider">📦 Tracking</div><span class="no-tracking">No tracking number assigned yet</span>`;
 
+  // ── Items section ──
+  let totalMargin = 0;
   const itemsHtml = o.items && o.items.length
-    ? `<div class="acc-items-label">Items</div>` +
+    ? `<div class="section-divider">📱 Items</div>` +
       o.items.map(item => {
-        const p = lookupProduct(item.sku);
+        const p   = lookupProduct(item.sku);
+        const qty = parseInt(item.qty) || 0;
+        const margin = getItemMargin(item.sku);
+        totalMargin += margin * qty;
         const imgHtml = p.img
           ? `<img class="item-img" src="${p.img}" alt="${p.name||item.sku}" onerror="this.style.display='none'">`
           : `<div class="item-img-placeholder">📱</div>`;
         return `<div class="acc-item">
           ${imgHtml}
           <div class="acc-item-info">
-            <span class="acc-item-qty">${item.qty} ${item.unit}</span>
+            <span class="acc-item-qty">${item.qty} × ${item.unit}</span>
             <span class="acc-item-name">${p.name || item.sku}</span>
+            <span class="acc-item-sku">${item.sku}</span>
+            ${margin > 0 ? `<span class="acc-item-margin">+$${(margin * qty).toFixed(2)} margin</span>` : ''}
           </div>
         </div>`;
       }).join('')
     : '';
+
+  const marginHtml = totalMargin > 0
+    ? `<div class="margin-bar"><span class="margin-bar-label">💰 Total Margin</span><span class="margin-bar-value">$${totalMargin.toFixed(2)}</span></div>`
+    : '';
+
+  // ── Order detail grid ──
+  const detailHtml = `<div class="detail-grid">
+    <div class="detail-cell"><span class="detail-lbl">Reference</span><span class="detail-val">${o.ref}</span></div>
+    <div class="detail-cell"><span class="detail-lbl">Order #</span><span class="detail-val">${o.num || '—'}</span></div>
+    <div class="detail-cell"><span class="detail-lbl">Status</span><span class="${statusClass(o.status)}" style="width:fit-content">${statusLabel(o.status)}</span></div>
+    <div class="detail-cell"><span class="detail-lbl">Date</span><span class="detail-val">${o.date}${o.time ? ' · ' + o.time : ''}</span></div>
+    ${o.location ? `<div class="detail-cell"><span class="detail-lbl">Delivered To</span><span class="detail-val">${o.location}</span></div>` : ''}
+    <div class="detail-cell"><span class="detail-lbl">Boxes / Phones</span><span class="detail-val">${counts.boxes} boxes · ${counts.phones} phones</span></div>
+  </div>`;
 
   const deliveryLine = o.status === 'Delivered'
     ? `${dateStr}${o.time ? ' &mdash; ' + o.time : ''}${o.location ? ' &middot; ' + o.location : ''}`
@@ -679,8 +721,10 @@ function renderAccordion(o) {
     </div>
     <div class="acc-body" id="${id}_body" style="display:none">
       <div class="acc-body-inner">
+        ${detailHtml}
         ${trackingHtml}
         ${itemsHtml}
+        ${marginHtml}
       </div>
     </div>
   </div>`;

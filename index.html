@@ -705,4 +705,87 @@ function renderCalendar() {
 
   const onTheWay  = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit');
   const ordered   = orders.filter(o => o.status === 'InProcess');
-  con
+  const delivered = orders.filter(o => o.status === 'Delivered');
+
+  let html = '';
+
+  if (activeStatus === 'InProgress') {
+    if (onTheWay.length === 0) {
+      html = '<div style="text-align:center;color:#bbb;padding:60px 0;font-size:0.95rem;">No orders out for delivery right now</div>';
+    } else {
+      html = `<div class="section-group">
+        <div class="section-header">
+          <span class="section-title">🚚 Out for Delivery</span>
+          <span class="section-count">${onTheWay.length}</span>
+        </div>
+        <div class="orders-list">${onTheWay.map(renderAccordion).join('')}</div>
+      </div>`;
+    }
+  } else if (activeStatus === 'Ordered') {
+    if (ordered.length === 0) {
+      html = '<div style="text-align:center;color:#bbb;padding:60px 0;font-size:0.95rem;">No pending orders without tracking</div>';
+    } else {
+      html = `<div class="section-group">
+        <div class="section-header">
+          <span class="section-title">⏳ Ordered</span>
+          <span class="section-count">${ordered.length}</span>
+        </div>
+        <div class="orders-list">${ordered.map(renderAccordion).join('')}</div>
+      </div>`;
+    }
+  } else if (activeStatus === 'Delivered') {
+    if (delivered.length === 0) {
+      html = '<div style="text-align:center;color:#bbb;padding:60px 0;font-size:0.95rem;">No delivered orders</div>';
+    } else {
+      html = `<div class="delivered-group">
+        <div class="delivered-header" onclick="toggleDelivered()">
+          <span class="delivered-title">✓ Delivered</span>
+          <span class="delivered-count">${delivered.length}</span>
+          <span style="flex:1"></span>
+          <span id="deliveredArrow" style="font-size:0.75rem;color:#bbb;">▼</span>
+        </div>
+        <div id="deliveredList">${delivered.map(renderAccordion).join('')}</div>
+      </div>`;
+    }
+  }
+
+  document.getElementById('calendarContainer').innerHTML = html;
+
+  // ── SUMMARY BAR ──────────────────────────────────────────────────────────
+  const allVisible = [...onTheWay, ...ordered, ...delivered];
+  let totalBoxes = 0, totalPhones = 0, totalBts = 0, totalSims = 0;
+  allVisible.forEach(o => {
+    const c = countItems(o);
+    totalBoxes  += c.boxes;
+    totalPhones += c.phones;
+    totalBts    += c.bts;
+    totalSims   += c.sims;
+  });
+  const bar = document.getElementById('summaryBar');
+  if (allVisible.length > 0) {
+    bar.style.display = 'flex';
+    bar.innerHTML = `
+      <div class="sum-item"><span class="sum-num">${allVisible.length}</span><span class="sum-lbl">Orders</span></div>
+      <div class="sum-sep"></div>
+      <div class="sum-item"><span class="sum-num">${totalBoxes}</span><span class="sum-lbl">Boxes</span></div>
+      <div class="sum-sep"></div>
+      <div class="sum-item"><span class="sum-num">${totalPhones}</span><span class="sum-lbl">Phones</span></div>
+      <div class="sum-sep"></div>
+      <div class="sum-item"><span class="sum-num">${totalBts}</span><span class="sum-lbl">BTS</span></div>
+      <div class="sum-sep"></div>
+      <div class="sum-item"><span class="sum-num">${totalSims}</span><span class="sum-lbl">SIMs</span></div>`;
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+// ── MODAL HELPERS ────────────────────────────────────────────────────────────
+function closeModalOverlay(e) {
+  if (e.target === document.getElementById('orderModal')) {
+    document.getElementById('orderModal').style.display = 'none';
+  }
+}
+
+</script>
+</body>
+</html>

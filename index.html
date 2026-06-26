@@ -776,14 +776,11 @@ function renderAccordion(o) {
     : `<div class="section-divider">📦 Tracking</div><span class="no-tracking">No tracking number assigned yet</span>`;
 
   // ── Items section ──
-  let totalMargin = 0;
   const itemsHtml = o.items && o.items.length
     ? `<div class="section-divider">📱 Items</div>` +
       o.items.map(item => {
         const p   = lookupProduct(item.sku);
         const qty = parseInt(item.qty) || 0;
-        const margin = getItemMargin(item.sku);
-        totalMargin += margin * qty;
         const imgHtml = p.img
           ? `<img class="item-img" src="${p.img}" alt="${p.name||item.sku}" onerror="this.style.display='none'">`
           : `<div class="item-img-placeholder">📱</div>`;
@@ -793,15 +790,11 @@ function renderAccordion(o) {
             <span class="acc-item-qty">${item.qty} × ${item.unit}</span>
             <span class="acc-item-name">${p.name || item.sku}</span>
             <span class="acc-item-sku">${item.sku}</span>
-            ${margin > 0 ? `<span class="acc-item-margin">+$${(margin * qty).toFixed(2)} margin</span>` : ''}
           </div>
         </div>`;
       }).join('')
     : '';
 
-  const marginHtml = totalMargin > 0
-    ? `<div class="margin-bar"><span class="margin-bar-label">💰 Total Margin</span><span class="margin-bar-value">$${totalMargin.toFixed(2)}</span></div>`
-    : '';
 
   // ── Order detail grid ──
   const detailHtml = `<div class="detail-grid">
@@ -844,7 +837,6 @@ function renderAccordion(o) {
         ${detailHtml}
         ${trackingHtml}
         ${itemsHtml}
-        ${marginHtml}
       </div>
     </div>
   </div>`;

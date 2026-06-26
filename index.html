@@ -54,12 +54,13 @@
       cursor: pointer; transition: background 0.2s;
     }
     .logout-btn:hover { background: rgba(255,255,255,0.3); }
-    .margins-btn {
-      background: rgba(255,255,255,0.92); border: none;
-      color: #4a148c; border-radius: 8px; padding: 6px 14px; font-size: 0.82rem;
-      cursor: pointer; font-weight: 700; transition: background 0.2s;
+    .main-tab {
+      padding: 14px 28px; font-size: 0.88rem; font-weight: 700; border: none;
+      background: none; color: #888; cursor: pointer; border-bottom: 3px solid transparent;
+      transition: all 0.15s; letter-spacing: 0.2px;
     }
-    .margins-btn:hover { background: white; }
+    .main-tab.active { color: #b5179e; border-bottom-color: #b5179e; }
+    .main-tab:hover:not(.active) { color: #555; background: #fafafa; }
     .margin-stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 10px; margin-bottom: 18px; }
     .margin-stat { background: linear-gradient(135deg,#f3e5f5,#ede7f6); border-radius: 12px; padding: 14px 16px; text-align:center; }
     .margin-stat-num { font-size: 1.6rem; font-weight: 800; color: #4a148c; display:block; }
@@ -266,27 +267,19 @@
     </div>
     <div class="header-right">
       <div class="user-pill" id="userPill"></div>
-      <button class="margins-btn" id="marginsToggleBtn" onclick="toggleMarginPanel()" style="display:none">💰 Margins</button>
       <button class="logout-btn" onclick="doLogout()">Sign Out</button>
     </div>
   </header>
-  <!-- MARGINS PANEL -->
-  <div id="marginPanel" style="display:none; background:#fff; border-bottom:1px solid #eee; box-shadow:0 2px 12px rgba(0,0,0,0.07);">
-    <div style="max-width:1200px; margin:0 auto; padding:20px 16px;">
-      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
-        <div style="font-size:1rem; font-weight:800; color:#4a148c;">💰 Margins Dashboard</div>
-        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-          <label style="font-size:0.78rem; font-weight:600; color:#666;">Store:</label>
-          <select id="marginStoreSelect" onchange="renderMarginPanel()" style="border:1.5px solid #e0e0e0; border-radius:8px; padding:6px 12px; font-size:0.85rem; outline:none; color:#333; background:white; cursor:pointer;">
-            <option value="ALL">All Stores</option>
-          </select>
-        </div>
-      </div>
-      <div id="marginContent"></div>
+  <!-- MAIN TABS -->
+  <div id="mainTabBar" style="display:none; background:white; border-bottom:2px solid #eee; position:sticky; top:64px; z-index:99;">
+    <div style="max-width:1200px; margin:0 auto; display:flex; gap:0;">
+      <button class="main-tab active" id="tabDelivery" onclick="switchMainTab('delivery')">📦 Delivery Tracking</button>
+      <button class="main-tab" id="tabMargins" onclick="switchMainTab('margins')">💰 Margins</button>
     </div>
   </div>
 
-  <div class="container">
+  <!-- DELIVERY VIEW -->
+  <div id="deliveryView" class="container">
     <div id="adminCredsSection" style="display:none">
       <div class="creds-panel">
         <h3>🔑 Store Login Credentials</h3>
@@ -300,6 +293,22 @@
       <div class="store-tabs" id="statusTabs"></div>
     </div>
     <div id="calendarContainer"></div>
+  </div>
+
+  <!-- MARGINS VIEW -->
+  <div id="marginsView" style="display:none;">
+    <div style="max-width:1200px; margin:0 auto; padding:24px 16px 90px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+        <div style="font-size:1.1rem; font-weight:800; color:#4a148c;">💰 Margins Dashboard</div>
+        <div style="display:flex; align-items:center; gap:10px;" id="marginStoreWrapper">
+          <label style="font-size:0.78rem; font-weight:600; color:#666;">Store:</label>
+          <select id="marginStoreSelect" onchange="renderMarginPanel()" style="border:1.5px solid #e0e0e0; border-radius:8px; padding:6px 12px; font-size:0.85rem; outline:none; color:#333; background:white; cursor:pointer;">
+            <option value="ALL">All Stores</option>
+          </select>
+        </div>
+      </div>
+      <div id="marginContent"></div>
+    </div>
   </div>
 </div>
 
@@ -570,20 +579,22 @@ function fmtDate(d) {
   return dt.toLocaleDateString('en-US', { month:'short', day:'numeric' });
 }
 
-// ── MARGINS PANEL ────────────────────────────────────────────────────────────
-let marginPanelOpen = false;
+// ── MAIN TAB SWITCHING ───────────────────────────────────────────────────────
+let activeMainTab = 'delivery';
 
-function toggleMarginPanel() {
-  marginPanelOpen = !marginPanelOpen;
-  document.getElementById('marginPanel').style.display = marginPanelOpen ? 'block' : 'none';
-  document.getElementById('marginsToggleBtn').style.background = marginPanelOpen
-    ? 'white' : 'rgba(255,255,255,0.92)';
-  if (marginPanelOpen) renderMarginPanel();
+function switchMainTab(tab) {
+  activeMainTab = tab;
+  document.getElementById('tabDelivery').className = 'main-tab' + (tab === 'delivery' ? ' active' : '');
+  document.getElementById('tabMargins').className  = 'main-tab' + (tab === 'margins'  ? ' active' : '');
+  document.getElementById('deliveryView').style.display = tab === 'delivery' ? 'block' : 'none';
+  document.getElementById('marginsView').style.display  = tab === 'margins'  ? 'block' : 'none';
+  document.getElementById('summaryBar').style.display   = tab === 'delivery' ? '' : 'none';
+  if (tab === 'margins') renderMarginPanel();
 }
 
+// ── MARGINS PANEL ─────────────────────────────────────────────────────────────
 function renderMarginPanel() {
   const select = document.getElementById('marginStoreSelect');
-  const chosenStore = select.value;
 
   // Populate store options once
   if (select.options.length <= 1) {
@@ -592,65 +603,75 @@ function renderMarginPanel() {
       const opt = document.createElement('option'); opt.value = lbl; opt.textContent = lbl;
       select.appendChild(opt);
     });
-    // If store user, lock to their store
     if (currentUser && currentUser.role === 'store') {
       select.value = currentUser.label; select.disabled = true;
-    } else if (chosenStore !== 'ALL') {
-      select.value = chosenStore;
     }
   }
 
   const filterLabel = (currentUser && currentUser.role === 'store') ? currentUser.label : select.value;
   let orders = ORDERS.filter(o => o.items && o.items.length > 0);
   if (filterLabel !== 'ALL') orders = orders.filter(o => o.label === filterLabel);
+  orders = [...orders].sort((a,b) => new Date(b.date) - new Date(a.date));
 
-  // Compute per-order margins
-  const orderMargins = orders.map(o => {
-    let total = 0;
-    (o.items || []).forEach(item => {
-      const qty = parseInt(item.qty) || 0;
-      total += getItemMargin(item.sku) * qty;
+  // Stats
+  let grandTotal = 0, totalPhonesCount = 0;
+  orders.forEach(o => {
+    (o.items||[]).forEach(item => {
+      const qty = parseInt(item.qty)||0;
+      grandTotal += getItemMargin(item.sku) * qty;
+      if (getItemMargin(item.sku) === MARGIN_RATES.PHONE) totalPhonesCount += qty;
     });
-    return { o, total };
-  }).sort((a, b) => new Date(b.o.date) - new Date(a.o.date));
-
-  const grandTotal = orderMargins.reduce((s, x) => s + x.total, 0);
-  const ordersWithMargin = orderMargins.filter(x => x.total > 0).length;
-  const totalPhones = orderMargins.reduce((s, x) => {
-    (x.o.items || []).forEach(item => {
-      const m = getItemMargin(item.sku);
-      if (m === MARGIN_RATES.PHONE) s += (parseInt(item.qty) || 0);
-    });
-    return s;
-  }, 0);
+  });
 
   const statsHtml = `<div class="margin-stat-row">
     <div class="margin-stat"><span class="margin-stat-num">$${grandTotal.toFixed(2)}</span><span class="margin-stat-lbl">Total Margin</span></div>
-    <div class="margin-stat"><span class="margin-stat-num">${ordersWithMargin}</span><span class="margin-stat-lbl">Orders</span></div>
-    <div class="margin-stat"><span class="margin-stat-num">${totalPhones}</span><span class="margin-stat-lbl">Phones</span></div>
-    <div class="margin-stat"><span class="margin-stat-num">$${ordersWithMargin > 0 ? (grandTotal/ordersWithMargin).toFixed(2) : '0.00'}</span><span class="margin-stat-lbl">Avg / Order</span></div>
+    <div class="margin-stat"><span class="margin-stat-num">${orders.length}</span><span class="margin-stat-lbl">Orders</span></div>
+    <div class="margin-stat"><span class="margin-stat-num">${totalPhonesCount}</span><span class="margin-stat-lbl">Phones</span></div>
+    <div class="margin-stat"><span class="margin-stat-num">$${orders.length > 0 ? (grandTotal/orders.length).toFixed(2) : '0.00'}</span><span class="margin-stat-lbl">Avg / Order</span></div>
   </div>`;
 
-  const rowsHtml = orderMargins.map(({ o, total }) => {
+  // Per-order cards with images
+  const orderCards = orders.map(o => {
     const color = COLORS[o.label] || '#888';
-    const phoneCount = (o.items||[]).reduce((s,i) => getItemMargin(i.sku) === MARGIN_RATES.PHONE ? s + (parseInt(i.qty)||0) : s, 0);
-    const btsCount   = (o.items||[]).reduce((s,i) => getItemMargin(i.sku) === MARGIN_RATES.TABLET ? s + (parseInt(i.qty)||0) : s, 0);
-    return `<tr>
-      <td><span class="margin-label-dot" style="background:${color}"></span><span class="margin-order-ref">${o.ref}</span></td>
-      <td>${fmtDate(o.date)}</td>
-      <td><span class="${statusClass(o.status)}">${statusLabel(o.status)}</span></td>
-      <td>${phoneCount > 0 ? phoneCount + ' phones' : ''}${btsCount > 0 ? (phoneCount > 0 ? ' · ' : '') + btsCount + ' bts' : ''}</td>
-      <td class="${total > 0 ? 'margin-amount' : 'margin-zero'}">$${total.toFixed(2)}</td>
-    </tr>`;
+    let orderTotal = 0;
+    const itemRows = (o.items||[]).map(item => {
+      const p   = lookupProduct(item.sku);
+      const qty = parseInt(item.qty)||0;
+      const m   = getItemMargin(item.sku);
+      const lineM = m * qty;
+      orderTotal += lineM;
+      const imgHtml = p.img
+        ? `<img style="width:56px;height:72px;object-fit:contain;border-radius:6px;background:#f9f9f9;padding:3px;flex-shrink:0" src="${p.img}" alt="${p.name||item.sku}" onerror="this.style.display='none'">`
+        : `<div style="width:56px;height:72px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;background:#f5f5f5;border-radius:6px;flex-shrink:0">📱</div>`;
+      return `<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #f5f5f5;">
+        ${imgHtml}
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:0.72rem;font-weight:700;color:#b5179e;margin-bottom:2px;">${qty} × ${item.unit}</div>
+          <div style="font-size:0.85rem;font-weight:600;color:#1a1a2e;">${p.name||item.sku}</div>
+          <div style="font-size:0.68rem;color:#bbb;font-family:monospace;">${item.sku}</div>
+        </div>
+        ${lineM > 0 ? `<div style="font-size:0.88rem;font-weight:800;color:#2e7d32;flex-shrink:0;">+$${lineM.toFixed(2)}</div>` : ''}
+      </div>`;
+    }).join('');
+
+    return `<div style="background:white;border-radius:14px;box-shadow:0 1px 6px rgba(0,0,0,0.08);margin-bottom:12px;overflow:hidden;border-left:5px solid ${color};">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;flex-wrap:wrap;gap:6px;">
+        <div>
+          <span style="font-size:0.95rem;font-weight:800;color:#1a1a2e;">${o.ref}</span>
+          ${o.num ? `<span style="font-size:0.75rem;color:#aaa;margin-left:6px;">#${o.num}</span>` : ''}
+          <span style="background:${color};color:white;border-radius:5px;padding:1px 8px;font-size:0.7rem;font-weight:700;margin-left:6px;">${o.label}</span>
+        </div>
+        <div style="font-size:0.8rem;color:#888;">${fmtDate(o.date)}</div>
+      </div>
+      <div style="padding:0 16px 4px;">${itemRows}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:linear-gradient(135deg,#f3e5f5,#e8eaf6);">
+        <span style="font-size:0.72rem;font-weight:700;color:#7b1fa2;text-transform:uppercase;letter-spacing:0.5px;">Order Total</span>
+        <span style="font-size:1.05rem;font-weight:800;color:#4a148c;">$${orderTotal.toFixed(2)}</span>
+      </div>
+    </div>`;
   }).join('');
 
-  document.getElementById('marginContent').innerHTML = statsHtml + `
-    <div style="overflow-x:auto;">
-      <table class="margin-table">
-        <thead><tr><th>Order</th><th>Date</th><th>Status</th><th>Items</th><th>Margin</th></tr></thead>
-        <tbody>${rowsHtml}</tbody>
-      </table>
-    </div>`;
+  document.getElementById('marginContent').innerHTML = statsHtml + (orderCards || '<div style="text-align:center;color:#bbb;padding:40px 0;">No orders with item data found</div>');
 }
 
 // ── LOGIN / LOGOUT ────────────────────────────────────────────────────────
@@ -663,7 +684,7 @@ function doLogin() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('appScreen').style.display   = 'block';
   document.getElementById('userPill').textContent = user.name;
-  document.getElementById('marginsToggleBtn').style.display = 'block';
+  document.getElementById('mainTabBar').style.display = 'block';
   if (user.role === 'admin') {
     document.getElementById('adminCredsSection').style.display = 'block';
     document.getElementById('adminTabs').style.display         = 'block';

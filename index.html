@@ -391,23 +391,27 @@ function getItemMargin(sku) {
 
 // ── EMBEDDED PRODUCT IMAGES (base64 thumbnails from docx) ───────────────────
 const PRODUCT_IMGS = {
-  'SAM X218U':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
-  'SAM A166U':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A16-5G/Blue-Black/Samsung-Galaxy-A16-5G-Blue-Black-frontimage.png',
-  'SAM A176U':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A17-5G/Black/Samsung-Galaxy-A17-5G-Black-frontimage.png',
-  'SAM A376U':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A37-5G/Awesome-Charcoal/Samsung-Galaxy-A37-5G-Awesome-Charcoal-frontimage.png',
-  'APL IPHONE 17 PRO':'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17-Pro-Max/Silver/Apple-iPhone-17-Pro-Max-Silver-frontimage.png',
-  'APL IPHONE 17':    'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17/Black/Apple-iPhone-17-Black-frontimage.png',
-  'APL IPHONE 16E':   'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-16e/Black/Apple-iPhone-16e-Black-frontimage.png',
-  'TMO REVVL TAB 2':  'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
-  'TMO REVVL TAB':    'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
-  'TMO REVVL 8':      'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/T-Mobile/T-Mobile-Revvl-8/Icy-Silver/T-Mobile-Revvl-8-Icy-Silver-frontimage.png',
-  'TCL FLIP':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/TCL/TCL-FLIP-4-5G/Stone-Gray/TCL-FLIP-4-5G-Stone-Gray-frontimage.png',
-  'MOT XT25171':      'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/motorola/Motorola-Moto-G-Stylus-5G-2024/Cadet-Blue/Motorola-Moto-G-Stylus-5G-2024-Cadet-Blue-frontimage.png',
-  'MOT XT26151':      'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/motorola/Motorola-Moto-G-Play-2024/Sapphire-Blue/Motorola-Moto-G-Play-2024-Sapphire-Blue-frontimage.png',
-  'MOT XT26131':      'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/motorola/Motorola-Moto-G-2024/Seafoam-Green/Motorola-Moto-G-2024-Seafoam-Green-frontimage.png',
-  'SAG FAST5688W':    'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/sagemcom/Sagemcom-Fast-5688W/Midnight-Black/Sagemcom-Fast-5688W-Midnight-Black-frontimage.png',
-  'TCL T513W':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/TCL/TCL-K32-5G/Blue/TCL-K32-5G-Blue-frontimage.png',
-  'TCL T432W':        'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/TCL/TCL-K11/Black/TCL-K11-Black-frontimage.png',
+  // ── Apple ─────────────────────────────────────────────────────────────────
+  'APL IPHONE 17 PRO': 'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17-Pro-Max/Silver/Apple-iPhone-17-Pro-Max-Silver-frontimage.png',
+  'APL IPHONE 17':     'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17/Black/Apple-iPhone-17-Black-frontimage.png',
+  'APL IPHONE 16E':    'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-16e/Black/Apple-iPhone-16e-Black-frontimage.png',
+  // ── Samsung ───────────────────────────────────────────────────────────────
+  'SAM A376U':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A37-5G/Awesome-Charcoal/Samsung-Galaxy-A37-5G-Awesome-Charcoal-frontimage.png',
+  'SAM A176U':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A17-5G/Black/Samsung-Galaxy-A17-5G-Black-frontimage.png',
+  'SAM A166U':         'https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a16-5g-1.jpg',
+  'SAM X218U':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
+  // ── Motorola ──────────────────────────────────────────────────────────────
+  'MOT XT25171':       'https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g-stylus-5g-2024-1.jpg',
+  'MOT XT26151':       'https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g-play-2024-1.jpg',
+  'MOT XT26131':       'https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g-play-2023-1.jpg',
+  // ── T-Mobile REVVL ────────────────────────────────────────────────────────
+  'TMO REVVL TAB 2':   'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
+  'TMO REVVL TAB':     'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
+  'TMO REVVL 8':       'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/T-Mobile/T-Mobile-Revvl-8/Icy-Silver/T-Mobile-Revvl-8-Icy-Silver-frontimage.png',
+  // ── TCL ───────────────────────────────────────────────────────────────────
+  'TCL FLIP':          'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/TCL/TCL-FLIP-4-5G/Stone-Gray/TCL-FLIP-4-5G-Stone-Gray-frontimage.png',
+  'TCL T513W':         'https://fdn2.gsmarena.com/vv/pics/tcl/tcl-408-1.jpg',
+  'TCL T432W':         'https://fdn2.gsmarena.com/vv/pics/tcl/tcl-305-1.jpg',
 };
 
 function lookupProduct(sku) {

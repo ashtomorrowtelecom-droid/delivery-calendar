@@ -535,15 +535,8 @@ const ORDERS = [
   { ref:'AMIT0624SP02', label:'AMIT', num:'171983192', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384405940'], items:[
       {qty:'2',unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
   ]},
-  // June 23 additional orders (from portal)
-  { ref:'CHO0623SP01', label:'CHO', num:'171982293', date:'2026-06-23', time:'11:49 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384414752'], items:[
-      {qty:'1',unit:'EA', sku:'SAM A376U A37 5G 128G GRY DISPLAY'},
-  ]},
-  { ref:'SK0623SP01ROSD', label:'SK', num:'171981802', date:'2026-06-23', time:'10:18 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384395103'], items:[
-      {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G SLV KIT'},
-  ]},
-  // June 26 new order
-  { ref:'SID0626SP02', label:'SID', num:'171985047', date:'2026-06-26', time:'12:08 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0284425984','1Z7900AX0284427044'], items:[
+  // June 26 new order (In Process)
+  { ref:'SID0626SP02', label:'SID', num:'171985047', date:'2026-06-26', time:'12:08 PM', status:'InProgress', tracking:[], items:[
       {qty:'10',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
       {qty:'2',unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
   ]},
@@ -904,7 +897,7 @@ function renderCalendar() {
   }
   // Apply status filter
   if (activeStatus === 'InProgress') {
-    orders = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit');
+    orders = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit' || o.status === 'InProgress');
   } else if (activeStatus === 'Ordered') {
     orders = orders.filter(o => o.status === 'InProcess');
   } else if (activeStatus === 'Delivered') {
@@ -981,4 +974,20 @@ function renderCalendar() {
       <div class="sum-sep"></div>
       <div class="sum-item"><span class="sum-num">${totalBts}</span><span class="sum-lbl">BTS</span></div>
       <div class="sum-sep"></div>
-      <div class="sum-item"><span class="sum-num">${totalSims}</span><span cl
+      <div class="sum-item"><span class="sum-num">${totalSims}</span><span class="sum-lbl">SIMs</span></div>`;
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+// ── MODAL HELPERS ────────────────────────────────────────────────────────────
+function closeModalOverlay(e) {
+  if (e.target === document.getElementById('orderModal')) {
+    document.getElementById('orderModal').style.display = 'none';
+  }
+}
+
+</script>
+</body>
+</html>
+                                                                                                                                          

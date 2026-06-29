@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tomorrow Telecom â Delivery Portal</title>
+  <title>Tomorrow Telecom — Delivery Portal</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
 
-    /* ââ LOGIN ââ */
+    /* ── LOGIN ── */
     #loginScreen {
       min-height: 100vh; display: flex; align-items: center; justify-content: center;
       background: linear-gradient(135deg, #b5179e 0%, #560bad 100%);
@@ -33,7 +33,7 @@
     .login-btn:hover { background: #c1005f; }
     .login-error { color: #c62828; font-size: 0.82rem; text-align: center; margin-top: 12px; display: none; }
 
-    /* ââ APP ââ */
+    /* ── APP ── */
     #appScreen { display: none; }
     header {
       background: linear-gradient(135deg, #b5179e 0%, #7b2ff7 100%);
@@ -76,7 +76,7 @@
     .margin-zero { color:#bbb; }
     .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px 90px; }
 
-    /* ââ ADMIN: store tabs ââ */
+    /* ── ADMIN: store tabs ── */
     .store-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
     .store-tab {
       padding: 7px 18px; border-radius: 20px; font-size: 0.82rem; font-weight: 600;
@@ -86,13 +86,13 @@
     .store-tab.active { color: white; }
     .store-tab:not(.active) { color: #444; }
 
-    /* ââ ACCORDION LIST ââ */
+    /* ── ACCORDION LIST ── */
     .orders-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
     .order-ref { font-size: 0.92rem; font-weight: 700; color: #1a1a2e; }
     .order-num { font-size: 0.78rem; color: #888; font-weight: 500; margin-left: 6px; }
     .label-badge { color: white; border-radius: 6px; padding: 2px 9px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px; margin-left: 6px; }
 
-    /* ââ ACCORDION CARD ââ */
+    /* ── ACCORDION CARD ── */
     .acc-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.08); }
     .acc-header {
       display: flex; align-items: center; gap: 12px; padding: 12px 16px;
@@ -109,13 +109,13 @@
     .cp-lbl { display: block; font-size: 0.6rem; color: #888; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 1px; }
     .acc-arrow { font-size: 0.75rem; color: #bbb; flex-shrink: 0; width: 16px; text-align: center; }
 
-    /* ââ STATUS BADGES ââ */
+    /* ── STATUS BADGES ── */
     .status-delivered { display: inline-flex; align-items: center; background: #e8f5e9; color: #2e7d32; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; font-weight: 600; }
     .status-out       { display: inline-flex; align-items: center; background: #e3f2fd; color: #1565c0; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; font-weight: 600; }
     .status-transit   { display: inline-flex; align-items: center; background: #fff8e1; color: #f57f17; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; font-weight: 600; }
     .status-pending   { display: inline-flex; align-items: center; background: #fce4ec; color: #c62828; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; font-weight: 600; }
 
-    /* ââ ACCORDION BODY ââ */
+    /* ── ACCORDION BODY ── */
     .acc-body { border-top: 1px solid #f0f0f0; }
     .acc-body-inner { padding: 14px 16px 16px; }
     .acc-tracking-label, .acc-items-label {
@@ -134,7 +134,7 @@
     .acc-item-qty { font-size: 0.72rem; font-weight: 700; color: #b5179e; }
     .acc-item-name { font-size: 0.82rem; color: #333; }
 
-    /* ââ DELIVERED GROUP ââ */
+    /* ── DELIVERED GROUP ── */
     .delivered-group { margin-top: 10px; }
     .delivered-header {
       display: flex; align-items: center; gap: 10px; padding: 12px 18px;
@@ -146,13 +146,13 @@
     .delivered-count { background: #e8f5e9; color: #2e7d32; border-radius: 20px; padding: 1px 10px; font-size: 0.75rem; font-weight: 700; }
     #deliveredList { margin-top: 8px; display: flex; flex-direction: column; gap: 8px; }
 
-    /* ââ SECTION GROUPS ââ */
+    /* ── SECTION GROUPS ── */
     .section-group { margin-bottom: 18px; }
     .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding: 0 4px; }
     .section-title { font-size: 0.85rem; font-weight: 700; color: #444; }
     .section-count { background: #eee; color: #555; border-radius: 20px; padding: 1px 9px; font-size: 0.72rem; font-weight: 700; }
 
-    /* ââ SUMMARY BAR ââ */
+    /* ── SUMMARY BAR ── */
     #summaryBar {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
       background: linear-gradient(135deg, #560bad 0%, #b5179e 100%);
@@ -165,7 +165,7 @@
     .sum-lbl  { display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.7px; opacity: 0.85; margin-top: 1px; }
     .sum-sep  { width: 1px; height: 44px; background: rgba(255,255,255,0.22); flex-shrink: 0; }
 
-    /* ââ ORDER MODAL ââ */
+    /* ── ORDER MODAL ── */
     .modal-overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 200;
       display: flex; align-items: center; justify-content: center; padding: 16px;
@@ -212,7 +212,7 @@
     .product-sku { font-size: 0.72rem; color: #aaa; font-family: 'Courier New', monospace; }
     .order-card { cursor: pointer; }
 
-    /* ââ CREDENTIALS TABLE (admin only) ââ */
+    /* ── CREDENTIALS TABLE (admin only) ── */
     .creds-panel {
       background: white; border-radius: 12px; padding: 20px; margin-bottom: 24px;
       box-shadow: 0 1px 6px rgba(0,0,0,0.07);
@@ -226,7 +226,7 @@
     .copy-btn { background: #f0f0f0; border: none; border-radius: 5px; padding: 3px 8px; font-size: 0.72rem; cursor: pointer; color: #555; }
     .copy-btn:hover { background: #e0e0e0; }
 
-    /* ââ RICH ACCORDION DETAIL ââ */
+    /* ── RICH ACCORDION DETAIL ── */
     .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-bottom: 14px; padding: 12px; background: #f8f8fc; border-radius: 10px; }
     .detail-cell { display: flex; flex-direction: column; gap: 2px; }
     .detail-lbl { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #aaa; }
@@ -246,7 +246,7 @@
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo">
-      <h1>ð¦ Tomorrow Telecom</h1>
+      <h1>📦 Tomorrow Telecom</h1>
       <p>Delivery Tracking Portal</p>
     </div>
     <label>Username</label>
@@ -262,7 +262,7 @@
 <div id="appScreen">
   <header>
     <div class="header-left">
-      <h1>ð¦ Tomorrow Telecom</h1>
+      <h1>📦 Tomorrow Telecom</h1>
       <div class="subtitle">Delivery Tracking Portal</div>
     </div>
     <div class="header-right">
@@ -273,8 +273,8 @@
   <!-- MAIN TABS -->
   <div id="mainTabBar" style="display:none; background:white; border-bottom:2px solid #eee; position:sticky; top:64px; z-index:99;">
     <div style="max-width:1200px; margin:0 auto; display:flex; gap:0;">
-      <button class="main-tab active" id="tabDelivery" onclick="switchMainTab('delivery')">ð¦ Delivery Tracking</button>
-      <button class="main-tab" id="tabMargins" onclick="switchMainTab('margins')">ð° Margins</button>
+      <button class="main-tab active" id="tabDelivery" onclick="switchMainTab('delivery')">📦 Delivery Tracking</button>
+      <button class="main-tab" id="tabMargins" onclick="switchMainTab('margins')">💰 Margins</button>
     </div>
   </div>
 
@@ -282,7 +282,7 @@
   <div id="deliveryView" class="container">
     <div id="adminCredsSection" style="display:none">
       <div class="creds-panel">
-        <h3>ð Store Login Credentials</h3>
+        <h3>🔑 Store Login Credentials</h3>
         <table class="creds-table" id="credsTable"></table>
       </div>
     </div>
@@ -299,7 +299,7 @@
   <div id="marginsView" style="display:none;">
     <div style="max-width:1200px; margin:0 auto; padding:24px 16px 90px;">
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
-        <div style="font-size:1.1rem; font-weight:800; color:#4a148c;">ð° Margins Dashboard</div>
+        <div style="font-size:1.1rem; font-weight:800; color:#4a148c;">💰 Margins Dashboard</div>
         <div style="display:flex; align-items:center; gap:10px;" id="marginStoreWrapper">
           <label style="font-size:0.78rem; font-weight:600; color:#666;">Store:</label>
           <select id="marginStoreSelect" onchange="renderMarginPanel()" style="border:1.5px solid #e0e0e0; border-radius:8px; padding:6px 12px; font-size:0.85rem; outline:none; color:#333; background:white; cursor:pointer;">
@@ -323,14 +323,14 @@
         <div class="modal-order-ref" id="modalTitle"></div>
         <div class="modal-order-meta" id="modalMeta"></div>
       </div>
-      <button class="modal-close" onclick="document.getElementById('orderModal').style.display='none'">â</button>
+      <button class="modal-close" onclick="document.getElementById('orderModal').style.display='none'">✕</button>
     </div>
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
 
 <script>
-// ââ USERS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── USERS ───────────────────────────────────────────────────────────────────
 const USERS = [
   { username: 'admin',     password: 'admin123',        role: 'admin',    label: null,       name: 'Admin' },
   { username: 'ali',       password: 'ALI2026!',        role: 'store',    label: 'ALI',      name: 'ALI' },
@@ -343,7 +343,7 @@ const USERS = [
   { username: 'cho',       password: 'CHO2026!',        role: 'store',    label: 'CHO',      name: 'CHO' },
 ];
 
-// ââ PRODUCT CATALOG ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── PRODUCT CATALOG ──────────────────────────────────────────────────────────
 // Key = SKU prefix (matched via startsWith). Add new devices here as needed.
 const PRODUCTS = {
   'SAM A166U':       { name: 'Samsung Galaxy A16 5G',       img: 'https://images.samsung.com/is/image/samsung/p6pim/us/sm-a166uzkaxaa/gallery/us-galaxy-a16-5g-sm-a166-sm-a166uzkaxaa-thumb-539803779?$650_519_PNG$' },
@@ -373,7 +373,7 @@ const PRODUCTS = {
   'TRIPLESIM':       { name: 'Metro SIM Card',                img: null },
 };
 
-// ââ MARGINS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── MARGINS ──────────────────────────────────────────────────────────────────
 // Phones & gateway = $19.50 each | Tablets = $8.00 each
 const MARGIN_RATES = {
   PHONE: 19.50,
@@ -389,26 +389,26 @@ function getItemMargin(sku) {
   return MARGIN_RATES.PHONE;
 }
 
-// ââ EMBEDDED PRODUCT IMAGES (base64 thumbnails from docx) âââââââââââââââââââ
+// ── EMBEDDED PRODUCT IMAGES (base64 thumbnails from docx) ───────────────────
 const PRODUCT_IMGS = {
-  // ââ Apple âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Apple ─────────────────────────────────────────────────────────────────
   'APL IPHONE 17 PRO': 'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17-Pro-Max/Silver/Apple-iPhone-17-Pro-Max-Silver-frontimage.png',
   'APL IPHONE 17':     'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17/Black/Apple-iPhone-17-Black-frontimage.png',
   'APL IPHONE 16E':    'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-16e/Black/Apple-iPhone-16e-Black-frontimage.png',
-  // ââ Samsung âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Samsung ───────────────────────────────────────────────────────────────
   'SAM A376U':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A37-5G/Awesome-Charcoal/Samsung-Galaxy-A37-5G-Awesome-Charcoal-frontimage.png',
   'SAM A176U':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A17-5G/Black/Samsung-Galaxy-A17-5G-Black-frontimage.png',
   'SAM A166U':         'https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a16-5g-1.jpg',
   'SAM X218U':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
-  // ââ Motorola ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Motorola ──────────────────────────────────────────────────────────────
   'MOT XT25171':       'https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g-stylus-5g-2024-1.jpg',
   'MOT XT26151':       'https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g-play-2024-1.jpg',
   'MOT XT26131':       'https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g-play-2023-1.jpg',
-  // ââ T-Mobile REVVL ââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── T-Mobile REVVL ────────────────────────────────────────────────────────
   'TMO REVVL TAB 2':   'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
   'TMO REVVL TAB':     'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
   'TMO REVVL 8':       'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/T-Mobile/T-Mobile-Revvl-8/Icy-Silver/T-Mobile-Revvl-8-Icy-Silver-frontimage.png',
-  // ââ TCL âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── TCL ───────────────────────────────────────────────────────────────────
   'TCL FLIP':          'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/TCL/TCL-FLIP-4-5G/Stone-Gray/TCL-FLIP-4-5G-Stone-Gray-frontimage.png',
   'TCL T513W':         'https://fdn2.gsmarena.com/vv/pics/tcl/tcl-408-1.jpg',
   'TCL T432W':         'https://fdn2.gsmarena.com/vv/pics/tcl/tcl-305-1.jpg',
@@ -428,13 +428,13 @@ function lookupProduct(sku) {
   return { name: sku, img: null };
 }
 
-// ââ COLORS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── COLORS ───────────────────────────────────────────────────────────────────
 const COLORS = {
   ALI:'#b5179e', BADER:'#7b2d8b', SK:'#1565c0', AMIT:'#2e7d32',
   SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828'
 };
 
-// ââ ORDERS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── ORDERS ───────────────────────────────────────────────────────────────────
 const ORDERS = [
   // June 4
   { ref:'ALI0601',        label:'ALI',       date:'2026-06-04', time:'11:59 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384095204','1Z7900AX0384094965'] },
@@ -458,7 +458,7 @@ const ORDERS = [
   { ref:'SK0609SP01HAL',  label:'SK',        date:'2026-06-16', time:'12:13 PM', status:'Delivered', location:'Receiver',   tracking:['1Z7900AX0384247004'] },
   // June 17
   { ref:'JACKSBORO0615',  label:'JACKSBORO', date:'2026-06-17', time:'11:32 AM', status:'Delivered', location:'Office', tracking:['1Z7900AX0284266790'] },
-  // June 18 â Out for Delivery
+  // June 18 — Out for Delivery
   { ref:'BADER0615',      label:'BADER',     date:'2026-06-18', time:'1:35 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384273762','1Z7900AX0384273851','1Z7900AX0384273780'] },
   { ref:'SK0615HAL',      label:'SK',        date:'2026-06-18', time:'11:22 AM', status:'Delivered', location:'Receiver',   tracking:['1Z7900AX0384273897','1Z7900AX0384273888'] },
   { ref:'SK0615BEWES',    label:'SK',        date:'2026-06-18', time:'11:33 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384271531'] },
@@ -535,8 +535,15 @@ const ORDERS = [
   { ref:'AMIT0624SP02', label:'AMIT', num:'171983192', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384405940'], items:[
       {qty:'2',unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
   ]},
-  // June 26 new order (In Process)
-  { ref:'SID0626SP02', label:'SID', num:'171985047', date:'2026-06-26', time:'12:08 PM', status:'InProgress', tracking:[], items:[
+  // June 23 additional orders (from portal)
+  { ref:'CHO0623SP01', label:'CHO', num:'171982293', date:'2026-06-23', time:'11:49 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384414752'], items:[
+      {qty:'1',unit:'EA', sku:'SAM A376U A37 5G 128G GRY DISPLAY'},
+  ]},
+  { ref:'SK0623SP01ROSD', label:'SK', num:'171981802', date:'2026-06-23', time:'10:18 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384395103'], items:[
+      {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G SLV KIT'},
+  ]},
+  // June 26 new order (In Transit — 1 of 2 packages delivered 06/29)
+  { ref:'SID0626SP02', label:'SID', num:'171985047', date:'2026-06-26', time:'12:08 PM', status:'InTransit', tracking:['1Z7900AX0284425984','1Z7900AX0284427044'], items:[
       {qty:'10',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
       {qty:'2',unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
   ]},
@@ -556,12 +563,12 @@ const ORDERS = [
   ]},
 ];
 
-// ââ APP STATE âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── APP STATE ─────────────────────────────────────────────────────────────
 let currentUser = null;
 let activeStore  = null;
 let activeStatus = 'InProgress';
 
-// ââ ITEM COUNTING âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── ITEM COUNTING ─────────────────────────────────────────────────────────
 // boxes = UPS tracking numbers count; phones/bts/sims from item list
 function countItems(o) {
   const items  = o.items   || [];
@@ -582,12 +589,12 @@ function countItems(o) {
   return { boxes, phones, bts, sims };
 }
 
-// ââ HELPERS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── HELPERS ───────────────────────────────────────────────────────────────
 function statusLabel(s) {
-  return s === 'Delivered'      ? 'â Delivered'
-       : s === 'OutForDelivery' ? 'ð Out for Delivery'
-       : s === 'InTransit'      ? 'ð¦ In Transit'
-       : 'â³ Ordered';
+  return s === 'Delivered'      ? '✓ Delivered'
+       : s === 'OutForDelivery' ? '🚚 Out for Delivery'
+       : s === 'InTransit'      ? '📦 In Transit'
+       : '⏳ Ordered';
 }
 function statusClass(s) {
   return s === 'Delivered'      ? 'status-delivered'
@@ -601,7 +608,7 @@ function fmtDate(d) {
   return dt.toLocaleDateString('en-US', { month:'short', day:'numeric' });
 }
 
-// ââ MAIN TAB SWITCHING âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── MAIN TAB SWITCHING ───────────────────────────────────────────────────────
 let activeMainTab = 'delivery';
 
 function switchMainTab(tab) {
@@ -614,7 +621,7 @@ function switchMainTab(tab) {
   if (tab === 'margins') renderMarginPanel();
 }
 
-// ââ MARGINS PANEL âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── MARGINS PANEL ─────────────────────────────────────────────────────────────
 function renderMarginPanel() {
   const select = document.getElementById('marginStoreSelect');
 
@@ -685,7 +692,7 @@ function renderMarginPanel() {
   document.getElementById('marginContent').innerHTML = statsHtml + (orderCards || '<div style="text-align:center;color:#bbb;padding:40px 0;">No orders with item data found</div>');
 }
 
-// ââ LOGIN / LOGOUT ââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── LOGIN / LOGOUT ────────────────────────────────────────────────────────
 function doLogin() {
   const u    = document.getElementById('usernameInput').value.trim().toLowerCase();
   const p    = document.getElementById('passwordInput').value;
@@ -718,7 +725,7 @@ function doLogout() {
   document.getElementById('passwordInput').value = '';
 }
 
-// ââ CREDS TABLE (admin) âââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── CREDS TABLE (admin) ───────────────────────────────────────────────────
 function renderCredsTable() {
   const t      = document.getElementById('credsTable');
   const stores = USERS.filter(u => u.role === 'store');
@@ -733,7 +740,7 @@ function renderCredsTable() {
     }).join('');
 }
 
-// ââ STORE TABS (admin) ââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── STORE TABS (admin) ────────────────────────────────────────────────────
 function renderStoreTabs() {
   const labels = ['All', ...new Set(ORDERS.map(o => o.label))];
   const el     = document.getElementById('storeTabs');
@@ -753,7 +760,7 @@ function setStore(lbl) {
   renderCalendar();
 }
 
-// ââ STATUS TABS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── STATUS TABS ───────────────────────────────────────────────────────────
 function renderStatusTabs() {
   const tabs = [
     { key:'InProgress', label:'In Progress' },
@@ -774,14 +781,14 @@ function setStatus(s) {
   renderCalendar();
 }
 
-// ââ ACCORDION TOGGLE ââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── ACCORDION TOGGLE ──────────────────────────────────────────────────────
 function toggleAcc(id) {
   const body  = document.getElementById(id + '_body');
   const arrow = document.getElementById(id + '_arrow');
   if (!body) return;
   const open = body.style.display !== 'none';
   body.style.display  = open ? 'none' : 'block';
-  arrow.textContent   = open ? 'â¼' : 'â²';
+  arrow.textContent   = open ? '▼' : '▲';
 }
 function toggleDelivered() {
   const list  = document.getElementById('deliveredList');
@@ -789,37 +796,37 @@ function toggleDelivered() {
   if (!list) return;
   const open = list.style.display !== 'none';
   list.style.display = open ? 'none' : 'block';
-  arrow.textContent  = open ? 'â¼' : 'â²';
+  arrow.textContent  = open ? '▼' : '▲';
 }
 
-// ââ RENDER ONE ACCORDION CARD âââââââââââââââââââââââââââââââââââââââââââââ
+// ── RENDER ONE ACCORDION CARD ─────────────────────────────────────────────
 function renderAccordion(o) {
   const color   = COLORS[o.label] || '#888';
   const counts  = countItems(o);
   const dateStr = fmtDate(o.date);
   const id      = 'ord_' + o.ref.replace(/[^a-z0-9]/gi, '_');
 
-  // ââ Tracking section ââ
+  // ── Tracking section ──
   const trackingHtml = o.tracking && o.tracking.length
-    ? `<div class="section-divider">ð¦ UPS Tracking</div>` +
+    ? `<div class="section-divider">📦 UPS Tracking</div>` +
       o.tracking.map(t =>
-        `<a class="tracking-link" href="https://www.ups.com/track?tracknum=${t}" target="_blank">ð¦ ${t}</a>`
+        `<a class="tracking-link" href="https://www.ups.com/track?tracknum=${t}" target="_blank">📦 ${t}</a>`
       ).join('')
-    : `<div class="section-divider">ð¦ Tracking</div><span class="no-tracking">No tracking number assigned yet</span>`;
+    : `<div class="section-divider">📦 Tracking</div><span class="no-tracking">No tracking number assigned yet</span>`;
 
-  // ââ Items section ââ
+  // ── Items section ──
   const itemsHtml = o.items && o.items.length
-    ? `<div class="section-divider">ð± Items</div>` +
+    ? `<div class="section-divider">📱 Items</div>` +
       o.items.map(item => {
         const p   = lookupProduct(item.sku);
         const qty = parseInt(item.qty) || 0;
         const imgHtml = p.img
           ? `<img class="item-img" src="${p.img}" alt="${p.name||item.sku}" onerror="this.style.display='none'">`
-          : `<div class="item-img-placeholder">ð±</div>`;
+          : `<div class="item-img-placeholder">📱</div>`;
         return `<div class="acc-item">
           ${imgHtml}
           <div class="acc-item-info">
-            <span class="acc-item-qty">${item.qty} Ã ${item.unit}</span>
+            <span class="acc-item-qty">${item.qty} × ${item.unit}</span>
             <span class="acc-item-name">${p.name || item.sku}</span>
             <span class="acc-item-sku">${item.sku}</span>
           </div>
@@ -828,14 +835,14 @@ function renderAccordion(o) {
     : '';
 
 
-  // ââ Order detail grid ââ
+  // ── Order detail grid ──
   const detailHtml = `<div class="detail-grid">
     <div class="detail-cell"><span class="detail-lbl">Reference</span><span class="detail-val">${o.ref}</span></div>
-    <div class="detail-cell"><span class="detail-lbl">Order #</span><span class="detail-val">${o.num || 'â'}</span></div>
+    <div class="detail-cell"><span class="detail-lbl">Order #</span><span class="detail-val">${o.num || '—'}</span></div>
     <div class="detail-cell"><span class="detail-lbl">Status</span><span class="${statusClass(o.status)}" style="width:fit-content">${statusLabel(o.status)}</span></div>
-    <div class="detail-cell"><span class="detail-lbl">Date</span><span class="detail-val">${o.date}${o.time ? ' Â· ' + o.time : ''}</span></div>
+    <div class="detail-cell"><span class="detail-lbl">Date</span><span class="detail-val">${o.date}${o.time ? ' · ' + o.time : ''}</span></div>
     ${o.location ? `<div class="detail-cell"><span class="detail-lbl">Delivered To</span><span class="detail-val">${o.location}</span></div>` : ''}
-    <div class="detail-cell"><span class="detail-lbl">Boxes / Phones</span><span class="detail-val">${counts.boxes} boxes Â· ${counts.phones} phones</span></div>
+    <div class="detail-cell"><span class="detail-lbl">Boxes / Phones</span><span class="detail-val">${counts.boxes} boxes · ${counts.phones} phones</span></div>
   </div>`;
 
   const deliveryLine = o.status === 'Delivered'
@@ -862,7 +869,7 @@ function renderAccordion(o) {
         <div class="count-pill"><span class="cp-num">${counts.bts}</span><span class="cp-lbl">BTS</span></div>
         <div class="count-pill"><span class="cp-num">${counts.sims}</span><span class="cp-lbl">SIMs</span></div>
       </div>
-      <div class="acc-arrow" id="${id}_arrow">â¼</div>
+      <div class="acc-arrow" id="${id}_arrow">▼</div>
     </div>
     <div class="acc-body" id="${id}_body" style="display:none">
       <div class="acc-body-inner">
@@ -874,7 +881,7 @@ function renderAccordion(o) {
   </div>`;
 }
 
-// ââ MAIN RENDER âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── MAIN RENDER ───────────────────────────────────────────────────────────
 function renderCalendar() {
   let orders = ORDERS.slice();
   if (currentUser && currentUser.role === 'store') {
@@ -903,7 +910,7 @@ function renderCalendar() {
     } else {
       html = `<div class="section-group">
         <div class="section-header">
-          <span class="section-title">ð Out for Delivery</span>
+          <span class="section-title">🚚 Out for Delivery</span>
           <span class="section-count">${onTheWay.length}</span>
         </div>
         <div class="orders-list">${onTheWay.map(renderAccordion).join('')}</div>
@@ -915,7 +922,7 @@ function renderCalendar() {
     } else {
       html = `<div class="section-group">
         <div class="section-header">
-          <span class="section-title">â³ Ordered</span>
+          <span class="section-title">⏳ Ordered</span>
           <span class="section-count">${ordered.length}</span>
         </div>
         <div class="orders-list">${ordered.map(renderAccordion).join('')}</div>
@@ -927,10 +934,10 @@ function renderCalendar() {
     } else {
       html = `<div class="delivered-group">
         <div class="delivered-header" onclick="toggleDelivered()">
-          <span class="delivered-title">â Delivered</span>
+          <span class="delivered-title">✓ Delivered</span>
           <span class="delivered-count">${delivered.length}</span>
           <span style="flex:1"></span>
-          <span id="deliveredArrow" style="font-size:0.75rem;color:#bbb;">â¼</span>
+          <span id="deliveredArrow" style="font-size:0.75rem;color:#bbb;">▼</span>
         </div>
         <div id="deliveredList">${delivered.map(renderAccordion).join('')}</div>
       </div>`;
@@ -939,7 +946,7 @@ function renderCalendar() {
 
   document.getElementById('calendarContainer').innerHTML = html;
 
-  // ââ SUMMARY BAR ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── SUMMARY BAR ──────────────────────────────────────────────────────────
   const allVisible = [...onTheWay, ...ordered, ...delivered];
   let totalBoxes = 0, totalPhones = 0, totalBts = 0, totalSims = 0;
   allVisible.forEach(o => {
@@ -961,20 +968,4 @@ function renderCalendar() {
       <div class="sum-sep"></div>
       <div class="sum-item"><span class="sum-num">${totalBts}</span><span class="sum-lbl">BTS</span></div>
       <div class="sum-sep"></div>
-      <div class="sum-item"><span class="sum-num">${totalSims}</span><span class="sum-lbl">SIMs</span></div>`;
-  } else {
-    bar.style.display = 'none';
-  }
-}
-
-// ââ MODAL HELPERS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-function closeModalOverlay(e) {
-  if (e.target === document.getElementById('orderModal')) {
-    document.getElementById('orderModal').style.display = 'none';
-  }
-}
-
-</script>
-</body>
-</html>
-                                                                                                                                          
+      <div class="sum-item"><span class="sum-num">${totalSims}</span><span cl

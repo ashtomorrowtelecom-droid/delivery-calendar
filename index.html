@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -275,6 +275,7 @@
     <div style="max-width:1200px; margin:0 auto; display:flex; gap:0;">
       <button class="main-tab active" id="tabDelivery" onclick="switchMainTab('delivery')">📦 Delivery Tracking</button>
       <button class="main-tab" id="tabMargins" onclick="switchMainTab('margins')">💰 Margins</button>
+      <button class="main-tab" id="tabCredit" onclick="switchMainTab('credit')">📋 Credit File</button>
     </div>
   </div>
 
@@ -293,6 +294,14 @@
       <div class="store-tabs" id="statusTabs"></div>
     </div>
     <div id="calendarContainer"></div>
+  </div>
+
+  <!-- CREDIT FILE VIEW -->
+  <div id="creditView" style="display:none;">
+    <div style="max-width:900px; margin:0 auto; padding:24px 16px 90px;">
+      <div style="font-size:1.1rem; font-weight:800; color:#4a148c; margin-bottom:20px;">📋 Credit Files</div>
+      <div id="creditLinksContainer" style="display:flex; flex-direction:column; gap:12px;"></div>
+    </div>
   </div>
 
   <!-- MARGINS VIEW -->
@@ -621,10 +630,40 @@ function switchMainTab(tab) {
   activeMainTab = tab;
   document.getElementById('tabDelivery').className = 'main-tab' + (tab === 'delivery' ? ' active' : '');
   document.getElementById('tabMargins').className  = 'main-tab' + (tab === 'margins'  ? ' active' : '');
+  document.getElementById('tabCredit').className   = 'main-tab' + (tab === 'credit'   ? ' active' : '');
   document.getElementById('deliveryView').style.display = tab === 'delivery' ? 'block' : 'none';
   document.getElementById('marginsView').style.display  = tab === 'margins'  ? 'block' : 'none';
+  document.getElementById('creditView').style.display   = tab === 'credit'   ? 'block' : 'none';
   document.getElementById('summaryBar').style.display   = tab === 'delivery' ? '' : 'none';
   if (tab === 'margins') renderMarginPanel();
+  if (tab === 'credit')  renderCreditPanel();
+}
+
+// ── CREDIT FILE PANEL ─────────────────────────────────────────────
+const CREDIT_LINKS = {
+  ALI:      'https://docs.google.com/spreadsheets/d/19OgL7eVR_rW3Jmn3XSsvB6Kq8jfr4LepmsuDrE0S4yY/edit?gid=2054813224#gid=2054813224',
+  BADER:    'https://docs.google.com/spreadsheets/d/1EGkSGRmjZBp4Kdljm2QyIS2wBTblSh-3fOQwSwEEVg8/edit?gid=997708778#gid=997708778',
+  SK:       'https://docs.google.com/spreadsheets/d/1Q5CSjFX9dkFxk968X1rMqAMReUbnuUDdYO9hlgunQZw/edit?gid=888199350#gid=888199350',
+  AMIT:     '',
+  SULEMAN:  'https://docs.google.com/spreadsheets/d/1m7yFlJG0ZM2t7hD87Rb4G0AEE6WShbPXz1aCRGSsyg4/edit?gid=1434497782#gid=1434497782',
+  SID:      'https://docs.google.com/spreadsheets/d/13fcxGeP2_yamGoImpxSZQq6Vsv9B2ZfjQbheHDhaYto/edit?gid=1025242076#gid=1025242076',
+  CHO:      'https://docs.google.com/spreadsheets/d/12rSsFtHgy983eLLp5rPpV9ByF8POhZlQdJoGaXSfoY0/edit?gid=772114128#gid=772114128',
+  JACKSBORO:'https://docs.google.com/spreadsheets/d/1NzabMn9CazRjYmoO2G3I8ktbrkeDVSwmX1cu6OQ1TqE/edit?gid=2075837100#gid=2075837100',
+};
+const STORE_COLORS = {
+  ALI:'#b5179e', BADER:'#7b2ff7', SK:'#1565c0', AMIT:'#2e7d32',
+  SULEMAN:'#e65100', SID:'#00838f', CHO:'#c62828', JACKSBORO:'#4e342e'
+};
+function renderCreditPanel() {
+  const container = document.getElementById('creditLinksContainer');
+  const isAdmin = currentUser && currentUser.role === 'admin';
+  const userLabel = currentUser && currentUser.label;
+  const stores = isAdmin ? Object.keys(CREDIT_LINKS) : (userLabel && CREDIT_LINKS[userLabel] !== undefined ? [userLabel] : []);
+  container.innerHTML = stores.map(store => {
+    const url = CREDIT_LINKS[store];
+    const color = STORE_COLORS[store] || '#555';
+    return `<div style="background:white;border-radius:12px;box-shadow:0 1px 6px rgba(0,0,0,0.08);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;"><div style="display:flex;align-items:center;gap:12px;"><span style="width:10px;height:10px;border-radius:3px;background:${color};flex-shrink:0;display:inline-block;"></span><span style="font-weight:700;font-size:0.95rem;color:#1a1a2e;">${store}</span></div>${url ? `<a href="${url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:${color};color:white;border-radius:8px;padding:8px 18px;font-size:0.82rem;font-weight:700;text-decoration:none;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Open Spreadsheet ↗</a>` : `<span style="font-size:0.8rem;color:#bbb;font-style:italic;">No link added yet</span>`}</div>`;
+  }).join('');
 }
 
 // ── MARGINS PANEL ─────────────────────────────────────────────────────────────

@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -594,8 +594,7 @@ function countItems(o) {
     const sku = (item.sku || '').toUpperCase();
     if (sku.includes('TRIPLESIM') || (sku.includes('SIM') && !sku.includes('REVVL'))) {
       sims += qty;
-    } else if (TABLET_SKUS.some(t => sku.startsWith(t.toUpperCase())) ||
-               sku.includes('FAST5688') || sku.includes('GATEWAY')) {
+    } else if (TABLET_SKUS.some(t => sku.startsWith(t.toUpperCase()))) {
       bts += qty;
     } else {
       phones += qty;

@@ -572,8 +572,7 @@ const ORDERS = [
   { ref:'SK0629BEWES', label:'SK',     num:'171986816', date:'2026-06-29', time:'11:59 AM', status:'InProgress', tracking:[], items:[] },
   { ref:'SK0629WESC',  label:'SK',     num:'171986819', date:'2026-06-29', time:'12:02 PM', status:'InProgress', tracking:[], items:[] },
   { ref:'SK0629ROSD',  label:'SK',     num:'171986831', date:'2026-06-29', time:'12:04 PM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629HAL',   label:'SK',     num:'171986833', date:'2026-06-29', time:'12:06 PM', status:'InProgress', tracking:[], items:[] },AY 64G BLU KIT'},
-  ]},
+  { ref:'SK0629HAL',   label:'SK',     num:'171986833', date:'2026-06-29', time:'12:06 PM', status:'InProgress', tracking:[], items:[] },
 ];
 
 // ── APP STATE ─────────────────────────────────────────────────────────────
@@ -904,7 +903,7 @@ function renderCalendar() {
   }
   // Apply status filter
   if (activeStatus === 'InProgress') {
-    orders = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit');
+    orders = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit' || o.status === 'InProgress');
   } else if (activeStatus === 'Ordered') {
     orders = orders.filter(o => o.status === 'InProcess');
   } else if (activeStatus === 'Delivered') {

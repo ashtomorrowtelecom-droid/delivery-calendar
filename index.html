@@ -542,7 +542,7 @@ const ORDERS = [
   { ref:'SK0623SP01ROSD', label:'SK', num:'171981802', date:'2026-06-23', time:'10:18 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384395103'], items:[
       {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G SLV KIT'},
   ]},
-  // June 26 new order (In Transit — 1 of 2 packages delivered 06/29)
+  // June 26 new order
   { ref:'SID0626SP02', label:'SID', num:'171985047', date:'2026-06-26', time:'12:08 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0284425984','1Z7900AX0284427044'], items:[
       {qty:'10',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
       {qty:'2',unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -904,7 +904,7 @@ function renderCalendar() {
   }
   // Apply status filter
   if (activeStatus === 'InProgress') {
-    orders = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit' || o.status === 'InProgress');
+    orders = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit');
   } else if (activeStatus === 'Ordered') {
     orders = orders.filter(o => o.status === 'InProcess');
   } else if (activeStatus === 'Delivered') {
@@ -982,5 +982,3 @@ function renderCalendar() {
       <div class="sum-item"><span class="sum-num">${totalBts}</span><span class="sum-lbl">BTS</span></div>
       <div class="sum-sep"></div>
       <div class="sum-item"><span class="sum-num">${totalSims}</span><span cl
- 
- 

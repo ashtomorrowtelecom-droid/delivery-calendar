@@ -904,7 +904,7 @@ function renderCalendar() {
     orders = orders.filter(o => o.status === 'Delivered');
   }
 
-  const onTheWay  = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit');
+  const onTheWay  = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit' || o.status === 'InProgress');
   const ordered   = orders.filter(o => o.status === 'InProcess');
   const delivered = orders.filter(o => o.status === 'Delivered');
 

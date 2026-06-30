@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -565,17 +565,31 @@ const ORDERS = [
   ]},
   // June 23 — SULEMAN order (portal: Completed)
   { ref:'SULEMAN0623SP01',  label:'SULEMAN', num:'171982222', date:'2026-06-23', time:'', status:'Delivered', location:'Front Desk', tracking:[], items:[] },
-  // June 29 — new orders (In Progress)
-  { ref:'ALI0629',     label:'ALI',    num:'171986734', date:'2026-06-29', time:'11:38 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'CHO0629',     label:'CHO',    num:'171986761', date:'2026-06-29', time:'11:40 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'BADER0629',   label:'BADER',  num:'171986781', date:'2026-06-29', time:'11:46 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629FER',   label:'SK',     num:'171986787', date:'2026-06-29', time:'11:50 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629SAM',   label:'SK',     num:'171986811', date:'2026-06-29', time:'11:54 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629FM',    label:'SK',     num:'171986814', date:'2026-06-29', time:'11:57 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629BEWES', label:'SK',     num:'171986816', date:'2026-06-29', time:'11:59 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629WESC',  label:'SK',     num:'171986819', date:'2026-06-29', time:'12:02 PM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629ROSD',  label:'SK',     num:'171986831', date:'2026-06-29', time:'12:04 PM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629HAL',   label:'SK',     num:'171986833', date:'2026-06-29', time:'12:06 PM', status:'InProgress', tracking:[], items:[] },
+  // June 29 — morning completed orders
+  { ref:'AMIT0629',       label:'AMIT',      num:'171986668', date:'2026-06-29', time:'11:26 AM', status:'Delivered', tracking:['1Z7900AX0384447575','1Z7900AX0384450089'], items:[] },
+  { ref:'JACKSBORO0629',  label:'JACKSBORO', num:'171986682', date:'2026-06-29', time:'11:29 AM', status:'Delivered', tracking:['1Z7900AX0384450132'], items:[] },
+  { ref:'SULEMAN0629',    label:'SULEMAN',   num:'171986703', date:'2026-06-29', time:'11:31 AM', status:'Delivered', tracking:['1Z7900AX0384454638'], items:[] },
+  { ref:'ALI0629',        label:'ALI',       num:'171986734', date:'2026-06-29', time:'11:38 AM', status:'Delivered', tracking:['1Z7900AX0384450249','1Z7900AX0384451382','1Z7900AX0384450230','1Z7900AX0384450258','1Z7900AX0384450212','1Z7900AX0384450221'], items:[] },
+  { ref:'CHO0629',        label:'CHO',       num:'171986761', date:'2026-06-29', time:'11:40 AM', status:'Delivered', tracking:['1Z7900AX0384451551'], items:[] },
+  // June 29 — InProgress (mid-morning)
+  { ref:'BADER0629',      label:'BADER',     num:'171986781', date:'2026-06-29', time:'11:46 AM', status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629FER',      label:'SK',        num:'171986787', date:'2026-06-29', time:'11:50 AM', status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629SAM',      label:'SK',        num:'171986811', date:'2026-06-29', time:'11:54 AM', status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629FM',       label:'SK',        num:'171986814', date:'2026-06-29', time:'11:57 AM', status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629BEWES',    label:'SK',        num:'171986816', date:'2026-06-29', time:'11:59 AM', status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629WESC',     label:'SK',        num:'171986819', date:'2026-06-29', time:'12:02 PM', status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629ROSD',     label:'SK',        num:'171986831', date:'2026-06-29', time:'12:04 PM', status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629HAL',      label:'SK',        num:'171986833', date:'2026-06-29', time:'12:06 PM', status:'InProgress', tracking:[], items:[] },
+  // June 29 — InProgress (afternoon batch)
+  { ref:'ALI062SP01',     label:'ALI',       num:'171986713', date:'2026-06-29', time:'2:09 PM',  status:'InProgress', tracking:[], items:[] },
+  { ref:'SID0629',        label:'SID',       num:'171986714', date:'2026-06-29', time:'2:11 PM',  status:'InProgress', tracking:[], items:[] },
+  { ref:'BADER0529SP01',  label:'BADER',     num:'171986715', date:'2026-06-29', time:'2:13 PM',  status:'InProgress', tracking:[], items:[] },
+  { ref:'AMIT0629SP01',   label:'AMIT',      num:'171986716', date:'2026-06-29', time:'2:19 PM',  status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629SP01FER',  label:'SK',        num:'171986717', date:'2026-06-29', time:'2:25 PM',  status:'InProgress', tracking:[], items:[] },
+  { ref:'CHO0629SP01',    label:'CHO',       num:'171986718', date:'2026-06-29', time:'2:27 PM',  status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629SP01SAM',  label:'SK',        num:'171986719', date:'2026-06-29', time:'2:30 PM',  status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629SP01HAL',  label:'SK',        num:'171986720', date:'2026-06-29', time:'2:32 PM',  status:'InProgress', tracking:[], items:[] },
+  { ref:'SK0629SP01WESC', label:'SK',        num:'171987081', date:'2026-06-29', time:'2:34 PM',  status:'InProgress', tracking:[], items:[] },
 ];
 
 // ── APP STATE ─────────────────────────────────────────────────────────────

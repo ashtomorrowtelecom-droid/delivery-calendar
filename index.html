@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -275,7 +275,6 @@
     <div style="max-width:1200px; margin:0 auto; display:flex; gap:0;">
       <button class="main-tab active" id="tabDelivery" onclick="switchMainTab('delivery')">📦 Delivery Tracking</button>
       <button class="main-tab" id="tabMargins" onclick="switchMainTab('margins')">💰 Margins</button>
-      <button class="main-tab" id="tabCredit" onclick="switchMainTab('credit')">📋 Credit File</button>
     </div>
   </div>
 
@@ -294,14 +293,6 @@
       <div class="store-tabs" id="statusTabs"></div>
     </div>
     <div id="calendarContainer"></div>
-  </div>
-
-  <!-- CREDIT FILE VIEW -->
-  <div id="creditView" style="display:none;">
-    <div style="max-width:900px; margin:0 auto; padding:24px 16px 90px;">
-      <div style="font-size:1.1rem; font-weight:800; color:#4a148c; margin-bottom:20px;">📋 Credit Files</div>
-      <div id="creditLinksContainer" style="display:flex; flex-direction:column; gap:12px;"></div>
-    </div>
   </div>
 
   <!-- MARGINS VIEW -->
@@ -544,8 +535,15 @@ const ORDERS = [
   { ref:'AMIT0624SP02', label:'AMIT', num:'171983192', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384405940'], items:[
       {qty:'2',unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
   ]},
-  // June 26 new order (In Process)
-  { ref:'SID0626SP02', label:'SID', num:'171985047', date:'2026-06-26', time:'12:08 PM', status:'InProgress', tracking:[], items:[
+  // June 23 additional orders (from portal)
+  { ref:'CHO0623SP01', label:'CHO', num:'171982293', date:'2026-06-23', time:'11:49 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384414752'], items:[
+      {qty:'1',unit:'EA', sku:'SAM A376U A37 5G 128G GRY DISPLAY'},
+  ]},
+  { ref:'SK0623SP01ROSD', label:'SK', num:'171981802', date:'2026-06-23', time:'10:18 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384395103'], items:[
+      {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G SLV KIT'},
+  ]},
+  // June 26 — delivered 06/29 (pkg 1: 10:02 AM Office; pkg 2: label created, not yet received by UPS)
+  { ref:'SID0626SP02', label:'SID', num:'171985047', date:'2026-06-29', time:'10:02 AM', status:'Delivered', location:'Office', tracking:['1Z7900AX0284425984','1Z7900AX0284427044'], items:[
       {qty:'10',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
       {qty:'2',unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
   ]},
@@ -563,33 +561,32 @@ const ORDERS = [
       {qty:'2',unit:'EA', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
       {qty:'1',unit:'EA', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
   ]},
-  // June 23 — SULEMAN order (portal: Completed)
-  { ref:'SULEMAN0623SP01',  label:'SULEMAN', num:'171982222', date:'2026-06-23', time:'', status:'Delivered', location:'Front Desk', tracking:[], items:[] },
-  // June 29 — morning completed orders
-  { ref:'AMIT0629',       label:'AMIT',      num:'171986668', date:'2026-06-29', time:'11:26 AM', status:'Delivered', tracking:['1Z7900AX0384447575','1Z7900AX0384450089'], items:[] },
-  { ref:'JACKSBORO0629',  label:'JACKSBORO', num:'171986682', date:'2026-06-29', time:'11:29 AM', status:'Delivered', tracking:['1Z7900AX0384450132'], items:[] },
-  { ref:'SULEMAN0629',    label:'SULEMAN',   num:'171986703', date:'2026-06-29', time:'11:31 AM', status:'Delivered', tracking:['1Z7900AX0384454638'], items:[] },
-  { ref:'ALI0629',        label:'ALI',       num:'171986734', date:'2026-06-29', time:'11:38 AM', status:'Delivered', tracking:['1Z7900AX0384450249','1Z7900AX0384451382','1Z7900AX0384450230','1Z7900AX0384450258','1Z7900AX0384450212','1Z7900AX0384450221'], items:[] },
-  { ref:'CHO0629',        label:'CHO',       num:'171986761', date:'2026-06-29', time:'11:40 AM', status:'Delivered', tracking:['1Z7900AX0384451551'], items:[] },
-  // June 29 — InProgress (mid-morning)
-  { ref:'BADER0629',      label:'BADER',     num:'171986781', date:'2026-06-29', time:'11:46 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629FER',      label:'SK',        num:'171986787', date:'2026-06-29', time:'11:50 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629SAM',      label:'SK',        num:'171986811', date:'2026-06-29', time:'11:54 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629FM',       label:'SK',        num:'171986814', date:'2026-06-29', time:'11:57 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629BEWES',    label:'SK',        num:'171986816', date:'2026-06-29', time:'11:59 AM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629WESC',     label:'SK',        num:'171986819', date:'2026-06-29', time:'12:02 PM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629ROSD',     label:'SK',        num:'171986831', date:'2026-06-29', time:'12:04 PM', status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629HAL',      label:'SK',        num:'171986833', date:'2026-06-29', time:'12:06 PM', status:'InProgress', tracking:[], items:[] },
-  // June 29 — InProgress (afternoon batch)
-  { ref:'ALI062SP01',     label:'ALI',       num:'171986713', date:'2026-06-29', time:'2:09 PM',  status:'InProgress', tracking:[], items:[] },
-  { ref:'SID0629',        label:'SID',       num:'171986714', date:'2026-06-29', time:'2:11 PM',  status:'InProgress', tracking:[], items:[] },
-  { ref:'BADER0529SP01',  label:'BADER',     num:'171986715', date:'2026-06-29', time:'2:13 PM',  status:'InProgress', tracking:[], items:[] },
-  { ref:'AMIT0629SP01',   label:'AMIT',      num:'171986716', date:'2026-06-29', time:'2:19 PM',  status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629SP01FER',  label:'SK',        num:'171986717', date:'2026-06-29', time:'2:25 PM',  status:'InProgress', tracking:[], items:[] },
-  { ref:'CHO0629SP01',    label:'CHO',       num:'171986718', date:'2026-06-29', time:'2:27 PM',  status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629SP01SAM',  label:'SK',        num:'171986719', date:'2026-06-29', time:'2:30 PM',  status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629SP01HAL',  label:'SK',        num:'171986720', date:'2026-06-29', time:'2:32 PM',  status:'InProgress', tracking:[], items:[] },
-  { ref:'SK0629SP01WESC', label:'SK',        num:'171987081', date:'2026-06-29', time:'2:34 PM',  status:'InProgress', tracking:[], items:[] },
+  // June 29 — portal pull 2026-06-30
+  { ref:'AMIT0629',      label:'AMIT',      num:'171986668', date:'2026-06-29', time:'11:26 AM', status:'InProcess', tracking:[], items:[]},
+  { ref:'JACKSBORO0629', label:'JACKSBORO', num:'171986682', date:'2026-06-29', time:'11:29 AM', status:'InProcess', tracking:[], items:[]},
+  { ref:'SULEMAN0629',   label:'SULEMAN',   num:'171986703', date:'2026-06-29', time:'11:31 AM', status:'InProcess', tracking:[], items:[]},
+  { ref:'ALI062SP01',    label:'ALI',       num:'171986713', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SID0629',       label:'SID',       num:'171986714', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'BADER0529SP01', label:'BADER',     num:'171986715', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'AMIT0629SP01',  label:'AMIT',      num:'171986716', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629SP01FER', label:'SK',        num:'171986717', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'CHO0629SP01',   label:'CHO',       num:'171986718', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629SP01SAM', label:'SK',        num:'171986719', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629SP01HAL', label:'SK',        num:'171986720', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'ALI0629',       label:'ALI',       num:'171986734', date:'2026-06-29', time:'11:38 AM', status:'InProcess', tracking:[], items:[]},
+  { ref:'CHO0629',       label:'CHO',       num:'171986761', date:'2026-06-29', time:'11:40 AM', status:'InProcess', tracking:[], items:[]},
+  { ref:'BADER0629',     label:'BADER',     num:'171986781', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629FER',     label:'SK',        num:'171986787', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629SAM',     label:'SK',        num:'171986811', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629FM',      label:'SK',        num:'171986814', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629BEWES',   label:'SK',        num:'171986816', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629WESC',    label:'SK',        num:'171986819', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629ROSD',    label:'SK',        num:'171986831', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629HAL',     label:'SK',        num:'171986833', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0629SP01WESC',label:'SK',        num:'171987081', date:'2026-06-29', time:'2:34 PM', status:'InProcess', tracking:[], items:[
+      {qty:'2', unit:'EA', sku:'TCL T807W 70PRO 128G BLU KIT'},
+  ]},
+
 ];
 
 // ── APP STATE ─────────────────────────────────────────────────────────────
@@ -608,7 +605,8 @@ function countItems(o) {
     const sku = (item.sku || '').toUpperCase();
     if (sku.includes('TRIPLESIM') || (sku.includes('SIM') && !sku.includes('REVVL'))) {
       sims += qty;
-    } else if (TABLET_SKUS.some(t => sku.startsWith(t.toUpperCase()))) {
+    } else if (TABLET_SKUS.some(t => sku.startsWith(t.toUpperCase())) ||
+               sku.includes('FAST5688') || sku.includes('GATEWAY')) {
       bts += qty;
     } else {
       phones += qty;
@@ -643,40 +641,10 @@ function switchMainTab(tab) {
   activeMainTab = tab;
   document.getElementById('tabDelivery').className = 'main-tab' + (tab === 'delivery' ? ' active' : '');
   document.getElementById('tabMargins').className  = 'main-tab' + (tab === 'margins'  ? ' active' : '');
-  document.getElementById('tabCredit').className   = 'main-tab' + (tab === 'credit'   ? ' active' : '');
   document.getElementById('deliveryView').style.display = tab === 'delivery' ? 'block' : 'none';
   document.getElementById('marginsView').style.display  = tab === 'margins'  ? 'block' : 'none';
-  document.getElementById('creditView').style.display   = tab === 'credit'   ? 'block' : 'none';
   document.getElementById('summaryBar').style.display   = tab === 'delivery' ? '' : 'none';
   if (tab === 'margins') renderMarginPanel();
-  if (tab === 'credit')  renderCreditPanel();
-}
-
-// ── CREDIT FILE PANEL ─────────────────────────────────────────────
-const CREDIT_LINKS = {
-  ALI:      'https://docs.google.com/spreadsheets/d/19OgL7eVR_rW3Jmn3XSsvB6Kq8jfr4LepmsuDrE0S4yY/edit?gid=2054813224#gid=2054813224',
-  BADER:    'https://docs.google.com/spreadsheets/d/1EGkSGRmjZBp4Kdljm2QyIS2wBTblSh-3fOQwSwEEVg8/edit?gid=997708778#gid=997708778',
-  SK:       'https://docs.google.com/spreadsheets/d/1Q5CSjFX9dkFxk968X1rMqAMReUbnuUDdYO9hlgunQZw/edit?gid=888199350#gid=888199350',
-  AMIT:     'https://docs.google.com/spreadsheets/d/1GhgQQFJLntg5k_2jj2W0wW86ljZOuJn0UwYKT1PdVes/edit?gid=1336604705#gid=1336604705',
-  SULEMAN:  'https://docs.google.com/spreadsheets/d/1m7yFlJG0ZM2t7hD87Rb4G0AEE6WShbPXz1aCRGSsyg4/edit?gid=1434497782#gid=1434497782',
-  SID:      'https://docs.google.com/spreadsheets/d/13fcxGeP2_yamGoImpxSZQq6Vsv9B2ZfjQbheHDhaYto/edit?gid=1025242076#gid=1025242076',
-  CHO:      'https://docs.google.com/spreadsheets/d/12rSsFtHgy983eLLp5rPpV9ByF8POhZlQdJoGaXSfoY0/edit?gid=772114128#gid=772114128',
-  JACKSBORO:'https://docs.google.com/spreadsheets/d/1NzabMn9CazRjYmoO2G3I8ktbrkeDVSwmX1cu6OQ1TqE/edit?gid=2075837100#gid=2075837100',
-};
-const STORE_COLORS = {
-  ALI:'#b5179e', BADER:'#7b2ff7', SK:'#1565c0', AMIT:'#2e7d32',
-  SULEMAN:'#e65100', SID:'#00838f', CHO:'#c62828', JACKSBORO:'#4e342e'
-};
-function renderCreditPanel() {
-  const container = document.getElementById('creditLinksContainer');
-  const isAdmin = currentUser && currentUser.role === 'admin';
-  const userLabel = currentUser && currentUser.label;
-  const stores = isAdmin ? Object.keys(CREDIT_LINKS) : (userLabel && CREDIT_LINKS[userLabel] !== undefined ? [userLabel] : []);
-  container.innerHTML = stores.map(store => {
-    const url = CREDIT_LINKS[store];
-    const color = STORE_COLORS[store] || '#555';
-    return `<div style="background:white;border-radius:12px;box-shadow:0 1px 6px rgba(0,0,0,0.08);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;"><div style="display:flex;align-items:center;gap:12px;"><span style="width:10px;height:10px;border-radius:3px;background:${color};flex-shrink:0;display:inline-block;"></span><span style="font-weight:700;font-size:0.95rem;color:#1a1a2e;">${store}</span></div>${url ? `<a href="${url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:${color};color:white;border-radius:8px;padding:8px 18px;font-size:0.82rem;font-weight:700;text-decoration:none;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Open Spreadsheet ↗</a>` : `<span style="font-size:0.8rem;color:#bbb;font-style:italic;">No link added yet</span>`}</div>`;
-  }).join('');
 }
 
 // ── MARGINS PANEL ─────────────────────────────────────────────────────────────
@@ -949,14 +917,14 @@ function renderCalendar() {
   }
   // Apply status filter
   if (activeStatus === 'InProgress') {
-    orders = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit' || o.status === 'InProgress');
+    orders = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit');
   } else if (activeStatus === 'Ordered') {
     orders = orders.filter(o => o.status === 'InProcess');
   } else if (activeStatus === 'Delivered') {
     orders = orders.filter(o => o.status === 'Delivered');
   }
 
-  const onTheWay  = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit' || o.status === 'InProgress');
+  const onTheWay  = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit');
   const ordered   = orders.filter(o => o.status === 'InProcess');
   const delivered = orders.filter(o => o.status === 'Delivered');
 
@@ -1026,20 +994,4 @@ function renderCalendar() {
       <div class="sum-sep"></div>
       <div class="sum-item"><span class="sum-num">${totalBts}</span><span class="sum-lbl">BTS</span></div>
       <div class="sum-sep"></div>
-      <div class="sum-item"><span class="sum-num">${totalSims}</span><span class="sum-lbl">SIMs</span></div>`;
-  } else {
-    bar.style.display = 'none';
-  }
-}
-
-// ── MODAL HELPERS ────────────────────────────────────────────────────────────
-function closeModalOverlay(e) {
-  if (e.target === document.getElementById('orderModal')) {
-    document.getElementById('orderModal').style.display = 'none';
-  }
-}
-
-</script>
-</body>
-</html>
-                                                                                                                                          
+      <div class="sum-ite

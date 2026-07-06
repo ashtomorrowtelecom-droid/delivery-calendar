@@ -567,7 +567,7 @@ const ORDERS = [
   { ref:'SULEMAN0629',   label:'SULEMAN',   num:'171986703', date:'2026-07-02', time:'1:06 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384454638'], items:[]},
   { ref:'ALI062SP01',    label:'ALI',       num:'171986713', date:'2026-06-29', time:'', status:'InProcess', tracking:[], items:[]},
   { ref:'SID0629',       label:'SID',       num:'171986714', date:'2026-07-03', time:'10:44 AM', status:'Delivered', location:'Office', tracking:['1Z7900AX0384469499'], items:[]},
-  { ref:'BADER0529SP01', label:'BADER',     num:'171986715', date:'2026-07-06', time:'', status:'InTransit', tracking:['1Z7900AX0384467919'], items:[]},
+  { ref:'BADER0529SP01', label:'BADER',     num:'171986715', date:'2026-07-06', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384467919'], items:[]},
   { ref:'AMIT0629SP01',  label:'AMIT',      num:'171986716', date:'2026-07-03', time:'12:50 PM', status:'Delivered', location:'Reception', tracking:['1Z7900AX0384469542'], items:[]},
   { ref:'SK0629SP01FER', label:'SK',        num:'171986717', date:'2026-07-03', time:'3:05 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384467553'], items:[]},
   { ref:'CHO0629SP01',   label:'CHO',       num:'171986718', date:'2026-07-03', time:'12:18 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384467777'], items:[]},
@@ -983,4 +983,4 @@ function renderCalendar() {
     }
   } else if (activeStatus === 'Delivered') {
     if (delivered.length === 0) {
-      html = '<div style="text-align:center;color:#bbb;padding:60px 0;font-size:
+      html = '<div style="text-align:center;color:#bbb;paddi

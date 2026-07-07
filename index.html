@@ -1036,4 +1036,23 @@ function renderCalendar() {
       <div class="sum-sep"></div>
       <div class="sum-item"><span class="sum-num">${totalBts}</span><span class="sum-lbl">BTS</span></div>
       <div class="sum-sep"></div>
-      <div class="sum-ite
+      <div class="sum-item"><span class="sum-num">${totalSims}</span><span class="sum-lbl">SIMs</span></div>`;
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────────────────
+function closeModalOverlay(e) {
+  if (e.target.id === 'orderModal') {
+    document.getElementById('orderModal').style.display = 'none';
+  }
+}
+
+// ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
+document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
+});
+</script>
+</body>
+</html>

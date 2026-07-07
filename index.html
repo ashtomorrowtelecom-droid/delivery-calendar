@@ -601,7 +601,7 @@ const ORDERS = [
   { ref:'AMIT0630SP01',  label:'AMIT',  num:'171987760', date:'2026-07-03', time:'12:50 PM', status:'Delivered', location:'Reception', tracking:['1Z7900AX0384464654'], items:[
       {qty:'7', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
   ]},
-  { ref:'BADER0630SP01', label:'BADER', num:'171987753', date:'2026-07-07', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384468034'], items:[
+  { ref:'BADER0630SP01', label:'BADER', num:'171987753', date:'2026-07-07', time:'12:30 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384468034'], items:[
       {qty:'10', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'4',  unit:'EA', sku:'TCL T807W 70PRO 128G BLU KIT'},
       {qty:'1',  unit:'PAC',sku:'MOT XT26131 G 128G BLU KIT'},
@@ -710,38 +710,54 @@ function renderMarginPanel() {
   if (filterLabel !== 'ALL') orders = orders.filter(o => o.label === filterLabel);
   orders = [...orders].sort((a,b) => new Date(b.date) - new Date(a.date));
 
-  // Stats
-  let grandTotal = 0, totalPhonesCount = 0;
-  orders.forEach(o => {
+  // Classify an item as BTS (tablets + gateways, same grouping as delivery counts) or phone
+  function isBtsItem(sku) {
+    const up = (sku || '').toUpperCase();
+    return TABLET_SKUS.some(t => up.startsWith(t.toUpperCase())) ||
+           up.includes('FAST5688') || up.includes('GATEWAY');
+  }
+  function splitMargins(o) {
+    let phoneM = 0, btsM = 0, phoneN = 0, btsN = 0;
     (o.items||[]).forEach(item => {
       const qty = parseInt(item.qty)||0;
-      grandTotal += getItemMargin(item.sku) * qty;
-      if (getItemMargin(item.sku) === MARGIN_RATES.PHONE) totalPhonesCount += qty;
+      const m   = getItemMargin(item.sku) * qty;
+      if (m === 0) return; // SIMs / no-margin items
+      if (isBtsItem(item.sku)) { btsM += m; btsN += qty; }
+      else                     { phoneM += m; phoneN += qty; }
     });
+    return { phoneM, btsM, phoneN, btsN };
+  }
+
+  // Stats
+  let phoneTotal = 0, btsTotal = 0, totalPhonesCount = 0, totalBtsCount = 0;
+  orders.forEach(o => {
+    const s = splitMargins(o);
+    phoneTotal += s.phoneM; btsTotal += s.btsM;
+    totalPhonesCount += s.phoneN; totalBtsCount += s.btsN;
   });
+  const grandTotal = phoneTotal + btsTotal;
 
   const statsHtml = `<div class="margin-stat-row">
     <div class="margin-stat"><span class="margin-stat-num">$${grandTotal.toFixed(2)}</span><span class="margin-stat-lbl">Total Margin</span></div>
+    <div class="margin-stat"><span class="margin-stat-num">$${phoneTotal.toFixed(2)}</span><span class="margin-stat-lbl">📱 Phone Margin (${totalPhonesCount})</span></div>
+    <div class="margin-stat"><span class="margin-stat-num">$${btsTotal.toFixed(2)}</span><span class="margin-stat-lbl">📡 BTS Margin (${totalBtsCount})</span></div>
     <div class="margin-stat"><span class="margin-stat-num">${orders.length}</span><span class="margin-stat-lbl">Orders</span></div>
-    <div class="margin-stat"><span class="margin-stat-num">${totalPhonesCount}</span><span class="margin-stat-lbl">Phones</span></div>
     <div class="margin-stat"><span class="margin-stat-num">$${orders.length > 0 ? (grandTotal/orders.length).toFixed(2) : '0.00'}</span><span class="margin-stat-lbl">Avg / Order</span></div>
   </div>`;
 
   // Per-order table rows (no images)
   const tableRows = orders.map(o => {
     const color = COLORS[o.label] || '#888';
-    let orderMargin = 0;
-    let totalItems = 0;
-    (o.items||[]).forEach(item => {
-      const qty = parseInt(item.qty)||0;
-      totalItems += qty;
-      orderMargin += getItemMargin(item.sku) * qty;
-    });
+    const s = splitMargins(o);
+    const orderMargin = s.phoneM + s.btsM;
     return `<tr>
       <td class="margin-order-ref">${o.ref}${o.num ? `<span style="font-size:0.7rem;color:#bbb;margin-left:5px;">#${o.num}</span>` : ''}</td>
       <td><span style="background:${color};color:white;border-radius:5px;padding:1px 8px;font-size:0.7rem;font-weight:700;">${o.label}</span></td>
       <td style="color:#666;">${fmtDate(o.date)}</td>
-      <td style="font-weight:700;color:#333;">${totalItems}</td>
+      <td style="font-weight:700;color:#333;">${s.phoneN}</td>
+      <td class="${s.phoneM > 0 ? 'margin-amount' : 'margin-zero'}">$${s.phoneM.toFixed(2)}</td>
+      <td style="font-weight:700;color:#333;">${s.btsN}</td>
+      <td class="${s.btsM > 0 ? 'margin-amount' : 'margin-zero'}">$${s.btsM.toFixed(2)}</td>
       <td class="${orderMargin > 0 ? 'margin-amount' : 'margin-zero'}">$${orderMargin.toFixed(2)}</td>
     </tr>`;
   }).join('');
@@ -750,7 +766,7 @@ function renderMarginPanel() {
     ? `<div style="background:white;border-radius:14px;box-shadow:0 1px 6px rgba(0,0,0,0.08);overflow:hidden;">
         <table class="margin-table" style="width:100%;">
           <thead><tr>
-            <th>Order Ref</th><th>Store</th><th>Date</th><th>Items</th><th>Margin</th>
+            <th>Order Ref</th><th>Store</th><th>Date</th><th>📱 Phones</th><th>Phone $</th><th>📡 BTS</th><th>BTS $</th><th>Total</th>
           </tr></thead>
           <tbody>${tableRows}</tbody>
         </table>
@@ -1049,6 +1065,7 @@ function closeModalOverlay(e) {
   }
 }
 
+// Last auto-update: 2026-07-07
 // ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
 document.getElementById('passwordInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') doLogin();

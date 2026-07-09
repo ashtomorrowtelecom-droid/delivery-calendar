@@ -615,16 +615,16 @@ const ORDERS = [
   ]},
 
   // July 5–6 — portal pull 2026-07-07
-  { ref:'SK0705BEWES',   label:'SK',        num:'171994303', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384544111'], items:[]},
-  { ref:'SK0706FM',      label:'SK',        num:'171994221', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384542382'], items:[]},
-  { ref:'SK0706SAM',     label:'SK',        num:'171993897', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384544602'], items:[]},
-  { ref:'SK0706FER',     label:'SK',        num:'171993896', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384550908'], items:[]},
-  { ref:'AMIT0706',      label:'AMIT',      num:'171993895', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384548948','1Z7900AX0384548957','1Z7900AX0384548975'], items:[]},
-  { ref:'CHO0706',       label:'CHO',       num:'171993894', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384546119'], items:[]},
-  { ref:'ALI0706',       label:'ALI',       num:'171993893', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384550033','1Z7900AX0384550042','1Z7900AX0384545889','1Z7900AX0384550051','1Z7900AX0384550024'], items:[]},
-  { ref:'SID0706',       label:'SID',       num:'171993892', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384551050'], items:[]},
-  { ref:'SULEMAN0706',   label:'SULEMAN',   num:'171993891', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384551345'], items:[]},
-  { ref:'JACKSBORO0706', label:'JACKSBORO', num:'171991970', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384541687'], items:[]},
+  { ref:'SK0705BEWES',   label:'SK',        num:'171994303', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384544111'], items:[]},
+  { ref:'SK0706FM',      label:'SK',        num:'171994221', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384542382'], items:[]},
+  { ref:'SK0706SAM',     label:'SK',        num:'171993897', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384544602'], items:[]},
+  { ref:'SK0706FER',     label:'SK',        num:'171993896', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384550908'], items:[]},
+  { ref:'AMIT0706',      label:'AMIT',      num:'171993895', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384548948','1Z7900AX0384548957','1Z7900AX0384548975'], items:[]},
+  { ref:'CHO0706',       label:'CHO',       num:'171993894', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384546119'], items:[]},
+  { ref:'ALI0706',       label:'ALI',       num:'171993893', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384550033','1Z7900AX0384550042','1Z7900AX0384545889','1Z7900AX0384550051','1Z7900AX0384550024'], items:[]},
+  { ref:'SID0706',       label:'SID',       num:'171993892', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384551050'], items:[]},
+  { ref:'SULEMAN0706',   label:'SULEMAN',   num:'171993891', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384551345'], items:[]},
+  { ref:'JACKSBORO0706', label:'JACKSBORO', num:'171991970', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384541687'], items:[]},
   { ref:'SK0706HAL',     label:'SK',        num:'171994365', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
   { ref:'SK0706ROSD',    label:'SK',        num:'171994344', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
   { ref:'SK0706WESC',    label:'SK',        num:'171994326', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
@@ -1123,7 +1123,7 @@ function closeModalOverlay(e) {
   }
 }
 
-// Last auto-update: 2026-07-07
+// Last auto-update: 2026-07-09
 // ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
 document.getElementById('passwordInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') doLogin();

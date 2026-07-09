@@ -431,7 +431,7 @@ function lookupProduct(sku) {
 // ── COLORS ───────────────────────────────────────────────────────────────────
 const COLORS = {
   ALI:'#b5179e', BADER:'#7b2d8b', SK:'#1565c0', AMIT:'#2e7d32',
-  SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828'
+  SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828', W:'#455a64'
 };
 
 // ── ORDERS ───────────────────────────────────────────────────────────────────
@@ -615,16 +615,16 @@ const ORDERS = [
   ]},
 
   // July 5–6 — portal pull 2026-07-07
-  { ref:'SK0705BEWES',   label:'SK',        num:'171994303', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384544111'], items:[]},
-  { ref:'SK0706FM',      label:'SK',        num:'171994221', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384542382'], items:[]},
-  { ref:'SK0706SAM',     label:'SK',        num:'171993897', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384544602'], items:[]},
-  { ref:'SK0706FER',     label:'SK',        num:'171993896', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384550908'], items:[]},
-  { ref:'AMIT0706',      label:'AMIT',      num:'171993895', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384548948','1Z7900AX0384548957','1Z7900AX0384548975'], items:[]},
-  { ref:'CHO0706',       label:'CHO',       num:'171993894', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384546119'], items:[]},
-  { ref:'ALI0706',       label:'ALI',       num:'171993893', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384550033','1Z7900AX0384550042','1Z7900AX0384545889','1Z7900AX0384550051','1Z7900AX0384550024'], items:[]},
-  { ref:'SID0706',       label:'SID',       num:'171993892', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384551050'], items:[]},
-  { ref:'SULEMAN0706',   label:'SULEMAN',   num:'171993891', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384551345'], items:[]},
-  { ref:'JACKSBORO0706', label:'JACKSBORO', num:'171991970', date:'2026-07-09', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384541687'], items:[]},
+  { ref:'SK0705BEWES',   label:'SK',        num:'171994303', date:'2026-07-09', time:'1:07 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384544111'], items:[]},
+  { ref:'SK0706FM',      label:'SK',        num:'171994221', date:'2026-07-09', time:'1:28 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384542382'], items:[]},
+  { ref:'SK0706SAM',     label:'SK',        num:'171993897', date:'2026-07-09', time:'11:35 AM', status:'Delivered', location:'Dock',       tracking:['1Z7900AX0384544602'], items:[]},
+  { ref:'SK0706FER',     label:'SK',        num:'171993896', date:'2026-07-09', time:'2:06 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384550908'], items:[]},
+  { ref:'AMIT0706',      label:'AMIT',      num:'171993895', date:'2026-07-09', time:'2:17 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384548948','1Z7900AX0384548957','1Z7900AX0384548975'], items:[]},
+  { ref:'CHO0706',       label:'CHO',       num:'171993894', date:'2026-07-09', time:'2:08 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384546119'], items:[]},
+  { ref:'ALI0706',       label:'ALI',       num:'171993893', date:'2026-07-09', time:'11:25 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384550033','1Z7900AX0384550042','1Z7900AX0384545889','1Z7900AX0384550051','1Z7900AX0384550024'], items:[]},
+  { ref:'SID0706',       label:'SID',       num:'171993892', date:'2026-07-09', time:'12:11 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384551050'], items:[]},
+  { ref:'SULEMAN0706',   label:'SULEMAN',   num:'171993891', date:'2026-07-09', time:'2:50 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384551345'], items:[]},
+  { ref:'JACKSBORO0706', label:'JACKSBORO', num:'171991970', date:'2026-07-09', time:'11:18 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384541687'], items:[]},
   { ref:'SK0706HAL',     label:'SK',        num:'171994365', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
   { ref:'SK0706ROSD',    label:'SK',        num:'171994344', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
   { ref:'SK0706WESC',    label:'SK',        num:'171994326', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
@@ -684,6 +684,21 @@ const ORDERS = [
   ]},
   { ref:'SULEMAN0707SP01',label:'SULEMAN', num:'171995852', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
       {qty:'1', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+  ]},
+
+  // July 6–8 — portal pull 2026-07-09 (Wichita "W" account)
+  { ref:'W0706',     label:'W', num:'171994445', date:'2026-07-10', time:'Est. 10:00 AM – 12:00 PM', status:'InTransit', tracking:['1Z7900AX0384573429','1Z7900AX0384588511'], items:[
+      {qty:'1', unit:'PAC', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
+      {qty:'6', unit:'EA',  sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+      {qty:'1', unit:'PAC', sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+  ]},
+  { ref:'W0706SP01', label:'W', num:'171994610', date:'2026-07-10', time:'Est. 10:00 AM – 12:00 PM', status:'InTransit', tracking:['1Z7900AX0384588995'], items:[
+      {qty:'8', unit:'EA',  sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'W0708SP01', label:'W', num:'171998134', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'2', unit:'PAC', sku:'SAM A376U A37 5G 128G GRY KIT'},
+      {qty:'2', unit:'PAC', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'2', unit:'PAC', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
   ]},
 
 ];
@@ -1106,28 +1121,4 @@ function renderCalendar() {
       <div class="sum-sep"></div>
       <div class="sum-item"><span class="sum-num">${totalBoxes}</span><span class="sum-lbl">Boxes</span></div>
       <div class="sum-sep"></div>
-      <div class="sum-item"><span class="sum-num">${totalPhones}</span><span class="sum-lbl">Phones</span></div>
-      <div class="sum-sep"></div>
-      <div class="sum-item"><span class="sum-num">${totalBts}</span><span class="sum-lbl">BTS</span></div>
-      <div class="sum-sep"></div>
-      <div class="sum-item"><span class="sum-num">${totalSims}</span><span class="sum-lbl">SIMs</span></div>`;
-  } else {
-    bar.style.display = 'none';
-  }
-}
-
-// ── MODAL ─────────────────────────────────────────────────────────────────────
-function closeModalOverlay(e) {
-  if (e.target.id === 'orderModal') {
-    document.getElementById('orderModal').style.display = 'none';
-  }
-}
-
-// Last auto-update: 2026-07-09
-// ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
-document.getElementById('passwordInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') doLogin();
-});
-</script>
-</body>
-</html>
+      <div class="sum-item"><span class="sum-num"

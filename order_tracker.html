@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomorrow Telecom — Delivery Portal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #loginScreen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #b5179e 0%, #560bad 100%);
+    }
+    .login-box {
+      background: white; border-radius: 18px; padding: 40px 36px; width: 360px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+    .login-logo { text-align: center; margin-bottom: 28px; }
+    .login-logo h1 { font-size: 1.6rem; font-weight: 800; color: #b5179e; }
+    .login-logo p { font-size: 0.85rem; color: #888; margin-top: 4px; }
+    .login-box label { display: block; font-size: 0.8rem; font-weight: 600; color: #555; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .login-box input {
+      width: 100%; padding: 11px 14px; border: 1.5px solid #e0e0e0; border-radius: 9px;
+      font-size: 0.95rem; margin-bottom: 16px; outline: none; transition: border 0.2s;
+    }
+    .login-box input:focus { border-color: #b5179e; }
+    .login-btn {
+      width: 100%; padding: 13px; background: #b5179e; color: white; border: none;
+      border-radius: 9px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    }
+    .login-btn:hover { background: #c1005f; }
+    .login-error { color: #c62828; font-size: 0.82rem; text-align: center; margin-top: 12px; display: none; }
+
+    /* ── APP ── */
+    #appScreen { display: none; }
+    header {
+      background: linear-gradient(135deg, #b5179e 0%, #7b2ff7 100%);
+      color: white; padding: 16px 24px; display: flex; align-items: center;
+      justify-content: space-between; box-shadow: 0 2px 12px rgba(181,23,158,0.3);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .header-left h1 { font-size: 1.3rem; font-weight: 700; }
+    .header-left .subtitle { font-size: 0.8rem; opacity: 0.85; }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .user-pill {
+      background: rgba(255,255,255,0.2); border-radius: 20px; padding: 5px 14px;
+      font-size: 0.82rem; font-weight: 600;
+    }
+    .logout-btn {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4);
+      color: white; border-radius: 8px; padding: 6px 14px; font-size: 0.82rem;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .logout-btn:hover { background: rgba(255,255,255,0.3); }
+    .main-tab {
+      padding: 14px 28px; font-size: 0.88rem; font-weight: 700; border: none;
+      background: none; color: #888; cursor: pointer; border-bottom: 3px solid transparent;
+      transition: all 0.15s; letter-spacing: 0.2px;
+    }
+    .main-tab.active { color: #b5179e; border-bottom-color: #b5179e; }
+    .main-tab:hover:not(.active) { color: #555; background: #fafafa; }
+    .margin-stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 10px; margin-bottom: 18px; }
+    .margin-stat { background: linear-gradient(135deg,#f3e5f5,#ede7f6); border-radius: 12px; padding: 14px 16px; text-align:center; }
+    .margin-stat-num { font-size: 1.6rem; font-weight: 800; color: #4a148c; display:block; }
+    .margin-stat-lbl { font-size: 0.68rem; font-weight: 700; text-transform:uppercase; letter-spacing:0.5px; color:#7b1fa2; margin-top:3px; display:block; }
+    .margin-table { width:100%; border-collapse:collapse; font-size:0.83rem; }
+    .margin-table th { text-align:left; padding:8px 10px; background:#f5f0ff; color:#4a148c; font-weight:700; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.4px; border-radius:4px; }
+    .margin-table td { padding:9px 10px; border-bottom:1px solid #f0f0f0; vertical-align:middle; }
+    .margin-table tr:last-child td { border-bottom:none; }
+    .margin-table tr:hover td { background:#fafafa; }
+    .margin-order-ref { font-weight:700; color:#1a1a2e; }
+    .margin-label-dot { display:inline-block; width:8px; height:8px; border-radius:3px; margin-right:5px; vertical-align:middle; }
+    .margin-amount { font-weight:800; color:#2e7d32; }
+    .margin-zero { color:#bbb; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px 90px; }
+
+    /* ── ADMIN: store tabs ── */
+    .store-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .store-tab {
+      padding: 7px 18px; border-radius: 20px; font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; border: 2px solid transparent; transition: all 0.15s; background: white;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .store-tab.active { color: white; }
+    .store-tab:not(.active) { color: #444; }
+
+    /* ── ACCORDION LIST ── */
+    .orders-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .order-ref { font-size: 0.92rem; font-weight: 700; color: #1a1a2e; }
+    .order-num { font-size: 0.78rem; color: #888; font-weight: 500; margin-left: 6px; }
+    .label-badge { color: white; border-radius: 6px; padding: 2px 9px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px; margin-left: 6px; }
+
+    /* ── ACCORDION CARD ── */
+    .acc-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.08); }
+    .acc-header {
+      display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+      cursor: pointer; transition: background 0.15s; user-select: none;
+    }
+    .acc-header:hover { background: #fafafa; }
+    .acc-header-main { flex: 1; min-width: 0; }
+    .acc-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 2px; margin-bottom: 5px; }
+    .acc-meta-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .acc-date { font-size: 0.78rem; color: #666; }
+    .acc-counts { display: flex; gap: 6px; flex-shrink: 0; }
+    .count-pill { background: #f5f5f8; border-radius: 8px; padding: 5px 8px; text-align: center; min-width: 44px; }
+    .cp-num { display: block; font-size: 1rem; font-weight: 700; color: #1a1a2e; line-height: 1.1; }
+    .cp-lbl { display: block; font-size: 0.6rem; color: #888; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 1px; }
+    .acc-arrow { font-size: 0.75rem; color: #bbb; flex-shrink: 0; width: 16px; text-align: center; }
+
+    /* ── STATUS BADGES ── */
+    .status-delivered { display: inline-flex; align-items: center; background: #e8f5e9; color: #2e7d32; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; font-weight: 600; }
+    .status-out       { display: inline-flex; align-items: center; background: #e3f2fd; color: #1565c0; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; font-weight: 600; }
+    .status-transit   { display: inline-flex; align-items: center; background: #fff8e1; color: #f57f17; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; font-weight: 600; }
+    .status-pending   { display: inline-flex; align-items: center; background: #fce4ec; color: #c62828; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; font-weight: 600; }
+
+    /* ── ACCORDION BODY ── */
+    .acc-body { border-top: 1px solid #f0f0f0; }
+    .acc-body-inner { padding: 14px 16px 16px; }
+    .acc-tracking-label, .acc-items-label {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
+      color: #aaa; margin-bottom: 6px; margin-top: 12px;
+    }
+    .acc-tracking-label { margin-top: 0; }
+    .tracking-link { display: block; color: #1565c0; text-decoration: none; font-size: 0.76rem; font-family: 'Courier New', monospace; margin-bottom: 3px; }
+    .tracking-link:hover { text-decoration: underline; }
+    .no-tracking { font-size: 0.76rem; color: #bbb; font-style: italic; }
+    .acc-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+    .acc-item:last-child { border-bottom: none; }
+    .item-img { width: 70px; height: 90px; object-fit: contain; flex-shrink: 0; border-radius: 6px; background: #f9f9f9; padding: 4px; }
+    .item-img-placeholder { width: 70px; height: 90px; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; background: #f5f5f5; border-radius: 6px; }
+    .acc-item-info { display: flex; flex-direction: column; gap: 3px; }
+    .acc-item-qty { font-size: 0.72rem; font-weight: 700; color: #b5179e; }
+    .acc-item-name { font-size: 0.82rem; color: #333; }
+
+    /* ── DELIVERED GROUP ── */
+    .delivered-group { margin-top: 10px; }
+    .delivered-header {
+      display: flex; align-items: center; gap: 10px; padding: 12px 18px;
+      background: white; border-radius: 12px; cursor: pointer;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07); user-select: none; transition: background 0.15s;
+    }
+    .delivered-header:hover { background: #fafafa; }
+    .delivered-title { font-size: 0.9rem; font-weight: 700; color: #2e7d32; }
+    .delivered-count { background: #e8f5e9; color: #2e7d32; border-radius: 20px; padding: 1px 10px; font-size: 0.75rem; font-weight: 700; }
+    #deliveredList { margin-top: 8px; display: flex; flex-direction: column; gap: 8px; }
+
+    /* ── SECTION GROUPS ── */
+    .section-group { margin-bottom: 18px; }
+    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding: 0 4px; }
+    .section-title { font-size: 0.85rem; font-weight: 700; color: #444; }
+    .section-count { background: #eee; color: #555; border-radius: 20px; padding: 1px 9px; font-size: 0.72rem; font-weight: 700; }
+
+    /* ── SUMMARY BAR ── */
+    #summaryBar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
+      background: linear-gradient(135deg, #560bad 0%, #b5179e 100%);
+      color: white; display: none; align-items: center; justify-content: center;
+      gap: 0; padding: 10px 24px;
+      box-shadow: 0 -2px 16px rgba(86,11,173,0.35);
+    }
+    .sum-item { text-align: center; padding: 0 22px; }
+    .sum-num  { display: block; font-size: 1.7rem; font-weight: 800; line-height: 1.1; }
+    .sum-lbl  { display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.7px; opacity: 0.85; margin-top: 1px; }
+    .sum-sep  { width: 1px; height: 44px; background: rgba(255,255,255,0.22); flex-shrink: 0; }
+
+    /* ── ORDER MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 200;
+      display: flex; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-box {
+      background: white; border-radius: 18px; width: 100%; max-width: 620px;
+      max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+    }
+    .modal-header {
+      padding: 18px 22px 14px; border-bottom: 2px solid #f0f0f0;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; background: white; z-index: 1;
+    }
+    .modal-header-left { display: flex; flex-direction: column; gap: 3px; }
+    .modal-order-ref { font-size: 1.1rem; font-weight: 800; }
+    .modal-order-meta { font-size: 0.78rem; color: #888; }
+    .modal-close {
+      background: #f0f0f0; border: none; width: 32px; height: 32px; border-radius: 50%;
+      font-size: 1.2rem; cursor: pointer; color: #555; display: flex; align-items: center;
+      justify-content: center; transition: background 0.15s; flex-shrink: 0;
+    }
+    .modal-close:hover { background: #e0e0e0; }
+    .modal-body { padding: 16px 22px 22px; }
+    .modal-no-items { text-align: center; color: #bbb; padding: 36px 0; font-size: 0.9rem; }
+    .product-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 0; border-bottom: 1px solid #f5f5f5;
+    }
+    .product-row:last-child { border-bottom: none; }
+    .product-img-wrap {
+      width: 76px; height: 96px; flex-shrink: 0; border-radius: 10px;
+      background: #f7f7f7; display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .product-img-wrap img { width: 100%; height: 100%; object-fit: contain; }
+    .product-img-fallback { font-size: 2.4rem; }
+    .product-info { flex: 1; min-width: 0; }
+    .product-qty-badge {
+      display: inline-block; background: #f0f0f0; color: #555; border-radius: 5px;
+      padding: 2px 8px; font-size: 0.72rem; font-weight: 700; margin-bottom: 6px;
+      text-transform: uppercase; letter-spacing: 0.4px;
+    }
+    .product-name { font-size: 0.92rem; font-weight: 700; color: #1a1a2e; margin-bottom: 3px; }
+    .product-sku { font-size: 0.72rem; color: #aaa; font-family: 'Courier New', monospace; }
+    .order-card { cursor: pointer; }
+
+    /* ── CREDENTIALS TABLE (admin only) ── */
+    .creds-panel {
+      background: white; border-radius: 12px; padding: 20px; margin-bottom: 24px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+    .creds-panel h3 { font-size: 0.85rem; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; }
+    .creds-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .creds-table th { text-align: left; padding: 8px 12px; background: #f5f5f5; color: #555; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.4px; }
+    .creds-table td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; }
+    .creds-table tr:last-child td { border-bottom: none; }
+    .store-dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 7px; vertical-align: middle; }
+    .copy-btn { background: #f0f0f0; border: none; border-radius: 5px; padding: 3px 8px; font-size: 0.72rem; cursor: pointer; color: #555; }
+    .copy-btn:hover { background: #e0e0e0; }
+
+    /* ── RICH ACCORDION DETAIL ── */
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-bottom: 14px; padding: 12px; background: #f8f8fc; border-radius: 10px; }
+    .detail-cell { display: flex; flex-direction: column; gap: 2px; }
+    .detail-lbl { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #aaa; }
+    .detail-val { font-size: 0.84rem; font-weight: 600; color: #1a1a2e; }
+    .detail-val.mono { font-family: 'Courier New', monospace; font-size: 0.78rem; }
+    .margin-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding: 10px 14px; background: linear-gradient(135deg,#f3e5f5,#e8eaf6); border-radius: 10px; }
+    .margin-bar-label { font-size: 0.72rem; font-weight: 700; color: #7b1fa2; text-transform: uppercase; letter-spacing: 0.5px; }
+    .margin-bar-value { font-size: 1.1rem; font-weight: 800; color: #4a148c; }
+    .acc-item-sku { font-size: 0.68rem; color: #bbb; font-family: 'Courier New', monospace; margin-top: 2px; }
+    .acc-item-margin { font-size: 0.7rem; color: #2e7d32; font-weight: 700; margin-top: 2px; }
+    .section-divider { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #ccc; margin: 14px 0 6px; border-top: 1px solid #f0f0f0; padding-top: 10px; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">
+      <h1>📦 Tomorrow Telecom</h1>
+      <p>Delivery Tracking Portal</p>
+    </div>
+    <label>Username</label>
+    <input type="text" id="usernameInput" placeholder="Enter username" autocomplete="off">
+    <label>Password</label>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <div class="login-error" id="loginError">Incorrect username or password</div>
+  </div>
+</div>
+
+<!-- APP SCREEN -->
+<div id="appScreen">
+  <header>
+    <div class="header-left">
+      <h1>📦 Tomorrow Telecom</h1>
+      <div class="subtitle">Delivery Tracking Portal</div>
+    </div>
+    <div class="header-right">
+      <div class="user-pill" id="userPill"></div>
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </header>
+  <!-- MAIN TABS -->
+  <div id="mainTabBar" style="display:none; background:white; border-bottom:2px solid #eee; position:sticky; top:64px; z-index:99;">
+    <div style="max-width:1200px; margin:0 auto; display:flex; gap:0;">
+      <button class="main-tab active" id="tabDelivery" onclick="switchMainTab('delivery')">📦 Delivery Tracking</button>
+      <button class="main-tab" id="tabMargins" onclick="switchMainTab('margins')">💰 Margins</button>
+    </div>
+  </div>
+
+  <!-- DELIVERY VIEW -->
+  <div id="deliveryView" class="container">
+    <div id="adminCredsSection" style="display:none">
+      <div class="creds-panel">
+        <h3>🔑 Store Login Credentials</h3>
+        <table class="creds-table" id="credsTable"></table>
+      </div>
+    </div>
+    <div id="adminTabs" style="display:none; margin-bottom:16px;">
+      <div class="store-tabs" id="storeTabs"></div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <div class="store-tabs" id="statusTabs"></div>
+    </div>
+    <div id="calendarContainer"></div>
+  </div>
+
+  <!-- MARGINS VIEW -->
+  <div id="marginsView" style="display:none;">
+    <div style="max-width:1200px; margin:0 auto; padding:24px 16px 90px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+        <div style="font-size:1.1rem; font-weight:800; color:#4a148c;">💰 Margins Dashboard</div>
+        <div style="display:flex; align-items:center; gap:10px;" id="marginStoreWrapper">
+          <label style="font-size:0.78rem; font-weight:600; color:#666;">Store:</label>
+          <select id="marginStoreSelect" onchange="renderMarginPanel()" style="border:1.5px solid #e0e0e0; border-radius:8px; padding:6px 12px; font-size:0.85rem; outline:none; color:#333; background:white; cursor:pointer;">
+            <option value="ALL">All Stores</option>
+          </select>
+        </div>
+      </div>
+      <div id="marginContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY BAR -->
+<div id="summaryBar"></div>
+
+<!-- ORDER DETAIL MODAL -->
+<div id="orderModal" class="modal-overlay" style="display:none" onclick="closeModalOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div class="modal-order-ref" id="modalTitle"></div>
+        <div class="modal-order-meta" id="modalMeta"></div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('orderModal').style.display='none'">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ── USERS ───────────────────────────────────────────────────────────────────
+const USERS = [
+  { username: 'admin',     password: 'admin123',        role: 'admin',    label: null,       name: 'Admin' },
+  { username: 'ali',       password: 'ALI2026!',        role: 'store',    label: 'ALI',      name: 'ALI' },
+  { username: 'bader',     password: 'BADER2026!',      role: 'store',    label: 'BADER',    name: 'BADER' },
+  { username: 'sk',        password: 'SK2026!',         role: 'store',    label: 'SK',       name: 'SK' },
+  { username: 'amit',      password: 'AMIT2026!',       role: 'store',    label: 'AMIT',     name: 'AMIT' },
+  { username: 'suleman',   password: 'SUL2026!',        role: 'store',    label: 'SULEMAN',  name: 'SULEMAN' },
+  { username: 'sid',       password: 'SID2026!',        role: 'store',    label: 'SID',      name: 'SID' },
+  { username: 'jacksboro', password: 'JACKS2026!',      role: 'store',    label: 'JACKSBORO',name: 'JACKSBORO' },
+  { username: 'cho',       password: 'CHO2026!',        role: 'store',    label: 'CHO',      name: 'CHO' },
+];
+
+// ── PRODUCT CATALOG ──────────────────────────────────────────────────────────
+// Key = SKU prefix (matched via startsWith). Add new devices here as needed.
+const PRODUCTS = {
+  'SAM A166U':       { name: 'Samsung Galaxy A16 5G',       img: 'https://images.samsung.com/is/image/samsung/p6pim/us/sm-a166uzkaxaa/gallery/us-galaxy-a16-5g-sm-a166-sm-a166uzkaxaa-thumb-539803779?$650_519_PNG$' },
+  'SAM A556':        { name: 'Samsung Galaxy A55 5G',        img: 'https://images.samsung.com/is/image/samsung/p6pim/us/sm-a556ezaaxaa/gallery/us-galaxy-a55-5g-sm-a556-sm-a556ezaaxaa-thumb-539764023?$650_519_PNG$' },
+  'SAM A256':        { name: 'Samsung Galaxy A25 5G',        img: 'https://images.samsung.com/is/image/samsung/p6pim/us/sm-a256uzkaxaa/gallery/us-galaxy-a25-5g-sm-a256-sm-a256uzkaxaa-thumb-539791547?$650_519_PNG$' },
+  'SAM A366':        { name: 'Samsung Galaxy A36 5G',        img: 'https://images.samsung.com/is/image/samsung/p6pim/us/sm-a366uzkaxaa/gallery/us-galaxy-a36-5g-sm-a366-sm-a366uzkaxaa-thumb?$650_519_PNG$' },
+  'SAM S926':        { name: 'Samsung Galaxy S25+',          img: 'https://images.samsung.com/is/image/samsung/p6pim/us/sm-s926uzkaxaa/gallery/us-galaxy-s25-plus-sm-s926-sm-s926uzkaxaa-thumb-539755395?$650_519_PNG$' },
+  'SAM S921':        { name: 'Samsung Galaxy S25',           img: 'https://images.samsung.com/is/image/samsung/p6pim/us/sm-s921uzkaxaa/gallery/us-galaxy-s25-sm-s921-sm-s921uzkaxaa-thumb-539755400?$650_519_PNG$' },
+  'TMO REVVL TAB 2': { name: 'T-Mobile REVVL Tab 2 5G',     img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/t-mobile/t-mobile-revvl-tab-2-5g/Black/T-Mobile-REVVL-Tab-2-5G-Black-front.png' },
+  'TMO REVVL 8':     { name: 'T-Mobile REVVL 8 5G',         img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/t-mobile/t-mobile-revvl-8-5g/Interstellar-Gray/T-Mobile-REVVL-8-5G-Interstellar-Gray-front.png' },
+  'TMO REVVL 7':     { name: 'T-Mobile REVVL 7',            img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/t-mobile/t-mobile-revvl-7/Teal/T-Mobile-REVVL-7-Teal-front.png' },
+  'TMO REVVL 6':     { name: 'T-Mobile REVVL 6',            img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/t-mobile/t-mobile-revvl-6-5g/Black/T-Mobile-REVVL-6-5G-Black-front.png' },
+  'MOT XT26151':     { name: 'Motorola Moto G Play 64GB',    img: 'https://motorola-global-portal.imovieproduction.com/content/dam/motorola/smartphones/consumer/moto-g-play-2024/pdp/moto-g-play-2024-boost-front.png' },
+  'MOT XT2651':      { name: 'Motorola Moto G Play',         img: 'https://motorola-global-portal.imovieproduction.com/content/dam/motorola/smartphones/consumer/moto-g-play-2024/pdp/moto-g-play-2024-boost-front.png' },
+  'MOT XT2343':      { name: 'Motorola Edge 50 Neo',         img: 'https://motorola-global-portal.imovieproduction.com/content/dam/motorola/smartphones/consumer/motorola-edge-50-neo/pdp/motorola-edge-50-neo-pdp-front.png' },
+  'MOT XT2411':      { name: 'Motorola Moto G 5G (2024)',    img: 'https://motorola-global-portal.imovieproduction.com/content/dam/motorola/smartphones/consumer/moto-g-5g-2024/pdp/moto-g-5g-2024-front.png' },
+  'APL IPHONE 16E':  { name: 'Apple iPhone 16e',              img: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16e-finish-select-202502-6-1inch-black?wid=400&hei=400&fmt=jpeg&qlt=90' },
+  'APL':             { name: 'Apple iPhone',                  img: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-finish-select-202409-6-1inch-black?wid=400&hei=400&fmt=jpeg&qlt=90' },
+  'SAM A176U':       { name: 'Samsung Galaxy A17',            img: 'https://images.samsung.com/is/image/samsung/p6pim/us/sm-a176uzkaxaa/gallery/us-galaxy-a17-sm-a176-sm-a176uzkaxaa-thumb?$650_519_PNG$' },
+  'MOT XT26131':     { name: 'Motorola Moto G 128GB',         img: 'https://motorola-global-portal.imovieproduction.com/content/dam/motorola/smartphones/consumer/moto-g-2024/pdp/moto-g-2024-front.png' },
+  'MOT XT25171':     { name: 'Motorola Moto G Stylus 5G',     img: 'https://motorola-global-portal.imovieproduction.com/content/dam/motorola/smartphones/consumer/moto-g-stylus-5g-2024/pdp/moto-g-stylus-5g-2024-front.png' },
+  'TCL T513W':       { name: 'TCL K32 5G',                    img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/tcl/tcl-k32-5g/Blue/TCL-K32-5G-Blue-front.png' },
+  'TCL T807W':       { name: 'TCL 70 Pro',                    img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/tcl/tcl-70-pro/Blue/TCL-70-Pro-Blue-front.png' },
+  'SAG FAST5688W':   { name: 'Sagemcom 5G Gateway',           img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/home-internet/gateway/sagemcom-fast5688w/T-Mobile-Sagemcom-Fast-5688W-front.png' },
+  'SAM X218U':       { name: 'Samsung Galaxy Tab A9+ 5G',    img: 'https://images.samsung.com/is/image/samsung/p6pim/us/sm-x218uzsaxaa/gallery/us-galaxy-tab-a9-plus-5g-sm-x218-sm-x218uzsaxaa-thumb?$650_519_PNG$' },
+  'TMO REVVL TAB':   { name: 'T-Mobile REVVL Tab 5G',        img: 'https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/t-mobile/t-mobile-revvl-tab-2-5g/Black/T-Mobile-REVVL-Tab-2-5G-Black-front.png' },
+  'TRIPLESIM':       { name: 'Metro SIM Card',                img: null },
+};
+
+// ── MARGINS ──────────────────────────────────────────────────────────────────
+// Phones & gateway = $19.50 each | Tablets = $8.00 each
+const MARGIN_RATES = {
+  PHONE: 19.50,
+  TABLET: 8.00,
+};
+const TABLET_SKUS = ['SAM X218U', 'TMO REVVL TAB'];
+
+function getItemMargin(sku) {
+  const upper = sku.toUpperCase();
+  if (TABLET_SKUS.some(t => upper.startsWith(t.toUpperCase()))) return MARGIN_RATES.TABLET;
+  // SIM cards / accessories have no margin
+  if (upper.includes('SIM') || upper.includes('TRIPLESIM')) return 0;
+  return MARGIN_RATES.PHONE;
+}
+
+// ── EMBEDDED PRODUCT IMAGES (base64 thumbnails from docx) ───────────────────
+const PRODUCT_IMGS = {
+  // ── Apple ─────────────────────────────────────────────────────────────────
+  'APL IPHONE 17 PRO': 'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17-Pro-Max/Silver/Apple-iPhone-17-Pro-Max-Silver-frontimage.png',
+  'APL IPHONE 17':     'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-17/Black/Apple-iPhone-17-Black-frontimage.png',
+  'APL IPHONE 16E':    'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-16e/Black/Apple-iPhone-16e-Black-frontimage.png',
+  // ── Samsung ───────────────────────────────────────────────────────────────
+  'SAM A376U':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A37-5G/Awesome-Charcoal/Samsung-Galaxy-A37-5G-Awesome-Charcoal-frontimage.png',
+  'SAM A176U':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-A17-5G/Black/Samsung-Galaxy-A17-5G-Black-frontimage.png',
+  'SAM A166U':         'https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a16-5g-1.jpg',
+  'SAM X218U':         'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
+  // ── Motorola ──────────────────────────────────────────────────────────────
+  'MOT XT25171':       'https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g-stylus-5g-2024-1.jpg',
+  'MOT XT26151':       'https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g-play-2024-1.jpg',
+  'MOT XT26131':       'https://fdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g-play-2023-1.jpg',
+  // ── T-Mobile REVVL ────────────────────────────────────────────────────────
+  'TMO REVVL TAB 2':   'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
+  'TMO REVVL TAB':     'https://cdn.tmobile.com/content/dam/t-mobile/en-p/internet-devices/T-Mobile/T-Mobile-Revvl-Tab-2/Black/T-Mobile-Revvl-Tab-2-Black-frontimage.png',
+  'TMO REVVL 8':       'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/T-Mobile/T-Mobile-Revvl-8/Icy-Silver/T-Mobile-Revvl-8-Icy-Silver-frontimage.png',
+  // ── TCL ───────────────────────────────────────────────────────────────────
+  'TCL FLIP':          'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/TCL/TCL-FLIP-4-5G/Stone-Gray/TCL-FLIP-4-5G-Stone-Gray-frontimage.png',
+  'TCL T513W':         'https://fdn2.gsmarena.com/vv/pics/tcl/tcl-408-1.jpg',
+  'TCL T432W':         'https://fdn2.gsmarena.com/vv/pics/tcl/tcl-305-1.jpg',
+};
+
+function lookupProduct(sku) {
+  const skuUp = (sku || '').toUpperCase();
+  for (const [key, val] of Object.entries(PRODUCTS)) {
+    if (skuUp.startsWith(key)) {
+      const prod = { ...val };
+      for (const [imgKey, imgData] of Object.entries(PRODUCT_IMGS)) {
+        if (skuUp.startsWith(imgKey.toUpperCase())) { prod.img = imgData; break; }
+      }
+      return prod;
+    }
+  }
+  return { name: sku, img: null };
+}
+
+// ── COLORS ───────────────────────────────────────────────────────────────────
+const COLORS = {
+  ALI:'#b5179e', BADER:'#7b2d8b', SK:'#1565c0', AMIT:'#2e7d32',
+  SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828', W:'#455a64'
+};
+
+// ── ORDERS ───────────────────────────────────────────────────────────────────
+const ORDERS = [
+  // June 4
+  { ref:'ALI0601',        label:'ALI',       date:'2026-06-04', time:'11:59 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384095204','1Z7900AX0384094965'] },
+  { ref:'SID0601',        label:'SID',       date:'2026-06-04', time:'12:46 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384097391','1Z7900AX0384097113','1Z7900AX0384097453'] },
+  { ref:'BADER0601',      label:'BADER',     date:'2026-06-04', time:'1:03 PM',  status:'Delivered', location:'Front Desk', tracking:[] },
+  { ref:'MRCHO0601',      label:'CHO',       date:'2026-06-04', time:'1:15 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384107389'] },
+  { ref:'SULEMAN0601',    label:'SULEMAN',   date:'2026-06-04', time:'1:50 PM',  status:'Delivered', location:'Front Desk', tracking:[] },
+  // June 5
+  { ref:'SK0601SAMU',     label:'SK',        date:'2026-06-05', time:'11:13 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384122853','1Z7900AX0384122862'] },
+  { ref:'JACKSBORO0601',  label:'JACKSBORO', date:'2026-06-05', time:'11:29 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384093420','1Z7900AX0384093466'] },
+  { ref:'SK0601HAL',      label:'SK',        date:'2026-06-05', time:'11:49 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384120784'] },
+  { ref:'SK0601WESC',     label:'SK',        date:'2026-06-05', time:'12:58 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384126662','1Z7900AX0384128517'] },
+  { ref:'SK0601BEWES',    label:'SK',        date:'2026-06-05', time:'1:04 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384123932'] },
+  { ref:'ALI0601SP01',    label:'ALI',       date:'2026-06-05', time:'1:34 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384122960'] },
+  { ref:'SK0601FM',       label:'SK',        date:'2026-06-05', time:'1:37 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384124271'] },
+  { ref:'SK0601ROSD',     label:'SK',        date:'2026-06-05', time:'1:43 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384122246','1Z7900AX0384121989'] },
+  { ref:'BADER0601SP01',  label:'BADER',     date:'2026-06-05', time:'1:46 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384123058'] },
+  { ref:'SK0601FER',      label:'SK',        date:'2026-06-05', time:'4:11 PM',  status:'Delivered', location:'Front Desk', tracking:[] },
+  // June 16
+  { ref:'AMIT0609SP02',   label:'AMIT',      date:'2026-06-16', time:'11:26 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384241439'] },
+  { ref:'SK0609SP01HAL',  label:'SK',        date:'2026-06-16', time:'12:13 PM', status:'Delivered', location:'Receiver',   tracking:['1Z7900AX0384247004'] },
+  // June 17
+  { ref:'JACKSBORO0615',  label:'JACKSBORO', date:'2026-06-17', time:'11:32 AM', status:'Delivered', location:'Office', tracking:['1Z7900AX0284266790'] },
+  // June 18 — Out for Delivery
+  { ref:'BADER0615',      label:'BADER',     date:'2026-06-18', time:'1:35 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384273762','1Z7900AX0384273851','1Z7900AX0384273780'] },
+  { ref:'SK0615HAL',      label:'SK',        date:'2026-06-18', time:'11:22 AM', status:'Delivered', location:'Receiver',   tracking:['1Z7900AX0384273897','1Z7900AX0384273888'] },
+  { ref:'SK0615BEWES',    label:'SK',        date:'2026-06-18', time:'11:33 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384271531'] },
+  { ref:'SK0615FER',      label:'SK',        date:'2026-06-18', time:'4:10 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384269633'] },
+  { ref:'SK0615ROSD',     label:'SK',        date:'2026-06-18', time:'11:53 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384275466','1Z7900AX0384275457'] },
+  { ref:'SK0615FM',       label:'SK',        date:'2026-06-18', time:'1:59 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384278516'] },
+  { ref:'SK0615SAM',      label:'SK',        date:'2026-06-18', time:'11:11 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384269642','1Z7900AX0384285768'] },
+  { ref:'SID0615',        label:'SID',       date:'2026-06-18', time:'11:20 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384280469'] },
+  { ref:'ALI0615',        label:'ALI',       date:'2026-06-18', time:'10:42 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384277553','1Z7900AX0384277713','1Z7900AX0384279033','1Z7900AX0384278507','1Z7900AX0384278801'] },
+  { ref:'AMIT0615',       label:'AMIT',      date:'2026-06-18', time:'12:23 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384275500','1Z7900AX0384276063','1Z7900AX0384275546'] },
+  { ref:'SULEMAN0615',    label:'SULEMAN',   date:'2026-06-18', time:'4:12 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384283582'] },
+  // June 19
+  { ref:'SK0615WESC',     label:'SK',        date:'2026-06-19', time:'1:09 PM',  status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384303701'] },
+  // June 22
+  { ref:'SULEMAN0615SP01',label:'SULEMAN',   date:'2026-06-22', time:'12:35 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384305763'] },
+  { ref:'SK0622SAM',   label:'SK',    num:'171980497', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384386382'], items:[
+      {qty:'1',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'2',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'3',unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'1',unit:'PAC',sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'2',unit:'EA', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+  ]},
+  { ref:'SK0622FM',    label:'SK',    num:'171980494', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384394686'], items:[
+      {qty:'3',unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'2',unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'3',unit:'EA', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'3',unit:'EA', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY KIT'},
+  ]},
+  // June 22 new orders
+  { ref:'SK0622ROSD',  label:'SK',    num:'171980489', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384389076','1Z7900AX0384389085'], items:[
+      {qty:'1',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'2',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'3',unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+  ]},
+  { ref:'BADER0622',   label:'BADER', num:'171980053', date:'2026-06-25', time:'2:26 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384367063','1Z7900AX0384367107','1Z7900AX0384367090','1Z7900AX0384367072'], items:[
+      {qty:'3',unit:'EA', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
+      {qty:'2',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'2',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+  ]},
+  { ref:'JACKSBORO0622SP01', label:'JACKSBORO', num:'171979791', date:'2026-06-24', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0284360437'], items:[
+      {qty:'3',unit:'EA', sku:'TCL T513W K32 5G 64G BLU KIT'},
+      {qty:'4',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'JACKSBORO0622', label:'JACKSBORO', num:'171979784', date:'2026-06-24', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0284358208'], items:[
+      {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'2',unit:'EA', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'2',unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+  ]},
+  // June 23 orders
+  { ref:'SK0623SP01FM', label:'SK',   num:'171981808', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384395078'], items:[
+      {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G SLV KIT'},
+  ]},
+  { ref:'ALI0623SP01',  label:'ALI',  num:'171981761', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384382153'], items:[
+      {qty:'4',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'1',unit:'PAC',sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
+      {qty:'2',unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G SLV KIT'},
+  ]},
+  { ref:'AMIT0623SP01', label:'AMIT', num:'171981436', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384381958'], items:[
+      {qty:'1',unit:'EA', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
+      {qty:'10',unit:'EA',sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+  ]},
+  // June 23 new orders (confirmed from portal)
+  { ref:'BADER0623SP01', label:'BADER', num:'171982340', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384404898'], items:[
+      {qty:'3',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+  ]},
+  // June 24 new orders (confirmed from portal)
+  { ref:'SK0624SP01SAM', label:'SK',   num:'171983191', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384406903'], items:[
+      {qty:'1',unit:'PAC',sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'2',unit:'EA', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'1',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+  ]},
+  { ref:'AMIT0624SP02', label:'AMIT', num:'171983192', date:'2026-06-26', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384405940'], items:[
+      {qty:'2',unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
+  ]},
+  // June 23 additional orders (from portal)
+  { ref:'CHO0623SP01', label:'CHO', num:'171982293', date:'2026-06-23', time:'11:49 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384414752'], items:[
+      {qty:'1',unit:'EA', sku:'SAM A376U A37 5G 128G GRY DISPLAY'},
+  ]},
+  { ref:'SK0623SP01ROSD', label:'SK', num:'171981802', date:'2026-06-23', time:'10:18 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384395103'], items:[
+      {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G SLV KIT'},
+  ]},
+  // June 26 — delivered 06/29 (pkg 1: 10:02 AM Office; pkg 2: label created, not yet received by UPS)
+  { ref:'SID0626SP02', label:'SID', num:'171985047', date:'2026-06-29', time:'10:02 AM', status:'Delivered', location:'Office', tracking:['1Z7900AX0284425984','1Z7900AX0284427044'], items:[
+      {qty:'10',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+      {qty:'2',unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+  ]},
+  // June 15 supplement orders (delivered)
+  { ref:'SK0615BEWESSP01',  label:'SK',   num:'171974275', date:'2026-06-22', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384311989'], items:[
+      {qty:'3',unit:'EA', sku:'TCL FLIP 4 V2 32G GRY KIT'},
+  ]},
+  { ref:'SID0615SP01',      label:'SID',  num:'171974271', date:'2026-06-19', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384308377'], items:[
+      {qty:'3',unit:'EA', sku:'TCL T432W K11 32G BLK KIT'},
+      {qty:'2',unit:'EA', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
+      {qty:'2',unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
+      {qty:'1',unit:'EA', sku:'SAM A376U A37 5G 128G GRY DISPLAY'},
+  ]},
+  { ref:'AMIT0615SP01',     label:'AMIT', num:'171974229', date:'2026-06-19', time:'', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384312317'], items:[
+      {qty:'2',unit:'EA', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
+      {qty:'1',unit:'EA', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+  ]},
+  // June 29 — portal pull 2026-06-30
+  { ref:'AMIT0629',      label:'AMIT',      num:'171986668', date:'2026-07-02', time:'2:21 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384447575','1Z7900AX0384450089'], items:[]},
+  { ref:'JACKSBORO0629', label:'JACKSBORO', num:'171986682', date:'2026-07-02', time:'11:40 AM', status:'Delivered', location:'Office', tracking:['1Z7900AX0384450132'], items:[]},
+  { ref:'SULEMAN0629',   label:'SULEMAN',   num:'171986703', date:'2026-07-02', time:'1:06 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384454638'], items:[]},
+  { ref:'ALI062SP01',    label:'ALI',       num:'171986713', date:'2026-07-03', time:'10:41 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384485784'], items:[]},
+  { ref:'SID0629',       label:'SID',       num:'171986714', date:'2026-07-03', time:'10:44 AM', status:'Delivered', location:'Office', tracking:['1Z7900AX0384469499'], items:[]},
+  { ref:'BADER0529SP01', label:'BADER',     num:'171986715', date:'2026-07-06', time:'2:17 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384467919'], items:[]},
+  { ref:'AMIT0629SP01',  label:'AMIT',      num:'171986716', date:'2026-07-03', time:'12:50 PM', status:'Delivered', location:'Reception', tracking:['1Z7900AX0384469542'], items:[]},
+  { ref:'SK0629SP01FER', label:'SK',        num:'171986717', date:'2026-07-03', time:'3:05 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384467553'], items:[]},
+  { ref:'CHO0629SP01',   label:'CHO',       num:'171986718', date:'2026-07-03', time:'12:18 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384467777'], items:[]},
+  { ref:'SK0629SP01SAM', label:'SK',        num:'171986719', date:'2026-07-03', time:'10:33 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384467651'], items:[]},
+  { ref:'SK0629SP01HAL', label:'SK',        num:'171986720', date:'2026-07-03', time:'1:13 PM', status:'Delivered', location:'Receiver', tracking:['1Z7900AX0384467740'], items:[]},
+  { ref:'ALI0629',       label:'ALI',       num:'171986734', date:'2026-07-02', time:'2:39 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384450249','1Z7900AX0384451382','1Z7900AX0384450230','1Z7900AX0384450258','1Z7900AX0384450212','1Z7900AX0384450221'], items:[]},
+  { ref:'CHO0629',       label:'CHO',       num:'171986761', date:'2026-07-02', time:'1:45 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384451551'], items:[]},
+  { ref:'BADER0629',     label:'BADER',     num:'171986781', date:'2026-07-06', time:'2:17 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384480770','1Z7900AX0384474072','1Z7900AX0384474063','1Z7900AX0384482876'], items:[]},
+  { ref:'SK0629FER',     label:'SK',        num:'171986787', date:'2026-07-03', time:'3:05 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384476150'], items:[]},
+  { ref:'SK0629SAM',     label:'SK',        num:'171986811', date:'2026-07-03', time:'10:33 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384471879','1Z7900AX0384471431','1Z7900AX0384477186'], items:[]},
+  { ref:'SK0629FM',      label:'SK',        num:'171986814', date:'2026-07-03', time:'12:30 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384477382'], items:[]},
+  { ref:'SK0629BEWES',   label:'SK',        num:'171986816', date:'2026-07-03', time:'1:15 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384469613'], items:[]},
+  { ref:'SK0629WESC',    label:'SK',        num:'171986819', date:'2026-07-03', time:'11:45 AM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384481091'], items:[]},
+  { ref:'SK0629ROSD',    label:'SK',        num:'171986831', date:'2026-07-03', time:'11:52 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384470790'], items:[]},
+  { ref:'SK0629HAL',     label:'SK',        num:'171986833', date:'2026-07-03', time:'1:13 PM', status:'Delivered', location:'Receiver', tracking:['1Z7900AX0384473439','1Z7900AX0384487924'], items:[]},
+  { ref:'SK0629SP01WESC',label:'SK',        num:'171987081', date:'2026-07-03', time:'11:45 AM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384467759'], items:[
+      {qty:'2', unit:'EA', sku:'TCL T807W 70PRO 128G BLU KIT'},
+  ]},
+
+  // June 30
+  { ref:'SK0630SP01SAM',  label:'SK', num:'171987812', date:'2026-07-03', time:'10:33 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384464869'], items:[]},
+  { ref:'SK0630SP01FM',   label:'SK', num:'171987816', date:'2026-07-03', time:'12:30 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384464761'], items:[]},
+  { ref:'SK0630SP01BEWES',label:'SK', num:'171988435', date:'2026-07-03', time:'1:12 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384464912'], items:[]},
+  { ref:'SK0630SP01WESC', label:'SK', num:'171988440', date:'2026-07-03', time:'11:45 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384464887'], items:[]},
+  { ref:'SK0630SP01HAL',  label:'SK', num:'171988443', date:'2026-07-03', time:'1:13 PM', status:'Delivered', location:'Receiver', tracking:['1Z7900AX0384464958'], items:[]},
+
+  // June 30 — portal pull 2026-07-02
+  { ref:'ALI0630SP01',   label:'ALI',   num:'171987775', date:'2026-07-03', time:'10:41 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384464592'], items:[
+      {qty:'9', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+  ]},
+  { ref:'AMIT0630SP01',  label:'AMIT',  num:'171987760', date:'2026-07-03', time:'12:50 PM', status:'Delivered', location:'Reception', tracking:['1Z7900AX0384464654'], items:[
+      {qty:'7', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+  ]},
+  { ref:'BADER0630SP01', label:'BADER', num:'171987753', date:'2026-07-07', time:'12:30 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384468034'], items:[
+      {qty:'10', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'4',  unit:'EA', sku:'TCL T807W 70PRO 128G BLU KIT'},
+      {qty:'1',  unit:'PAC',sku:'MOT XT26131 G 128G BLU KIT'},
+  ]},
+
+  // July 1 — portal pull 2026-07-02
+  { ref:'AMIT0701SP02',  label:'AMIT',  num:'171990087', date:'2026-07-06', time:'2:08 PM', status:'Delivered', location:'Reception', tracking:['1Z7900AX0384499840'], items:[
+      {qty:'1', unit:'PAC', sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+      {qty:'1', unit:'EA',  sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+      {qty:'2', unit:'EA',  sku:'MOT XT25191 EDGE 5G 256G GRN KIT'},
+  ]},
+
+  // July 5–6 — portal pull 2026-07-07
+  { ref:'SK0705BEWES',   label:'SK',        num:'171994303', date:'2026-07-09', time:'1:07 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384544111'], items:[]},
+  { ref:'SK0706FM',      label:'SK',        num:'171994221', date:'2026-07-09', time:'1:28 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384542382'], items:[]},
+  { ref:'SK0706SAM',     label:'SK',        num:'171993897', date:'2026-07-09', time:'11:35 AM', status:'Delivered', location:'Dock',       tracking:['1Z7900AX0384544602'], items:[]},
+  { ref:'SK0706FER',     label:'SK',        num:'171993896', date:'2026-07-09', time:'2:06 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384550908'], items:[]},
+  { ref:'AMIT0706',      label:'AMIT',      num:'171993895', date:'2026-07-09', time:'2:17 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384548948','1Z7900AX0384548957','1Z7900AX0384548975'], items:[]},
+  { ref:'CHO0706',       label:'CHO',       num:'171993894', date:'2026-07-09', time:'2:08 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384546119'], items:[]},
+  { ref:'ALI0706',       label:'ALI',       num:'171993893', date:'2026-07-09', time:'11:25 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384550033','1Z7900AX0384550042','1Z7900AX0384545889','1Z7900AX0384550051','1Z7900AX0384550024'], items:[]},
+  { ref:'SID0706',       label:'SID',       num:'171993892', date:'2026-07-09', time:'12:11 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384551050'], items:[]},
+  { ref:'SULEMAN0706',   label:'SULEMAN',   num:'171993891', date:'2026-07-09', time:'2:50 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384551345'], items:[]},
+  { ref:'JACKSBORO0706', label:'JACKSBORO', num:'171991970', date:'2026-07-09', time:'11:18 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384541687'], items:[]},
+  { ref:'SK0706HAL',     label:'SK',        num:'171994365', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0706ROSD',    label:'SK',        num:'171994344', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0706WESC',    label:'SK',        num:'171994326', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
+
+  // July 7 — portal pull 2026-07-07 (all In Process)
+  { ref:'AMIT0707SP02',   label:'AMIT',    num:'171996523', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'3', unit:'EA', sku:'TCL T807W 70PRO 128G BLU KIT'},
+  ]},
+  { ref:'CHO0707SP01',    label:'CHO',     num:'171996163', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA', sku:'TMO HOTSPOT HS1 BLK TMUS KIT'},
+  ]},
+  { ref:'SK0707SP01HAL',  label:'SK',      num:'171996161', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'3', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17E 256G PNK KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
+      {qty:'2', unit:'EA', sku:'TCL FLIP 4 V2 32G GRY KIT'},
+      {qty:'1', unit:'EA', sku:'MOT XT25533 RAZR 256G BLU KIT'},
+  ]},
+  { ref:'SK0707SP01ROSD', label:'SK',      num:'171996136', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
+      {qty:'1', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
+      {qty:'1', unit:'EA', sku:'MOT XT25533 RAZR 256G BLU KIT'},
+      {qty:'2', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
+  ]},
+  { ref:'SK0707SP01WESC', label:'SK',      num:'171996049', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
+  ]},
+  { ref:'SK0707SP01BEWES',label:'SK',      num:'171996048', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17E 256G PNK KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
+      {qty:'1', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
+      {qty:'1', unit:'EA', sku:'MOT XT25533 RAZR 256G BLU KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
+  ]},
+  { ref:'SK0707SP01FM',   label:'SK',      num:'171996006', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17E 256G PNK KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
+      {qty:'2', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
+      {qty:'1', unit:'EA', sku:'MOT XT25533 RAZR 256G BLU KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
+  ]},
+  { ref:'SK0707SP01SAM',  label:'SK',      num:'171996003', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
+  ]},
+  { ref:'SK0707SP01FER',  label:'SK',      num:'171996000', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
+  ]},
+  { ref:'AMIT0707SP01',   label:'AMIT',    num:'171995940', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17E 256G PNK KIT'},
+  ]},
+  { ref:'ALI0707SP01',    label:'ALI',     num:'171995884', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'3', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
+  ]},
+  { ref:'SULEMAN0707SP01',label:'SULEMAN', num:'171995852', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+  ]},
+
+  // July 6–8 — portal pull 2026-07-09 (Wichita "W" account)
+  { ref:'W0706',     label:'W', num:'171994445', date:'2026-07-10', time:'Est. 10:00 AM – 12:00 PM', status:'InTransit', tracking:['1Z7900AX0384573429','1Z7900AX0384588511'], items:[
+      {qty:'1', unit:'PAC', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
+      {qty:'6', unit:'EA',  sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+      {qty:'1', unit:'PAC', sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+  ]},
+  { ref:'W0706SP01', label:'W', num:'171994610', date:'2026-07-10', time:'Est. 10:00 AM – 12:00 PM', status:'InTransit', tracking:['1Z7900AX0384588995'], items:[
+      {qty:'8', unit:'EA',  sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'W0708SP01', label:'W', num:'171998134', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'2', unit:'PAC', sku:'SAM A376U A37 5G 128G GRY KIT'},
+      {qty:'2', unit:'PAC', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'2', unit:'PAC', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+  ]},
+
+];
+
+// ── APP STATE ─────────────────────────────────────────────────────────────
+let currentUser = null;
+let activeStore  = null;
+let activeStatus = 'InProgress';
+
+// ── ITEM COUNTING ─────────────────────────────────────────────────────────
+// boxes = UPS tracking numbers count; phones/bts/sims from item list
+function countItems(o) {
+  const items  = o.items   || [];
+  const boxes  = (o.tracking || []).length;
+  let phones=0, bts=0, sims=0;
+  for (const item of items) {
+    const qty = parseInt(item.qty) || 0;
+    const sku = (item.sku || '').toUpperCase();
+    if (sku.includes('TRIPLESIM') || (sku.includes('SIM') && !sku.includes('REVVL'))) {
+      sims += qty;
+    } else if (TABLET_SKUS.some(t => sku.startsWith(t.toUpperCase())) ||
+               sku.includes('FAST5688') || sku.includes('GATEWAY')) {
+      bts += qty;
+    } else {
+      phones += qty;
+    }
+  }
+  return { boxes, phones, bts, sims };
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────
+function statusLabel(s) {
+  return s === 'Delivered'      ? '✓ Delivered'
+       : s === 'OutForDelivery' ? '🚚 Out for Delivery'
+       : s === 'InTransit'      ? '📦 In Transit'
+       : '⏳ Ordered';
+}
+function statusClass(s) {
+  return s === 'Delivered'      ? 'status-delivered'
+       : s === 'OutForDelivery' ? 'status-out'
+       : s === 'InTransit'      ? 'status-transit'
+       : 'status-pending';
+}
+function fmtDate(d) {
+  if (!d || d === 'PENDING') return 'TBD';
+  const dt = new Date(d + 'T12:00:00');
+  return dt.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+}
+
+// ── MAIN TAB SWITCHING ───────────────────────────────────────────────────────
+let activeMainTab = 'delivery';
+
+function switchMainTab(tab) {
+  activeMainTab = tab;
+  document.getElementById('tabDelivery').className = 'main-tab' + (tab === 'delivery' ? ' active' : '');
+  document.getElementById('tabMargins').className  = 'main-tab' + (tab === 'margins'  ? ' active' : '');
+  document.getElementById('deliveryView').style.display = tab === 'delivery' ? 'block' : 'none';
+  document.getElementById('marginsView').style.display  = tab === 'margins'  ? 'block' : 'none';
+  document.getElementById('summaryBar').style.display   = tab === 'delivery' ? '' : 'none';
+  if (tab === 'margins') renderMarginPanel();
+}
+
+// ── MARGINS PANEL ─────────────────────────────────────────────────────────────
+function renderMarginPanel() {
+  const select = document.getElementById('marginStoreSelect');
+
+  // Populate store options once
+  if (select.options.length <= 1) {
+    const labels = [...new Set(ORDERS.filter(o => o.items && o.items.length).map(o => o.label))].sort();
+    labels.forEach(lbl => {
+      const opt = document.createElement('option'); opt.value = lbl; opt.textContent = lbl;
+      select.appendChild(opt);
+    });
+    if (currentUser && currentUser.role === 'store') {
+      select.value = currentUser.label; select.disabled = true;
+    }
+  }
+
+  const filterLabel = (currentUser && currentUser.role === 'store') ? currentUser.label : select.value;
+  // Only count margins once the portal order status is completed (excludes 'In process' orders)
+  let orders = ORDERS.filter(o => o.items && o.items.length > 0 && o.status !== 'InProcess');
+  if (filterLabel !== 'ALL') orders = orders.filter(o => o.label === filterLabel);
+  orders = [...orders].sort((a,b) => new Date(b.date) - new Date(a.date));
+
+  // Classify an item as BTS (tablets + gateways, same grouping as delivery counts) or phone
+  function isBtsItem(sku) {
+    const up = (sku || '').toUpperCase();
+    return TABLET_SKUS.some(t => up.startsWith(t.toUpperCase())) ||
+           up.includes('FAST5688') || up.includes('GATEWAY');
+  }
+  function splitMargins(o) {
+    let phoneM = 0, btsM = 0, phoneN = 0, btsN = 0;
+    (o.items||[]).forEach(item => {
+      const qty = parseInt(item.qty)||0;
+      const m   = getItemMargin(item.sku) * qty;
+      if (m === 0) return; // SIMs / no-margin items
+      if (isBtsItem(item.sku)) { btsM += m; btsN += qty; }
+      else                     { phoneM += m; phoneN += qty; }
+    });
+    return { phoneM, btsM, phoneN, btsN };
+  }
+
+  // Stats
+  let phoneTotal = 0, btsTotal = 0, totalPhonesCount = 0, totalBtsCount = 0;
+  orders.forEach(o => {
+    const s = splitMargins(o);
+    phoneTotal += s.phoneM; btsTotal += s.btsM;
+    totalPhonesCount += s.phoneN; totalBtsCount += s.btsN;
+  });
+  const grandTotal = phoneTotal + btsTotal;
+
+  const statsHtml = `<div class="margin-stat-row">
+    <div class="margin-stat"><span class="margin-stat-num">$${grandTotal.toFixed(2)}</span><span class="margin-stat-lbl">Total Margin</span></div>
+    <div class="margin-stat"><span class="margin-stat-num">$${phoneTotal.toFixed(2)}</span><span class="margin-stat-lbl">📱 Phone Margin (${totalPhonesCount})</span></div>
+    <div class="margin-stat"><span class="margin-stat-num">$${btsTotal.toFixed(2)}</span><span class="margin-stat-lbl">📡 BTS Margin (${totalBtsCount})</span></div>
+    <div class="margin-stat"><span class="margin-stat-num">${orders.length}</span><span class="margin-stat-lbl">Orders</span></div>
+    <div class="margin-stat"><span class="margin-stat-num">$${orders.length > 0 ? (grandTotal/orders.length).toFixed(2) : '0.00'}</span><span class="margin-stat-lbl">Avg / Order</span></div>
+  </div>`;
+
+  // Per-order table rows (no images)
+  const tableRows = orders.map(o => {
+    const color = COLORS[o.label] || '#888';
+    const s = splitMargins(o);
+    const orderMargin = s.phoneM + s.btsM;
+    return `<tr>
+      <td class="margin-order-ref">${o.ref}${o.num ? `<span style="font-size:0.7rem;color:#bbb;margin-left:5px;">#${o.num}</span>` : ''}</td>
+      <td><span style="background:${color};color:white;border-radius:5px;padding:1px 8px;font-size:0.7rem;font-weight:700;">${o.label}</span></td>
+      <td style="color:#666;">${fmtDate(o.date)}</td>
+      <td style="font-weight:700;color:#333;">${s.phoneN}</td>
+      <td class="${s.phoneM > 0 ? 'margin-amount' : 'margin-zero'}">$${s.phoneM.toFixed(2)}</td>
+      <td style="font-weight:700;color:#333;">${s.btsN}</td>
+      <td class="${s.btsM > 0 ? 'margin-amount' : 'margin-zero'}">$${s.btsM.toFixed(2)}</td>
+      <td class="${orderMargin > 0 ? 'margin-amount' : 'margin-zero'}">$${orderMargin.toFixed(2)}</td>
+    </tr>`;
+  }).join('');
+
+  const orderCards = orders.length > 0
+    ? `<div style="background:white;border-radius:14px;box-shadow:0 1px 6px rgba(0,0,0,0.08);overflow:hidden;">
+        <table class="margin-table" style="width:100%;">
+          <thead><tr>
+            <th>Order Ref</th><th>Store</th><th>Date</th><th>📱 Phones</th><th>Phone $</th><th>📡 BTS</th><th>BTS $</th><th>Total</th>
+          </tr></thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>`
+    : '';
+
+  document.getElementById('marginContent').innerHTML = statsHtml + (orderCards || '<div style="text-align:center;color:#bbb;padding:40px 0;">No orders with item data found</div>');
+}
+
+// ── LOGIN / LOGOUT ────────────────────────────────────────────────────────
+function doLogin() {
+  const u    = document.getElementById('usernameInput').value.trim().toLowerCase();
+  const p    = document.getElementById('passwordInput').value;
+  const user = USERS.find(x => x.username === u && x.password === p);
+  if (!user) { document.getElementById('loginError').style.display='block'; return; }
+  currentUser = user;
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('appScreen').style.display   = 'block';
+  document.getElementById('userPill').textContent = user.name;
+  document.getElementById('mainTabBar').style.display = 'block';
+  if (user.role === 'admin') {
+    document.getElementById('adminCredsSection').style.display = 'block';
+    document.getElementById('adminTabs').style.display         = 'block';
+    renderCredsTable();
+    renderStoreTabs();
+  } else {
+    activeStore = user.label;
+  }
+  renderStatusTabs();
+  renderCalendar();
+}
+function doLogout() {
+  currentUser = null; activeStore = null; activeStatus = 'InProgress';
+  document.getElementById('loginScreen').style.display        = 'flex';
+  document.getElementById('appScreen').style.display          = 'none';
+  document.getElementById('adminCredsSection').style.display  = 'none';
+  document.getElementById('adminTabs').style.display          = 'none';
+  document.getElementById('loginError').style.display         = 'none';
+  document.getElementById('usernameInput').value = '';
+  document.getElementById('passwordInput').value = '';
+}
+
+// ── CREDS TABLE (admin) ───────────────────────────────────────────────────
+function renderCredsTable() {
+  const t      = document.getElementById('credsTable');
+  const stores = USERS.filter(u => u.role === 'store');
+  t.innerHTML  = '<tr><th>Store</th><th>Username</th><th>Password</th></tr>' +
+    stores.map(u => {
+      const c = COLORS[u.label] || '#888';
+      return `<tr>
+        <td><span class="store-dot" style="background:${c}"></span>${u.name}</td>
+        <td>${u.username} <button class="copy-btn" onclick="navigator.clipboard.writeText('${u.username}')">Copy</button></td>
+        <td>${u.password} <button class="copy-btn" onclick="navigator.clipboard.writeText('${u.password}')">Copy</button></td>
+      </tr>`;
+    }).join('');
+}
+
+// ── STORE TABS (admin) ────────────────────────────────────────────────────
+function renderStoreTabs() {
+  const labels = ['All', ...new Set(ORDERS.map(o => o.label))];
+  const el     = document.getElementById('storeTabs');
+  el.innerHTML = labels.map(lbl => {
+    const color  = lbl === 'All' ? '#555' : (COLORS[lbl] || '#555');
+    const active = (activeStore === null && lbl === 'All') || activeStore === lbl;
+    const style  = active
+      ? `background:${color};color:white;border-color:${color}`
+      : `color:${color};border-color:${color}`;
+    return `<button class="store-tab ${active?'active':''}" style="${style}"
+              onclick="setStore('${lbl}')">${lbl}</button>`;
+  }).join('');
+}
+function setStore(lbl) {
+  activeStore = lbl === 'All' ? null : lbl;
+  renderStoreTabs();
+  renderCalendar();
+}
+
+// ── STATUS TABS ───────────────────────────────────────────────────────────
+function renderStatusTabs() {
+  const tabs = [
+    { key:'InProgress', label:'In Progress' },
+    { key:'Ordered',    label:'Ordered' },
+    { key:'Delivered',  label:'Delivered' },
+  ];
+  const el     = document.getElementById('statusTabs');
+  el.innerHTML = tabs.map(t => {
+    const on = activeStatus === t.key;
+    return `<button class="store-tab ${on?'active':''}"
+      style="${on?'background:#b5179e;color:white;border-color:#b5179e':'color:#b5179e;border-color:#b5179e'}"
+      onclick="setStatus('${t.key}')">${t.label}</button>`;
+  }).join('');
+}
+function setStatus(s) {
+  activeStatus = s;
+  renderStatusTabs();
+  renderCalendar();
+}
+
+// ── ACCORDION TOGGLE ──────────────────────────────────────────────────────
+function toggleAcc(id) {
+  const body  = document.getElementById(id + '_body');
+  const arrow = document.getElementById(id + '_arrow');
+  if (!body) return;
+  const open = body.style.display !== 'none';
+  body.style.display  = open ? 'none' : 'block';
+  arrow.textContent   = open ? '▼' : '▲';
+}
+function toggleDelivered() {
+  const list  = document.getElementById('deliveredList');
+  const arrow = document.getElementById('deliveredArrow');
+  if (!list) return;
+  const open = list.style.display !== 'none';
+  list.style.display = open ? 'none' : 'block';
+  arrow.textContent  = open ? '▼' : '▲';
+}
+
+// ── RENDER ONE ACCORDION CARD ─────────────────────────────────────────────
+function renderAccordion(o) {
+  const color   = COLORS[o.label] || '#888';
+  const counts  = countItems(o);
+  const dateStr = fmtDate(o.date);
+  const id      = 'ord_' + o.ref.replace(/[^a-z0-9]/gi, '_');
+
+  // ── Tracking section ──
+  const trackingHtml = o.tracking && o.tracking.length
+    ? `<div class="section-divider">📦 UPS Tracking</div>` +
+      o.tracking.map(t =>
+        `<a class="tracking-link" href="https://www.ups.com/track?tracknum=${t}" target="_blank">📦 ${t}</a>`
+      ).join('')
+    : `<div class="section-divider">📦 Tracking</div><span class="no-tracking">No tracking number assigned yet</span>`;
+
+  // ── Items section ──
+  const itemsHtml = o.items && o.items.length
+    ? `<div class="section-divider">📱 Items</div>` +
+      o.items.map(item => {
+        const p   = lookupProduct(item.sku);
+        const qty = parseInt(item.qty) || 0;
+        const imgHtml = p.img
+          ? `<img class="item-img" src="${p.img}" alt="${p.name||item.sku}" onerror="this.style.display='none'">`
+          : `<div class="item-img-placeholder">📱</div>`;
+        return `<div class="acc-item">
+          ${imgHtml}
+          <div class="acc-item-info">
+            <span class="acc-item-qty">${item.qty} × ${item.unit}</span>
+            <span class="acc-item-name">${p.name || item.sku}</span>
+            <span class="acc-item-sku">${item.sku}</span>
+          </div>
+        </div>`;
+      }).join('')
+    : '';
+
+
+  // ── Order detail grid ──
+  const detailHtml = `<div class="detail-grid">
+    <div class="detail-cell"><span class="detail-lbl">Reference</span><span class="detail-val">${o.ref}</span></div>
+    <div class="detail-cell"><span class="detail-lbl">Order #</span><span class="detail-val">${o.num || '—'}</span></div>
+    <div class="detail-cell"><span class="detail-lbl">Status</span><span class="${statusClass(o.status)}" style="width:fit-content">${statusLabel(o.status)}</span></div>
+    <div class="detail-cell"><span class="detail-lbl">Date</span><span class="detail-val">${o.date}${o.time ? ' · ' + o.time : ''}</span></div>
+    ${o.location ? `<div class="detail-cell"><span class="detail-lbl">Delivered To</span><span class="detail-val">${o.location}</span></div>` : ''}
+    <div class="detail-cell"><span class="detail-lbl">Boxes / Phones</span><span class="detail-val">${counts.boxes} boxes · ${counts.phones} phones</span></div>
+  </div>`;
+
+  const deliveryLine = o.status === 'Delivered'
+    ? `${dateStr}${o.time ? ' &mdash; ' + o.time : ''}${o.location ? ' &middot; ' + o.location : ''}`
+    : `${dateStr}${o.time ? ' &mdash; ' + o.time : ''}`;
+
+  return `
+  <div class="acc-card">
+    <div class="acc-header" onclick="toggleAcc('${id}')" style="border-left:5px solid ${color}">
+      <div class="acc-header-main">
+        <div class="acc-title-row">
+          <span class="order-ref">${o.ref}</span>
+          ${o.num ? `<span class="order-num">#${o.num}</span>` : ''}
+          <span class="label-badge" style="background:${color}">${o.label}</span>
+        </div>
+        <div class="acc-meta-row">
+          <span class="${statusClass(o.status)}">${statusLabel(o.status)}</span>
+          <span class="acc-date">${deliveryLine}</span>
+        </div>
+      </div>
+      <div class="acc-counts">
+        <div class="count-pill"><span class="cp-num">${counts.boxes}</span><span class="cp-lbl">Boxes</span></div>
+        <div class="count-pill"><span class="cp-num">${counts.phones}</span><span class="cp-lbl">Phones</span></div>
+        <div class="count-pill"><span class="cp-num">${counts.bts}</span><span class="cp-lbl">BTS</span></div>
+        <div class="count-pill"><span class="cp-num">${counts.sims}</span><span class="cp-lbl">SIMs</span></div>
+      </div>
+      <div class="acc-arrow" id="${id}_arrow">▼</div>
+    </div>
+    <div class="acc-body" id="${id}_body" style="display:none">
+      <div class="acc-body-inner">
+        ${detailHtml}
+        ${trackingHtml}
+        ${itemsHtml}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── MAIN RENDER ───────────────────────────────────────────────────────────
+function renderCalendar() {
+  let orders = ORDERS.slice();
+  if (currentUser && currentUser.role === 'store') {
+    orders = orders.filter(o => o.label === currentUser.label);
+  } else if (activeStore) {
+    orders = orders.filter(o => o.label === activeStore);
+  }
+  // Apply status filter
+  if (activeStatus === 'InProgress') {
+    orders = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit');
+  } else if (activeStatus === 'Ordered') {
+    orders = orders.filter(o => o.status === 'InProcess');
+  } else if (activeStatus === 'Delivered') {
+    orders = orders.filter(o => o.status === 'Delivered');
+  }
+
+  const onTheWay  = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit');
+  const ordered   = orders.filter(o => o.status === 'InProcess');
+  const delivered = orders.filter(o => o.status === 'Delivered');
+
+  let html = '';
+
+  if (activeStatus === 'InProgress') {
+    if (onTheWay.length === 0) {
+      html = '<div style="text-align:center;color:#bbb;padding:60px 0;font-size:0.95rem;">No orders out for delivery right now</div>';
+    } else {
+      html = `<div class="section-group">
+        <div class="section-header">
+          <span class="section-title">🚚 Out for Delivery</span>
+          <span class="section-count">${onTheWay.length}</span>
+        </div>
+        <div class="orders-list">${onTheWay.map(renderAccordion).join('')}</div>
+      </div>`;
+    }
+  } else if (activeStatus === 'Ordered') {
+    if (ordered.length === 0) {
+      html = '<div style="text-align:center;color:#bbb;padding:60px 0;font-size:0.95rem;">No pending orders without tracking</div>';
+    } else {
+      html = `<div class="section-group">
+        <div class="section-header">
+          <span class="section-title">⏳ Ordered</span>
+          <span class="section-count">${ordered.length}</span>
+        </div>
+        <div class="orders-list">${ordered.map(renderAccordion).join('')}</div>
+      </div>`;
+    }
+  } else if (activeStatus === 'Delivered') {
+    if (delivered.length === 0) {
+      html = '<div style="text-align:center;color:#bbb;padding:60px 0;font-size:0.95rem;">No delivered orders</div>';
+    } else {
+      html = `<div class="delivered-group">
+        <div class="delivered-header" onclick="toggleDelivered()">
+          <span class="delivered-title">✓ Delivered</span>
+          <span class="delivered-count">${delivered.length}</span>
+          <span style="flex:1"></span>
+          <span id="deliveredArrow" style="font-size:0.75rem;color:#bbb;">▼</span>
+        </div>
+        <div id="deliveredList">${delivered.map(renderAccordion).join('')}</div>
+      </div>`;
+    }
+  }
+
+  document.getElementById('calendarContainer').innerHTML = html;
+
+  // ── SUMMARY BAR ──────────────────────────────────────────────────────────
+  const allVisible = [...onTheWay, ...ordered, ...delivered];
+  let totalBoxes = 0, totalPhones = 0, totalBts = 0, totalSims = 0;
+  allVisible.forEach(o => {
+    const c = countItems(o);
+    totalBoxes  += c.boxes;
+    totalPhones += c.phones;
+    totalBts    += c.bts;
+    totalSims   += c.sims;
+  });
+  const bar = document.getElementById('summaryBar');
+  if (allVisible.length > 0) {
+    bar.style.display = 'flex';
+    bar.innerHTML = `
+      <div class="sum-item"><span class="sum-num">${allVisible.length}</span><span class="sum-lbl">Orders</span></div>
+      <div class="sum-sep"></div>
+      <div class="sum-item"><span class="sum-num">${totalBoxes}</span><span class="sum-lbl">Boxes</span></div>
+      <div class="sum-sep"></div>
+      <div class="sum-item"><span class="sum-num">${totalPhones}</span><span class="sum-lbl">Phones</span></div>
+      <div class="sum-sep"></div>
+      <div class="sum-item"><span class="sum-num">${totalBts}</span><span class="sum-lbl">BTS</span></div>
+      <div class="sum-sep"></div>
+      <div class="sum-item"><span class="sum-num">${totalSims}</span><span class="sum-lbl">SIMs</span></div>`;
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────────────────
+function closeModalOverlay(e) {
+  if (e.target.id === 'orderModal') {
+    document.getElementById('orderModal').style.display = 'none';
+  }
+}
+
+// Last auto-update: 2026-07-09 (rev 2)
+// ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
+document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
+});
+</script>
+</body>
+</html>

@@ -1055,6 +1055,13 @@ function renderCalendar() {
     orders = orders.filter(o => o.status === 'Delivered');
   }
 
+  // Newest first: sort by date descending (PENDING = newest, shown on top)
+  orders.sort((a, b) => {
+    const da = (!a.date || a.date === 'PENDING') ? '9999-12-31' : a.date;
+    const db = (!b.date || b.date === 'PENDING') ? '9999-12-31' : b.date;
+    return db.localeCompare(da);
+  });
+
   const onTheWay  = orders.filter(o => o.status === 'OutForDelivery' || o.status === 'InTransit');
   const ordered   = orders.filter(o => o.status === 'InProcess');
   const delivered = orders.filter(o => o.status === 'Delivered');

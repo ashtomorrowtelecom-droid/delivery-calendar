@@ -431,7 +431,7 @@ function lookupProduct(sku) {
 // ── COLORS ───────────────────────────────────────────────────────────────────
 const COLORS = {
   ALI:'#b5179e', BADER:'#7b2d8b', SK:'#1565c0', AMIT:'#2e7d32',
-  SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828', W:'#455a64'
+  SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828', W:'#455a64', ARSALAN:'#827717'
 };
 
 // ── ORDERS ───────────────────────────────────────────────────────────────────
@@ -625,64 +625,84 @@ const ORDERS = [
   { ref:'SID0706',       label:'SID',       num:'171993892', date:'2026-07-09', time:'12:11 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384551050'], items:[]},
   { ref:'SULEMAN0706',   label:'SULEMAN',   num:'171993891', date:'2026-07-09', time:'2:50 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384551345'], items:[]},
   { ref:'JACKSBORO0706', label:'JACKSBORO', num:'171991970', date:'2026-07-09', time:'11:18 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384541687'], items:[]},
-  { ref:'SK0706HAL',     label:'SK',        num:'171994365', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
-  { ref:'SK0706ROSD',    label:'SK',        num:'171994344', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
-  { ref:'SK0706WESC',    label:'SK',        num:'171994326', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[]},
+  { ref:'SK0706HAL',     label:'SK',        num:'171994365', date:'2026-07-10', time:'12:18 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384580206'], items:[
+      {qty:'1', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'4', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'4', unit:'EA',  sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+      {qty:'3', unit:'EA',  sku:'MOT XT26131 G 128G BLU KIT'},
+  ]},
+  { ref:'SK0706ROSD',    label:'SK',        num:'171994344', date:'2026-07-10', time:'11:22 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384582419'], items:[
+      {qty:'2', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'4', unit:'EA',  sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'1', unit:'PAC', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'1', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'4', unit:'EA',  sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+      {qty:'4', unit:'EA',  sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'TRIPLESIM PLUG 64K METRO UICC'},
+  ]},
+  { ref:'SK0706WESC',    label:'SK',        num:'171994326', date:'2026-07-10', time:'12:00 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384583454'], items:[
+      {qty:'1', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'4', unit:'EA',  sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'3', unit:'EA',  sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+      {qty:'1', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+  ]},
 
   // July 7 — portal pull 2026-07-07 (all In Process)
-  { ref:'AMIT0707SP02',   label:'AMIT',    num:'171996523', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'AMIT0707SP02',   label:'AMIT',    num:'171996523', date:'2026-07-10', time:'2:29 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384587834'], items:[
       {qty:'3', unit:'EA', sku:'TCL T807W 70PRO 128G BLU KIT'},
   ]},
-  { ref:'CHO0707SP01',    label:'CHO',     num:'171996163', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'CHO0707SP01',    label:'CHO',     num:'171996163', date:'2026-07-10', time:'3:50 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384588539'], items:[
       {qty:'1', unit:'EA', sku:'TMO HOTSPOT HS1 BLK TMUS KIT'},
   ]},
-  { ref:'SK0707SP01HAL',  label:'SK',      num:'171996161', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'SK0707SP01HAL',  label:'SK',      num:'171996161', date:'2026-07-10', time:'12:18 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384572902'], items:[
       {qty:'3', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'1', unit:'EA', sku:'APL IPHONE 17E 256G PNK KIT'},
       {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
       {qty:'2', unit:'EA', sku:'TCL FLIP 4 V2 32G GRY KIT'},
       {qty:'1', unit:'EA', sku:'MOT XT25533 RAZR 256G BLU KIT'},
   ]},
-  { ref:'SK0707SP01ROSD', label:'SK',      num:'171996136', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'SK0707SP01ROSD', label:'SK',      num:'171996136', date:'2026-07-10', time:'11:22 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384572260'], items:[
       {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
       {qty:'1', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
       {qty:'1', unit:'EA', sku:'MOT XT25533 RAZR 256G BLU KIT'},
       {qty:'2', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'1', unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
   ]},
-  { ref:'SK0707SP01WESC', label:'SK',      num:'171996049', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'SK0707SP01WESC', label:'SK',      num:'171996049', date:'2026-07-09', time:'12:43 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384563574'], items:[
       {qty:'1', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
       {qty:'1', unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
   ]},
-  { ref:'SK0707SP01BEWES',label:'SK',      num:'171996048', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'SK0707SP01BEWES',label:'SK',      num:'171996048', date:'2026-07-10', time:'10:54 AM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384572377'], items:[
       {qty:'1', unit:'EA', sku:'APL IPHONE 17E 256G PNK KIT'},
       {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
       {qty:'1', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
       {qty:'1', unit:'EA', sku:'MOT XT25533 RAZR 256G BLU KIT'},
       {qty:'1', unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
   ]},
-  { ref:'SK0707SP01FM',   label:'SK',      num:'171996006', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'SK0707SP01FM',   label:'SK',      num:'171996006', date:'2026-07-10', time:'1:42 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384572466'], items:[
       {qty:'1', unit:'EA', sku:'APL IPHONE 17E 256G PNK KIT'},
       {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
       {qty:'2', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
       {qty:'1', unit:'EA', sku:'MOT XT25533 RAZR 256G BLU KIT'},
       {qty:'1', unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
   ]},
-  { ref:'SK0707SP01SAM',  label:'SK',      num:'171996003', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'SK0707SP01SAM',  label:'SK',      num:'171996003', date:'2026-07-10', time:'10:51 AM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384583329'], items:[
       {qty:'1', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
       {qty:'1', unit:'EA', sku:'APL IPHONE 17 256G BLK KIT'},
   ]},
-  { ref:'SK0707SP01FER',  label:'SK',      num:'171996000', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'SK0707SP01FER',  label:'SK',      num:'171996000', date:'2026-07-10', time:'2:50 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384569032'], items:[
       {qty:'1', unit:'EA', sku:'SAM A376U A37 5G 128G GRY KIT'},
   ]},
-  { ref:'AMIT0707SP01',   label:'AMIT',    num:'171995940', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'AMIT0707SP01',   label:'AMIT',    num:'171995940', date:'2026-07-10', time:'2:29 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384568757'], items:[
       {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
       {qty:'1', unit:'EA', sku:'APL IPHONE 17E 256G PNK KIT'},
   ]},
-  { ref:'ALI0707SP01',    label:'ALI',     num:'171995884', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'ALI0707SP01',    label:'ALI',     num:'171995884', date:'2026-07-10', time:'11:10 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384564715'], items:[
       {qty:'3', unit:'EA', sku:'APL IPHONE 17 PRO 256G SLV KIT'},
   ]},
-  { ref:'SULEMAN0707SP01',label:'SULEMAN', num:'171995852', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+  { ref:'SULEMAN0707SP01',label:'SULEMAN', num:'171995852', date:'2026-07-10', time:'1:24 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384563967'], items:[
       {qty:'1', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
   ]},
 
@@ -699,6 +719,164 @@ const ORDERS = [
       {qty:'2', unit:'PAC', sku:'SAM A376U A37 5G 128G GRY KIT'},
       {qty:'2', unit:'PAC', sku:'MOT XT26131 G 128G BLU KIT'},
       {qty:'2', unit:'PAC', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+  ]},
+
+  // July 7–8 ARSALAN orders — portal pull 2026-07-14
+  { ref:'ARSALAN0707',     label:'ARSALAN', num:'171996897', date:'2026-07-09', time:'2:47 PM',  status:'Delivered', location:'Front Desk', tracking:['1Z7900AX1384597028'], items:[
+      {qty:'4', unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'4', unit:'EA', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'2', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'4', unit:'EA', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'4', unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'4', unit:'EA', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'4', unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'ARSALAN0707SP01', label:'ARSALAN', num:'171996899', date:'2026-07-13', time:'10:00 AM', status:'Delivered', location:'Office', tracking:['1Z7900AX0384606116'], items:[
+      {qty:'2', unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'4', unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'4', unit:'EA', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'4', unit:'EA', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'4', unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'4', unit:'EA', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'4', unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'ALI0708SP02',     label:'ALI',     num:'171998273', date:'2026-07-14', time:'11:10 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384620065'], items:[
+      {qty:'2', unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G SLV KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G ORG KIT'},
+      {qty:'1', unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G BLU KIT'},
+  ]},
+
+  // July 13 — portal pull 2026-07-14 (shipped, in transit)
+  { ref:'JACKSBORO0713', label:'JACKSBORO', num:'172003603', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384639715'], items:[
+      {qty:'3', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'3', unit:'EA',  sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'AMIT0713',      label:'AMIT',      num:'172003604', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384641542','1Z7900AX0384641515','1Z7900AX0384642247'], items:[
+      {qty:'3', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'4', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'2', unit:'PAC', sku:'TCL T807W 70PRO 128G BLU KIT'},
+      {qty:'2', unit:'PAC', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'2', unit:'EA',  sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'3', unit:'PAC', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'8', unit:'EA',  sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'1', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+  ]},
+  { ref:'CHO0713',       label:'CHO',       num:'172003605', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384638501'], items:[
+      {qty:'2', unit:'EA',  sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'2', unit:'EA',  sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'1', unit:'EA',  sku:'SAM L305U GW7 40MM CRM KIT'},
+      {qty:'2', unit:'EA',  sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'2', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+  ]},
+  { ref:'SID0713',       label:'SID',       num:'172003607', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384640301'], items:[
+      {qty:'2', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'1', unit:'PAC', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'1', unit:'PAC', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'1', unit:'EA',  sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'TCL T513W K32 5G 64G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'TRIPLESIM PLUG 64K METRO UICC'},
+  ]},
+  { ref:'ALI0713',       label:'ALI',       num:'172003844', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384640178','1Z7900AX0384640169','1Z7900AX0384640212'], items:[
+      {qty:'3', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'7', unit:'EA',  sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'3', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'2', unit:'PAC', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'2', unit:'PAC', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'2', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'2', unit:'PAC', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'4', unit:'EA',  sku:'TCL T807W 70PRO 128G BLU KIT'},
+  ]},
+  { ref:'SK0713BEWES',   label:'SK',        num:'172003850', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384638770'], items:[
+      {qty:'2', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'3', unit:'EA',  sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'2', unit:'EA',  sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+  ]},
+  { ref:'SK0713HAL',     label:'SK',        num:'172004069', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384640418'], items:[
+      {qty:'3', unit:'EA',  sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'1', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'3', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'3', unit:'EA',  sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'SK0713FER',     label:'SK',        num:'172004163', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384638752'], items:[
+      {qty:'1', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'3', unit:'EA',  sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'3', unit:'EA',  sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'4', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+  ]},
+
+  // July 13 — still in process (no tracking yet)
+  { ref:'SULEMAN0713',   label:'SULEMAN',   num:'172004130', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA',  sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'2', unit:'EA',  sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'SK0713ROSD',    label:'SK',        num:'172004166', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'2', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'2', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+  ]},
+  { ref:'SK0713FM',      label:'SK',        num:'172004191', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'2', unit:'EA',  sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'2', unit:'EA',  sku:'TMO REVVL 8 5G 128G SLV KIT'},
+  ]},
+  { ref:'SK0713SAM',     label:'SK',        num:'172004193', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'3', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'2', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'2', unit:'PAC', sku:'TRIPLESIM PLUG 64K METRO UICC'},
+  ]},
+  { ref:'SK0713WESC',    label:'SK',        num:'172004198', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'1', unit:'EA',  sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'4', unit:'EA',  sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+  ]},
+  { ref:'BADER0713BELT', label:'BADER',     num:'172004199', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'PAC', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'2', unit:'EA',  sku:'TMO REVVL 8 5G 128G SLV KIT'},
+      {qty:'3', unit:'EA',  sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+      {qty:'2', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'2', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'2', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'2', unit:'PAC', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'3', unit:'PAC', sku:'TRIPLESIM PLUG 64K METRO UICC'},
+  ]},
+  { ref:'BADER0713MOT',  label:'BADER',     num:'172004200', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'4', unit:'EA',  sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'2', unit:'EA',  sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'1', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'2', unit:'EA',  sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'3', unit:'EA',  sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+      {qty:'2', unit:'EA',  sku:'TMO REVVL 8 5G 128G SLV KIT'},
+  ]},
+  { ref:'BADER0713FRTG', label:'BADER',     num:'172004261', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'3', unit:'EA',  sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'1', unit:'EA',  sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'2', unit:'EA',  sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+      {qty:'4', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+  ]},
+  { ref:'BADER0713BRDWY',label:'BADER',     num:'172004262', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'1', unit:'EA',  sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'1', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'2', unit:'EA',  sku:'MOT XT25754 MOTO PAD 128G GRN KIT'},
+      {qty:'3', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+  ]},
+  { ref:'ARSALAN0713',   label:'ARSALAN',   num:'172004263', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'3', unit:'EA',  sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'5', unit:'EA',  sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
+      {qty:'1', unit:'PAC', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'4', unit:'EA',  sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'2', unit:'PAC', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'2', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'2', unit:'PAC', sku:'TRIPLESIM PLUG 64K METRO UICC'},
+  ]},
+
+  // July 14 — portal pull 2026-07-14
+  { ref:'SID0714SP01',   label:'SID',       num:'172004928', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'2', unit:'EA',  sku:'APL IPHONE 17 256G BLK KIT'},
+      {qty:'1', unit:'EA',  sku:'APL IPHONE 17E 256G BLK KIT'},
+      {qty:'4', unit:'EA',  sku:'TCL FLIP 4 V2 32G GRY KIT'},
   ]},
 
 ];
@@ -1145,7 +1323,7 @@ function closeModalOverlay(e) {
   }
 }
 
-// Last auto-update: 2026-07-13
+// Last auto-update: 2026-07-14
 // ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
 document.getElementById('passwordInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') doLogin();

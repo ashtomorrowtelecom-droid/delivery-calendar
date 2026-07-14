@@ -894,7 +894,8 @@ function countItems(o) {
   const boxes  = (o.tracking || []).length;
   let phones=0, bts=0, sims=0;
   for (const item of items) {
-    const qty = parseInt(item.qty) || 0;
+    // PAC = pack of 5 units
+    const qty = (parseInt(item.qty) || 0) * ((item.unit||'').toUpperCase()==='PAC' ? 5 : 1);
     const sku = (item.sku || '').toUpperCase();
     if (sku.includes('TRIPLESIM') || (sku.includes('SIM') && !sku.includes('REVVL'))) {
       sims += qty;
@@ -969,7 +970,8 @@ function renderMarginPanel() {
   function splitMargins(o) {
     let phoneM = 0, btsM = 0, phoneN = 0, btsN = 0;
     (o.items||[]).forEach(item => {
-      const qty = parseInt(item.qty)||0;
+      // PAC = pack of 5 units
+      const qty = (parseInt(item.qty)||0) * ((item.unit||'').toUpperCase()==='PAC' ? 5 : 1);
       const m   = getItemMargin(item.sku) * qty;
       if (m === 0) return; // SIMs / no-margin items
       if (isBtsItem(item.sku)) { btsM += m; btsN += qty; }

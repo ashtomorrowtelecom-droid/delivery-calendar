@@ -898,8 +898,7 @@ function countItems(o) {
     const sku = (item.sku || '').toUpperCase();
     if (sku.includes('TRIPLESIM') || (sku.includes('SIM') && !sku.includes('REVVL'))) {
       sims += qty;
-    } else if (TABLET_SKUS.some(t => sku.startsWith(t.toUpperCase())) ||
-               sku.includes('FAST5688') || sku.includes('GATEWAY')) {
+    } else if (TABLET_SKUS.some(t => sku.startsWith(t.toUpperCase()))) {
       bts += qty;
     } else {
       phones += qty;
@@ -962,11 +961,10 @@ function renderMarginPanel() {
   if (filterLabel !== 'ALL') orders = orders.filter(o => o.label === filterLabel);
   orders = [...orders].sort((a,b) => new Date(b.date) - new Date(a.date));
 
-  // Classify an item as BTS (tablets + gateways, same grouping as delivery counts) or phone
+  // Classify an item as BTS (tablets only — gateways count as phones) or phone
   function isBtsItem(sku) {
     const up = (sku || '').toUpperCase();
-    return TABLET_SKUS.some(t => up.startsWith(t.toUpperCase())) ||
-           up.includes('FAST5688') || up.includes('GATEWAY');
+    return TABLET_SKUS.some(t => up.startsWith(t.toUpperCase()));
   }
   function splitMargins(o) {
     let phoneM = 0, btsM = 0, phoneN = 0, btsN = 0;

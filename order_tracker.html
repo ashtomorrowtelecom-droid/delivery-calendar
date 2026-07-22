@@ -432,7 +432,7 @@ function lookupProduct(sku) {
 // ── COLORS ───────────────────────────────────────────────────────────────────
 const COLORS = {
   ALI:'#b5179e', BADER:'#7b2d8b', SK:'#1565c0', AMIT:'#2e7d32',
-  SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828', ARSALAN:'#827717'
+  SULEMAN:'#e65100', SID:'#00838f', JACKSBORO:'#6d4c41', CHO:'#c62828', ARSALAN:'#827717', W:'#455a64'
 };
 
 // ── ORDERS ───────────────────────────────────────────────────────────────────
@@ -914,19 +914,19 @@ const ORDERS = [
   { ref:'AMIT0716SP03',    label:'AMIT',    num:'172009842', value:'1786.33', date:'2026-07-22', time:'Est. by 3:00 PM', status:'InTransit', tracking:['1Z7900AX0384724908'], items:[
       {qty:'2', unit:'PAC', sku:'TCL T807W 70PRO 128G BLU KIT'},
   ]},
-  { ref:'ARSALAN0716SP02', label:'ARSALAN', num:'172009843', value:'1786.33', date:'2026-07-22', time:'Est. by 2:15 PM', status:'InTransit', tracking:['1Z7900AX0384722544'], items:[
+  { ref:'ARSALAN0716SP02', label:'ARSALAN', num:'172009843', value:'1786.33', date:'2026-07-22', time:'10:46 AM', status:'Delivered', location:'Receiver', tracking:['1Z7900AX0384722544'], items:[
       {qty:'2', unit:'PAC', sku:'TCL T807W 70PRO 128G BLU KIT'},
   ]},
 
   // July 20 — portal pull 2026-07-21
-  { ref:'JACKSBORO0720', label:'JACKSBORO', num:'172011576', value:'2586.85', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0284733365'], items:[
+  { ref:'JACKSBORO0720', label:'JACKSBORO', num:'172011576', value:'2586.85', date:'2026-07-22', time:'Est. by 1:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0284733365'], items:[
       {qty:'1', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'1', unit:'PAC', sku:'TMO REVVL 8 5G 128G SLV KIT'},
       {qty:'3', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
       {qty:'3', unit:'EA',  sku:'MOT XT26131 G 128G BLU KIT'},
       {qty:'2', unit:'EA',  sku:'TCL FLIP 4 V2 32G GRY KIT'},
   ]},
-  { ref:'AMIT0720', label:'AMIT', num:'172011627', value:'8433.21', date:'2026-07-22', time:'Est. by 3:00 PM', status:'InTransit', tracking:['1Z7900AX0384734488','1Z7900AX0384734513','1Z7900AX0384734479'], items:[
+  { ref:'AMIT0720', label:'AMIT', num:'172011627', value:'8433.21', date:'2026-07-23', time:'Est. by 3:15 PM', status:'InTransit', tracking:['1Z7900AX0384734488','1Z7900AX0384734513','1Z7900AX0384734479'], items:[
       {qty:'4', unit:'EA',  sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'2', unit:'EA',  sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -939,7 +939,7 @@ const ORDERS = [
       {qty:'3', unit:'EA',  sku:'TCL FLIP 4 V2 32G GRY KIT'},
       {qty:'8', unit:'EA',  sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
   ]},
-  { ref:'CHO0720', label:'CHO', num:'172011654', value:'2529.80', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384739518'], items:[
+  { ref:'CHO0720', label:'CHO', num:'172011654', value:'2529.80', date:'2026-07-23', time:'Est. by 2:30 PM', status:'InTransit', tracking:['1Z7900AX0384739518'], items:[
       {qty:'1', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
       {qty:'2', unit:'EA',  sku:'TCL T513W K32 5G 64G BLU KIT'},
       {qty:'2', unit:'EA',  sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -947,7 +947,7 @@ const ORDERS = [
       {qty:'1', unit:'EA',  sku:'TCL FLIP 4 V2 32G GRY KIT'},
       {qty:'1', unit:'EA',  sku:'SAM A576U A57 5G 256G BLU KIT'},
   ]},
-  { ref:'SULEMAN0720', label:'SULEMAN', num:'172011660', value:'2976.42', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384740159'], items:[
+  { ref:'SULEMAN0720', label:'SULEMAN', num:'172011660', value:'2976.42', date:'2026-07-23', time:'Est. by 3:30 PM', status:'InTransit', tracking:['1Z7900AX0384740159'], items:[
       {qty:'1', unit:'PAC', sku:'TMO REVVL 8 5G 128G SLV KIT'},
       {qty:'1', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2', unit:'EA',  sku:'MOT XT26131 G 128G BLU KIT'},
@@ -955,7 +955,7 @@ const ORDERS = [
       {qty:'1', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
       {qty:'1', unit:'EA',  sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
   ]},
-  { ref:'ALI0720', label:'ALI', num:'172012076', value:'17315.63', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384740757','1Z7900AX0384740748','1Z7900AX0384735245'], items:[
+  { ref:'ALI0720', label:'ALI', num:'172012076', value:'17315.63', date:'2026-07-23', time:'Est. by 2:00 PM', status:'InTransit', tracking:['1Z7900AX0384740757','1Z7900AX0384740748','1Z7900AX0384735245'], items:[
       {qty:'2', unit:'PAC', sku:'TMO REVVL 8 5G 128G SLV KIT'},
       {qty:'4', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
@@ -964,7 +964,7 @@ const ORDERS = [
       {qty:'2', unit:'PAC', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
       {qty:'3', unit:'EA',  sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
   ]},
-  { ref:'SID0720', label:'SID', num:'172012092', value:'4360.40', date:'PENDING', time:'', status:'InTransit', tracking:['1Z7900AX0384739723'], items:[
+  { ref:'SID0720', label:'SID', num:'172012092', value:'4360.40', date:'2026-07-23', time:'Est. by 1:00 PM', status:'InTransit', tracking:['1Z7900AX0384739723'], items:[
       {qty:'1', unit:'EA',  sku:'TCL T432W K11 32G BLK KIT'},
       {qty:'2', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'2', unit:'PAC', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
@@ -1124,6 +1124,25 @@ const ORDERS = [
   ]},
   { ref:'ARSALAN0720SP02', label:'ARSALAN', num:'172012432', value:'2455.13', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
       {qty:'2', unit:'EA',  sku:'APL IPHONE 17 PRO MAX 256G BLU KIT'},
+  ]},
+
+  // July 21-22 — portal pull 2026-07-22 (W account)
+  { ref:'W0721SP01', label:'W', num:'172014627', value:'24341.31', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'4', unit:'EA',  sku:'TCL T807W 70PRO 128G BLU KIT'},
+      {qty:'3', unit:'PAC', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'MOT XT25533 RAZR 256G BLU KIT'},
+      {qty:'4', unit:'PAC', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'3', unit:'PAC', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'2', unit:'EA',  sku:'MOT XT26151 GPLAY 64G BLU KIT'},
+      {qty:'8', unit:'PAC', sku:'SAM A176U A17 128G BLK KIT'},
+      {qty:'4', unit:'PAC', sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'3', unit:'EA',  sku:'MOT XT26131 G 128G BLU KIT'},
+      {qty:'1', unit:'PAC', sku:'TCL FLIP 4 V2 32G GRY KIT'},
+      {qty:'1', unit:'EA',  sku:'TCL FLIP 4 V2 32G GRY KIT'},
+  ]},
+  { ref:'W0722DISPLAY', label:'W', num:'172015306', value:'7.20', date:'PENDING', time:'', status:'InProcess', tracking:[], items:[
+      {qty:'6', unit:'EA',  sku:'SAM X238U TAB A11+ 128G GRY DISPLAY'},
+      {qty:'6', unit:'EA',  sku:'MOT XT25754 MOTO PAD 128G GRN DISPLAY'},
   ]},
 
 ];
@@ -1575,7 +1594,7 @@ function closeModalOverlay(e) {
   }
 }
 
-// Last auto-update: 2026-07-21
+// Last auto-update: 2026-07-22
 // ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
 document.getElementById('passwordInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') doLogin();

@@ -1249,6 +1249,46 @@ const ORDERS = [
       {qty:'3',unit:'EA', sku:'MOT XT26131 G 128G BLU KIT'},
   ]},
 
+  // July 29–30 — portal pull 2026-08-03
+  { ref:'SK0729WESC', label:'SK', num:'172023116', value:'2037.52', date:'2026-08-04', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384911527'], items:[
+      {qty:'1',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'3',unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
+      {qty:'3',unit:'EA', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
+      {qty:'2',unit:'EA', sku:'TMO REVVL 8 5G 128G SLV KIT'},
+  ]},
+  { ref:'ALI0729SP01', label:'ALI', num:'172022618', date:'2026-08-03', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384897188'], items:[
+      {qty:'5',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+      {qty:'2',unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G BLU KIT'},
+      {qty:'1',unit:'PAC',sku:'MOT XT25191 EDGE 5G 256G GRN KIT'},
+  ]},
+  { ref:'BADER0730SP01MOT', label:'BADER', num:'172023288', date:'2026-08-03', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384905632'], items:[
+      {qty:'2',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'SK0730SP01HAL', label:'SK', num:'172023290', date:'2026-08-03', time:'9:46 AM', status:'Delivered', location:'Receiver', tracking:['1Z7900AX0384905614'], items:[
+      {qty:'2',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'SK0730SP01FER', label:'SK', num:'172023362', date:'2026-08-04', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384910751'], items:[
+      {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+      {qty:'1',unit:'EA', sku:'TMO REVVL 8 PRO 5G 256G GRY KIT'},
+  ]},
+  { ref:'SK0730SP1FM', label:'SK', num:'172023365', date:'2026-08-04', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384910742'], items:[
+      {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO 256G ORG KIT'},
+      {qty:'1',unit:'EA', sku:'TMO REVVL 8 PRO 5G 256G GRY KIT'},
+      {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
+  ]},
+  { ref:'SK0730SP01SAM', label:'SK', num:'172023411', date:'2026-08-04', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384910966'], items:[
+      {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G BLU KIT'},
+      {qty:'1',unit:'EA', sku:'TMO REVVL 8 PRO 5G 256G GRY KIT'},
+      {qty:'1',unit:'EA', sku:'APL IPHONE 17E 256G BLK KIT'},
+  ]},
+  { ref:'AMIT0730SP01', label:'AMIT', num:'172023451', date:'2026-08-03', time:'Est. by 9:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384905267'], items:[
+      {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO 256G ORG KIT'},
+      {qty:'1',unit:'PAC',sku:'SAM A176U A17 128G BLK KIT'},
+  ]},
+  { ref:'BADER0730SP01BELT', label:'BADER', num:'172023453', date:'2026-08-04', time:'Est. by 9:00 PM', status:'InTransit', tracking:['1Z7900AX0384906088'], items:[
+      {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO 256G ORG KIT'},
+  ]},
+
 ];
 
 // ── APP STATE ─────────────────────────────────────────────────────────────
@@ -1698,7 +1738,7 @@ function closeModalOverlay(e) {
   }
 }
 
-// Last auto-update: 2026-08-03
+// Last auto-update: 2026-08-03 (added 07/29–07/30 orders; UPS statuses refreshed)
 // ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
 document.getElementById('passwordInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') doLogin();

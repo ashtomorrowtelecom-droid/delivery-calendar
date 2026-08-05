@@ -1259,7 +1259,7 @@ const ORDERS = [
   ]},
 
   // July 29–30 — portal pull 2026-08-03
-  { ref:'SK0729WESC', label:'SK', num:'172023116', value:'2037.52', date:'2026-08-04', time:'Est. by 3:45 PM', status:'OutForDelivery', tracking:['1Z7900AX0384911527'], items:[
+  { ref:'SK0729WESC', label:'SK', num:'172023116', value:'2037.52', date:'2026-08-04', time:'1:07 PM', status:'Delivered', location:'Office', tracking:['1Z7900AX0384911527'], items:[
       {qty:'1',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'3',unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'3',unit:'EA', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -1280,12 +1280,12 @@ const ORDERS = [
       {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
       {qty:'1',unit:'EA', sku:'TMO REVVL 8 PRO 5G 256G GRY KIT'},
   ]},
-  { ref:'SK0730SP1FM', label:'SK', num:'172023365', date:'2026-08-04', time:'Est. by 2:45 PM', status:'OutForDelivery', tracking:['1Z7900AX0384910742'], items:[
+  { ref:'SK0730SP1FM', label:'SK', num:'172023365', date:'2026-08-04', time:'4:11 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384910742'], items:[
       {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO 256G ORG KIT'},
       {qty:'1',unit:'EA', sku:'TMO REVVL 8 PRO 5G 256G GRY KIT'},
       {qty:'3',unit:'EA', sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
   ]},
-  { ref:'SK0730SP01SAM', label:'SK', num:'172023411', date:'2026-08-04', time:'Est. by 1:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384910966'], items:[
+  { ref:'SK0730SP01SAM', label:'SK', num:'172023411', date:'2026-08-04', time:'11:59 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384910966'], items:[
       {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO MAX 256G BLU KIT'},
       {qty:'1',unit:'EA', sku:'TMO REVVL 8 PRO 5G 256G GRY KIT'},
       {qty:'1',unit:'EA', sku:'APL IPHONE 17E 256G BLK KIT'},
@@ -1294,7 +1294,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO 256G ORG KIT'},
       {qty:'1',unit:'PAC',sku:'SAM A176U A17 128G BLK KIT'},
   ]},
-  { ref:'BADER0730SP01BELT', label:'BADER', num:'172023453', date:'2026-08-04', time:'Est. by 12:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0384906088'], items:[
+  { ref:'BADER0730SP01BELT', label:'BADER', num:'172023453', date:'2026-08-04', time:'11:29 AM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384906088'], items:[
       {qty:'1',unit:'EA', sku:'APL IPHONE 17 PRO 256G ORG KIT'},
   ]},
 
@@ -1747,7 +1747,7 @@ function closeModalOverlay(e) {
   }
 }
 
-// Last auto-update: 2026-08-04 (added W0728phone; W0721SP01/W0722DISPLAY tracking found, delivered 07/27; UPS statuses refreshed)
+// Last auto-update: 2026-08-05 (portal session expired, skipped pull; UPS refreshed: SK0729WESC, SK0730SP1FM, SK0730SP01SAM, BADER0730SP01BELT all delivered 08/04)
 // ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
 document.getElementById('passwordInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') doLogin();

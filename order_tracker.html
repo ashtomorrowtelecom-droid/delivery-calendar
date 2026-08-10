@@ -1417,7 +1417,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'SAM A376U A37 5G 128G GRY DISPLAY'},
       {qty:'1',unit:'EA', sku:'SAM A576U A57 5G 256G BLU DISPLAY'},
   ]},
-  { ref:'SK0805SAM', label:'SK', num:'172030146', value:'7661.50', date:'2026-08-11', time:'Est. by 1:45 PM', status:'InTransit', tracking:['1Z7900AX0385001106','1Z7900AX0385001099'], items:[
+  { ref:'SK0805SAM', label:'SK', num:'172030146', value:'7661.50', date:'2026-08-10', time:'Est. by 1:45 PM', status:'OutForDelivery', tracking:['1Z7900AX0385001106','1Z7900AX0385001099'], items:[
       {qty:'2',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -1471,7 +1471,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'MOT XT25754 MOTO PAD 128G GRN DISPLAY'},
       {qty:'1',unit:'EA', sku:'TCL T807W 70PRO 128G BLU DISPLAY'},
   ]},
-  { ref:'SK0805HAL', label:'SK', num:'172030018', value:'4875.02', date:'2026-08-10', time:'Est. by 3:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0384995581','1Z7900AX0385001160'], items:[
+  { ref:'SK0805HAL', label:'SK', num:'172030018', value:'4875.02', date:'2026-08-10', time:'10:59 AM', status:'Delivered', location:'Receiver', tracking:['1Z7900AX0384995581','1Z7900AX0385001160'], items:[
       {qty:'2',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -1943,7 +1943,7 @@ function closeModalOverlay(e) {
   }
 }
 
-// Last auto-update: 2026-08-10 (portal session expired — no pull; UPS: all 6 Aug 4 orders Delivered Aug 7; SK0805 FM/ROSD/FER/HAL/BEWES Out for Delivery today; SID0805, AMIT0805SP01, BADER0805DISPLAY, SK0805WESC/SAM In Transit est. Aug 11)
+// Last auto-update: 2026-08-10 PM (portal checked — 18 orders last 7 days, all already tracked, none new; UPS: SK0805HAL Delivered 10:59 AM (Receiver/PATEL); SK0805SAM now Out for Delivery today est. 1:45 PM; SK0805 FM/ROSD/FER/BEWES still Out for Delivery today; SID0805, AMIT0805SP01, BADER0805DISPLAY, SK0805WESC In Transit est. Aug 11)
 // ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
 document.getElementById('passwordInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') doLogin();

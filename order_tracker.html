@@ -1386,16 +1386,16 @@ const ORDERS = [
   ]},
 
   // Aug 5 — SK batch out for delivery Aug 10; rest in transit est. Aug 11
-  { ref:'SID0805', label:'SID', num:'172030564', value:'5172.00', date:'2026-08-11', time:'Est. by 2:15 PM', status:'InTransit', tracking:['1Z7900AX0385013353'], items:[
+  { ref:'SID0805', label:'SID', num:'172030564', value:'5172.00', date:'2026-08-11', time:'Est. by 2:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0385013353'], items:[
       {qty:'2',unit:'PAC',sku:'SAM A176U A17 128G BLK KIT'},
       {qty:'2',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'EA', sku:'SAM X238U TAB A11+ 128G GRY KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
   ]},
-  { ref:'AMIT0805SP01', label:'AMIT', num:'172030563', value:'590.00', date:'2026-08-11', time:'Est. by 3:15 PM', status:'InTransit', tracking:['1Z7900AX0385008074','1Z7900AX0385007995'], items:[
+  { ref:'AMIT0805SP01', label:'AMIT', num:'172030563', value:'590.00', date:'2026-08-11', time:'Est. by 3:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0385008074','1Z7900AX0385007995'], items:[
       {qty:'10',unit:'EA',sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
   ]},
-  { ref:'BADER0805DISPLAY', label:'BADER', num:'172030330', value:'0.19', date:'2026-08-11', time:'Est. by 12:15 PM', status:'InTransit', tracking:['1Z7900AX0385014058'], items:[
+  { ref:'BADER0805DISPLAY', label:'BADER', num:'172030330', value:'0.19', date:'2026-08-11', time:'Est. by 12:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0385014058'], items:[
       {qty:'2',unit:'EA', sku:'TCL T440W FLIP 4 5G 32G GRY DISPLAY'},
       {qty:'1',unit:'EA', sku:'SAM L305U GW7 40MM CRM DISPLAY'},
       {qty:'5',unit:'EA', sku:'SAM X238U TAB A11+ 128G GRY DISPLAY'},
@@ -1404,7 +1404,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'MOT XT25754 MOTO PAD 128G GRN DISPLAY'},
       {qty:'4',unit:'EA', sku:'SAM A576U A57 5G 256G BLU DISPLAY'},
   ]},
-  { ref:'SK0805WESC', label:'SK', num:'172030329', value:'4653.29', date:'2026-08-11', time:'Est. by 1:45 PM', status:'InTransit', tracking:['1Z7900AX0385012676'], items:[
+  { ref:'SK0805WESC', label:'SK', num:'172030329', value:'4653.29', date:'2026-08-11', time:'Est. by 3:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0385012676'], items:[
       {qty:'1',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -1417,7 +1417,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'SAM A376U A37 5G 128G GRY DISPLAY'},
       {qty:'1',unit:'EA', sku:'SAM A576U A57 5G 256G BLU DISPLAY'},
   ]},
-  { ref:'SK0805SAM', label:'SK', num:'172030146', value:'7661.50', date:'2026-08-10', time:'Est. by 1:45 PM', status:'OutForDelivery', tracking:['1Z7900AX0385001106','1Z7900AX0385001099'], items:[
+  { ref:'SK0805SAM', label:'SK', num:'172030146', value:'7661.50', date:'2026-08-10', time:'2:05 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0385001106','1Z7900AX0385001099'], items:[
       {qty:'2',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -1433,7 +1433,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'SAM A576U A57 5G 256G BLU DISPLAY'},
       {qty:'1',unit:'EA', sku:'SAM X238U TAB A11+ 128G GRY DISPLAY'},
   ]},
-  { ref:'SK0805FM', label:'SK', num:'172030070', value:'2429.54', date:'2026-08-10', time:'Est. by 4:30 PM', status:'OutForDelivery', tracking:['1Z7900AX0384995956'], items:[
+  { ref:'SK0805FM', label:'SK', num:'172030070', value:'2429.54', date:'2026-08-10', time:'12:38 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384995956'], items:[
       {qty:'3',unit:'EA', sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'EA', sku:'MOT XT25171 G STYLUS 5G 128G BLU KIT'},
       {qty:'1',unit:'PAC',sku:'SAM A176U A17 128G BLK KIT'},
@@ -1443,7 +1443,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'MOT XT25754 MOTO PAD 128G GRN DISPLAY'},
       {qty:'1',unit:'EA', sku:'SAM X238U TAB A11+ 128G GRY DISPLAY'},
   ]},
-  { ref:'SK0805ROSD', label:'SK', num:'172030067', value:'7241.62', date:'2026-08-10', time:'Est. by 3:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0384998328','1Z7900AX0384998346'], items:[
+  { ref:'SK0805ROSD', label:'SK', num:'172030067', value:'7241.62', date:'2026-08-10', time:'4:28 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384998328','1Z7900AX0384998346'], items:[
       {qty:'2',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'2',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -1458,7 +1458,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'MOT XT25754 MOTO PAD 128G GRN DISPLAY'},
       {qty:'1',unit:'EA', sku:'SAM X238U TAB A11+ 128G GRY DISPLAY'},
   ]},
-  { ref:'SK0805FER', label:'SK', num:'172030064', value:'3497.83', date:'2026-08-10', time:'Est. by 4:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384999452'], items:[
+  { ref:'SK0805FER', label:'SK', num:'172030064', value:'3497.83', date:'2026-08-10', time:'1:33 PM', status:'Delivered', location:'Inside Delivery', tracking:['1Z7900AX0384999452'], items:[
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'1',unit:'EA', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'2',unit:'EA', sku:'SAM A176U A17 128G BLK KIT'},
@@ -1482,7 +1482,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'SAM A576U A57 5G 256G BLU DISPLAY'},
       {qty:'1',unit:'EA', sku:'MOT XT25754 MOTO PAD 128G GRN DISPLAY'},
   ]},
-  { ref:'SK805BEWES', label:'SK', num:'172030014', value:'1855.33', date:'2026-08-10', time:'Est. by 2:00 PM', status:'OutForDelivery', tracking:['1Z7900AX0384999381'], items:[
+  { ref:'SK805BEWES', label:'SK', num:'172030014', value:'1855.33', date:'2026-08-10', time:'12:00 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0384999381'], items:[
       {qty:'1',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'4',unit:'EA', sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
       {qty:'2',unit:'EA', sku:'MOT XT26151 GPLAY 64G BLU KIT'},
@@ -1943,7 +1943,7 @@ function closeModalOverlay(e) {
   }
 }
 
-// Last auto-update: 2026-08-10 PM (portal checked — 18 orders last 7 days, all already tracked, none new; UPS: SK0805HAL Delivered 10:59 AM (Receiver/PATEL); SK0805SAM now Out for Delivery today est. 1:45 PM; SK0805 FM/ROSD/FER/BEWES still Out for Delivery today; SID0805, AMIT0805SP01, BADER0805DISPLAY, SK0805WESC In Transit est. Aug 11)
+// Last auto-update: 2026-08-11 (portal session expired — no new-order pull this run; UPS: SK0805SAM Delivered Aug 10 2:05 PM Inside Delivery, SK0805FM Delivered Aug 10 12:38 PM Inside Delivery, SK0805ROSD Delivered Aug 10 4:28 PM Front Desk, SK0805FER Delivered Aug 10 1:33 PM Inside Delivery, SK805BEWES Delivered Aug 10 12:00 PM Front Desk; SID0805, AMIT0805SP01, BADER0805DISPLAY, SK0805WESC now Out for Delivery today Aug 11)
 // ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
 document.getElementById('passwordInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') doLogin();

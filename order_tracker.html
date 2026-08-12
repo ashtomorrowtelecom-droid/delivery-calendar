@@ -1386,16 +1386,16 @@ const ORDERS = [
   ]},
 
   // Aug 5 — SK batch out for delivery Aug 10; rest in transit est. Aug 11
-  { ref:'SID0805', label:'SID', num:'172030564', value:'5172.00', date:'2026-08-11', time:'Est. by 2:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0385013353'], items:[
+  { ref:'SID0805', label:'SID', num:'172030564', value:'5172.00', date:'2026-08-11', time:'11:38 AM', status:'Delivered', location:'Office', tracking:['1Z7900AX0385013353'], items:[
       {qty:'2',unit:'PAC',sku:'SAM A176U A17 128G BLK KIT'},
       {qty:'2',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'EA', sku:'SAM X238U TAB A11+ 128G GRY KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
   ]},
-  { ref:'AMIT0805SP01', label:'AMIT', num:'172030563', value:'590.00', date:'2026-08-11', time:'Est. by 3:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0385008074','1Z7900AX0385007995'], items:[
+  { ref:'AMIT0805SP01', label:'AMIT', num:'172030563', value:'590.00', date:'2026-08-12', time:'Est. by 1:30 PM', status:'OutForDelivery', tracking:['1Z7900AX0385008074','1Z7900AX0385007995'], items:[
       {qty:'10',unit:'EA',sku:'SAG FAST5688W 5G GATEWAY BLK TMUS CPO'},
   ]},
-  { ref:'BADER0805DISPLAY', label:'BADER', num:'172030330', value:'0.19', date:'2026-08-11', time:'Est. by 12:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0385014058'], items:[
+  { ref:'BADER0805DISPLAY', label:'BADER', num:'172030330', value:'0.19', date:'2026-08-11', time:'12:00 PM', status:'Delivered', location:'Front Desk', tracking:['1Z7900AX0385014058'], items:[
       {qty:'2',unit:'EA', sku:'TCL T440W FLIP 4 5G 32G GRY DISPLAY'},
       {qty:'1',unit:'EA', sku:'SAM L305U GW7 40MM CRM DISPLAY'},
       {qty:'5',unit:'EA', sku:'SAM X238U TAB A11+ 128G GRY DISPLAY'},
@@ -1404,7 +1404,7 @@ const ORDERS = [
       {qty:'1',unit:'EA', sku:'MOT XT25754 MOTO PAD 128G GRN DISPLAY'},
       {qty:'4',unit:'EA', sku:'SAM A576U A57 5G 256G BLU DISPLAY'},
   ]},
-  { ref:'SK0805WESC', label:'SK', num:'172030329', value:'4653.29', date:'2026-08-11', time:'Est. by 3:15 PM', status:'OutForDelivery', tracking:['1Z7900AX0385012676'], items:[
+  { ref:'SK0805WESC', label:'SK', num:'172030329', value:'4653.29', date:'2026-08-11', time:'1:32 PM', status:'Delivered', location:'Office', tracking:['1Z7900AX0385012676'], items:[
       {qty:'1',unit:'PAC',sku:'SAM A166U A16 5G 128G BLU KIT'},
       {qty:'2',unit:'EA', sku:'APL IPHONE 16E 128G BLK TMUS KIT'},
       {qty:'1',unit:'PAC',sku:'TMO REVVL TAB 2 5G 64G BLK KIT'},
@@ -1943,7 +1943,7 @@ function closeModalOverlay(e) {
   }
 }
 
-// Last auto-update: 2026-08-11 (portal session expired — no new-order pull this run; UPS: SK0805SAM Delivered Aug 10 2:05 PM Inside Delivery, SK0805FM Delivered Aug 10 12:38 PM Inside Delivery, SK0805ROSD Delivered Aug 10 4:28 PM Front Desk, SK0805FER Delivered Aug 10 1:33 PM Inside Delivery, SK805BEWES Delivered Aug 10 12:00 PM Front Desk; SID0805, AMIT0805SP01, BADER0805DISPLAY, SK0805WESC now Out for Delivery today Aug 11)
+// Last auto-update: 2026-08-12 (portal session expired — no new-order pull this run; UPS: SID0805 Delivered Aug 11 11:38 AM Office, BADER0805DISPLAY Delivered Aug 11 12:00 PM Front Desk, SK0805WESC Delivered Aug 11 1:32 PM Office, AMIT0805SP01 pkg 2/2 Delivered Aug 11 4:09 PM Front Desk but pkg 1/2 still Out for Delivery today Aug 12 est. by 1:30 PM)
 // ── ENTER KEY LOGIN ─────────────────────────────────────────────────────────────
 document.getElementById('passwordInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') doLogin();

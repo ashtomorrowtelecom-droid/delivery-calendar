@@ -392,11 +392,18 @@ const MARGIN_RATES = {
   PHONE: 19.50,
   TABLET: 8.00,
 };
-const TABLET_SKUS = ['SAM X218U', 'TMO REVVL TAB'];
+const TABLET_SKUS = ['SAM X218U', 'SAM X238U', 'TMO REVVL TAB', 'MOT XT25754'];
+
+// A device is a tablet (BTS) if its SKU is on the list above, or its description
+// contains the word TAB or PAD (e.g. "SAM X238U TAB A11+", "MOTO PAD").
+function isTabletSku(sku) {
+  const up = (sku || '').toUpperCase();
+  return TABLET_SKUS.some(t => up.startsWith(t)) || /\b(TAB|PAD)\b/.test(up);
+}
 
 function getItemMargin(sku) {
   const upper = sku.toUpperCase();
-  if (TABLET_SKUS.some(t => upper.startsWith(t.toUpperCase()))) return MARGIN_RATES.TABLET;
+  if (isTabletSku(upper)) return MARGIN_RATES.TABLET;
   // SIM cards / accessories have no margin
   if (upper.includes('SIM') || upper.includes('TRIPLESIM')) return 0;
   return MARGIN_RATES.PHONE;
@@ -2384,7 +2391,7 @@ function countItems(o) {
     const sku = (item.sku || '').toUpperCase();
     if (isSimSku(sku)) {
       sims += qty;
-    } else if (TABLET_SKUS.some(t => sku.startsWith(t.toUpperCase()))) {
+    } else if (isTabletSku(sku)) {
       bts += qty;
     } else {
       phones += qty;
@@ -2449,8 +2456,7 @@ function renderMarginPanel() {
 
   // Classify an item as BTS (tablets only — gateways count as phones) or phone
   function isBtsItem(sku) {
-    const up = (sku || '').toUpperCase();
-    return TABLET_SKUS.some(t => up.startsWith(t.toUpperCase()));
+    return isTabletSku(sku);
   }
   function splitMargins(o) {
     let phoneM = 0, btsM = 0, phoneN = 0, btsN = 0;
